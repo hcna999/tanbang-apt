@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>탄방동 내집마련 현황</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: #f0f2f5;
+      color: #1a1a1a;
+      font-size: 15px;
+      padding: 12px;
+    }
+    h1 {
+      font-size: 17px;
+      font-weight: 700;
+      text-align: center;
+      padding: 14px 0 4px;
+      color: #111;
+    }
+    .date {
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #555;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .badge-green { background: #e6f9f0; color: #1a8a4a; }
+    .badge-red   { background: #fdecea; color: #c0392b; }
+    .badge-gray  { background: #f0f0f0; color: #666; }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 7px 0;
+      border-bottom: 1px solid #f3f3f3;
+      gap: 8px;
+    }
+    .row:last-child { border-bottom: none; }
+    .row-label {
+      font-size: 13px;
+      color: #666;
+      flex-shrink: 0;
+    }
+    .row-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #111;
+      text-align: right;
+    }
+    .highlight { color: #1a6fdb; }
+    .accent    { color: #c0392b; }
+    .green     { color: #1a8a4a; }
+
+    .big-price {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1a6fdb;
+      margin: 4px 0 2px;
+    }
+    .sub-text {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .nego-box {
+      background: #e8f4fd;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-top: 8px;
+    }
+    .nego-box p {
+      font-size: 13px;
+      color: #1a5fab;
+    }
+    .nego-box strong { font-weight: 700; }
+
+    .phone-link {
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+      padding: 11px;
+      background: #1a6fdb;
+      color: #fff;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .pass-box {
+      background: #fdecea;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-top: 4px;
+    }
+    .pass-box p { font-size: 13px; color: #c0392b; line-height: 1.6; }
+
+    .loan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .loan-item {
+      background: #f7f8fa;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+    .loan-item .l-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+    .loan-item .l-value { font-size: 16px; font-weight: 800; color: #1a6fdb; }
+    .loan-item .l-sub   { font-size: 11px; color: #aaa; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+  <h1>탄방동 내집마련 현황</h1>
+  <p class="date">2026.11.06 기준</p>
+
+  <!-- 1순위 매물 -->
+  <div class="card">
+    <div class="card-title">
+      🏆 1순위 매물
+      <span class="badge badge-green">추천</span>
+    </div>
+
+    <div class="big-price">5.45억</div>
+    <div class="sub-text">산호 101동 8층 · 31평(전용84㎡)</div>
+
+    <div class="row">
+      <span class="row-label">특징</span>
+      <span class="row-value">3단지 중 로열층 최저가</span>
+    </div>
+    <div class="row">
+      <span class="row-label">대지지분</span>
+      <span class="row-value highlight">19.04평 (3단지 1위)</span>
+    </div>
+    <div class="row">
+      <span class="row-label">재건축 분담금</span>
+      <span class="row-value green">약 2억 수준</span>
+    </div>
+    <div class="row">
+      <span class="row-label">직전 실거래</span>
+      <span class="row-value">11/4 · 101동 7층 5.40억</span>
+    </div>
+
+    <div class="nego-box">
+      <p>🎯 네고 목표가: <strong>5.40억</strong><br>
+      7층 실거래 5.40억 → 동일 근거 제시</p>
+    </div>
+
+    <a href="tel:042-471-1212" class="phone-link">📞 가로수공인 042-471-1212</a>
+  </div>
+
+  <!-- 한우리 -->
+  <div class="card">
+    <div class="card-title">
+      ❌ 한우리 108동 506호
+      <span class="badge badge-red">PASS</span>
+    </div>
+    <div class="row">
+      <span class="row-label">현재 호가</span>
+      <span class="row-value accent">6.0억 (↑ 상향)</span>
+    </div>
+    <div class="row">
+      <span class="row-label">대지지분</span>
+      <span class="row-value accent">15.5평 (산호 대비 -3.5평)</span>
+    </div>
+    <div class="pass-box">
+      <p>분담금 차이 5~8천만원 추가<br>
+      → 실질 매수가 <strong>6.5억+</strong> 수준, 패스 확정</p>
+    </div>
+  </div>
+
+  <!-- 개나리 -->
+  <div class="card">
+    <div class="card-title">
+      🔍 개나리 매물 현황
+      <span class="badge badge-gray">멸종</span>
+    </div>
+    <div class="row">
+      <span class="row-label">실입주 중고층</span>
+      <span class="row-value accent">0건 (완전 멸종)</span>
+    </div>
+    <div class="row">
+      <span class="row-label">유일 매물</span>
+      <span class="row-value">102동 1층 전세낀 4.5억</span>
+    </div>
+  </div>
+
+  <!-- 자금 -->
+  <div class="card">
+    <div class="card-title">💰 자금 계획 (산호 8층 기준)</div>
+    <div class="loan-grid">
+      <div class="loan-item">
+        <div class="l-label">최대 대출 (LTV 80%)</div>
+        <div class="l-value">4.36억</div>
+        <div class="l-sub">생애최초 디딤돌 등</div>
+      </div>
+      <div class="loan-item">
+        <div class="l-label">최소 필요 현금</div>
+        <div class="l-value">1.25억~</div>
+        <div class="l-sub">풀대출+올수리 기준</div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <span class="row-label">LTV 70% 시 현금</span>
+      <span class="row-value">1.76억</span>
+    </div>
+    <div class="row">
+      <span class="row-label">잔여 유동자금</span>
+      <span class="row-value green">4~5억 보존 가능</span>
+    </div>
+  </div>
+
+  <!-- 전체 마스터플랜 링크 -->
+  <div style="margin-top: 14px; text-align: center; display: flex; flex-direction: column; gap: 8px;">
+    <a href="index.html" style="display:block; padding: 12px; background: #fff; color: #1a6fdb; border-radius: 10px; font-weight: 700; text-decoration: none; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
+      📊 전체 종합 마스터플랜 (상세 리포트) ➜
+    </a>
+    <a href="https://t.me/tanbang_helper_bot" style="display:block; padding: 10px; background: #229ED9; color: #fff; border-radius: 10px; font-weight: 700; text-decoration: none;">
+      💬 텔레그램 질문방 돌아가기
+    </a>
+  </div>
+
+</body>
+</html>
