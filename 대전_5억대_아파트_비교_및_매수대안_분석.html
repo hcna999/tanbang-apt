@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>대전 5억 중반대 아파트 매수 대안 종합 비교 (클로드 & 플래시 협업 분석)</title>
+<style>
+  :root {
+    --paper:      #F6F7F5;
+    --surface:    #FFFFFF;
+    --surface-2:  #EDEFEA;
+    --ink:        #16202B;
+    --ink-2:      #3D4A52;
+    --muted:      #6B7469;
+    --rule:       #DCDFD8;
+    --rule-2:     #C6CBC0;
+    --go:         #1F6F5C;
+    --go-bg:      #E4EFEA;
+    --warn:       #A9741A;
+    --warn-bg:    #F6EEDD;
+    --stop:       #9B2C2C;
+    --stop-bg:    #F6E5E3;
+    --accent:     #2B4C7E;
+    --accent-bg:  #E6EEF8;
+    --shadow:     0 1px 2px rgba(22,32,43,.05), 0 8px 24px -16px rgba(22,32,43,.28);
+    --f-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
+    --f-mono: "SFMono-Regular", "Cascadia Code", "Consolas", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #14181A;
+      --surface:   #1B2023;
+      --surface-2: #232A2D;
+      --ink:       #E7EAE4;
+      --ink-2:     #B4BDB8;
+      --muted:     #8B958D;
+      --rule:      #2C3336;
+      --rule-2:    #3D464A;
+      --go:        #55BFA0;
+      --go-bg:     #14312A;
+      --warn:      #D2A047;
+      --warn-bg:   #33280F;
+      --stop:      #E0776F;
+      --stop-bg:   #35191A;
+      --accent:    #7BA7DB;
+      --accent-bg: #17273A;
+      --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 16px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-sans);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  /* Top Nav */
+  .top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: var(--surface);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+    box-shadow: var(--shadow);
+  }
+  .nav-btn {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: var(--ink-2);
+    background: var(--surface-2);
+    transition: all 0.2s;
+  }
+  .nav-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+  }
+  .kicker {
+    font-family: var(--f-mono);
+    font-size: 0.82rem;
+    color: var(--go);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+  .intro-box {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 5px solid var(--go);
+    border-radius: 6px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .intro-box p {
+    margin: 0;
+    font-size: 0.98rem;
+    color: var(--ink);
+  }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.92rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .matrix-table th, .matrix-table td {
+    padding: 12px 14px;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .matrix-table th {
+    background: var(--surface-2);
+    font-weight: 700;
+    color: var(--ink-2);
+  }
+  .matrix-table td:first-child {
+    text-align: left;
+    font-weight: 700;
+  }
+  .highlight-row {
+    background: var(--go-bg);
+    font-weight: 700;
+  }
+  .score-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.88rem;
+  }
+  .score-high { background: var(--go); color: #fff; }
+  .score-mid { background: var(--warn); color: #fff; }
+  .score-low { background: var(--stop); color: #fff; }
+  
+  .tier-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .tier-card.tier-1 { border-left: 6px solid var(--go); }
+  .tier-card.tier-2 { border-left: 6px solid var(--accent); }
+  .tier-card.tier-3 { border-left: 6px solid var(--warn); }
+  .tier-card.tier-4 { border-left: 6px solid #888; }
+  .tier-card.tier-5 { border-left: 6px solid var(--stop); }
+
+  .tier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+  .tier-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .tier-tag {
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .tag-s { background: var(--go-bg); color: var(--go); border: 1px solid var(--go); }
+  .tag-a { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); }
+  .tag-b { background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn); }
+  .tag-c { background: var(--stop-bg); color: var(--stop); border: 1px solid var(--stop); }
+
+  .pros-cons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .pro-box {
+    background: var(--go-bg);
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .con-box {
+    background: var(--stop-bg);
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .pro-box strong, .con-box strong { display: block; margin-bottom: 4px; }
+  
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .timeline-item {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px;
+  }
+  .timeline-yr {
+    font-family: var(--f-mono);
+    font-weight: 800;
+    color: var(--accent);
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 상단 반응형 네비게이션 -->
+  <nav class="top-nav">
+    <a href="index.html" class="nav-btn">📊 실시간 매수 플랜</a>
+    <a href="탄방동_3단지_2028년_전월세전환_및_학군환금성_분석.html" class="nav-btn">🎓 학군·환금성 분석</a>
+    <a href="대전_5억대_아파트_비교_및_매수대안_분석.html" class="nav-btn active">🏛️ 대전 전역 5억대 대안 비교</a>
+  </nav>
+
+  <header>
+    <div class="kicker">CLAUDE CODE & GEMINI FLASH DUAL CO-ANALYSIS | 2026.11.06</div>
+    <h1>대전 5억 중반대 아파트 매수 대안 종합 비교 &amp; 투자 가이드</h1>
+    <div class="intro-box">
+      <p>
+        <strong>수석 투자 분석 총괄 요약:</strong><br>
+        탄방동 산호 31평(101동 8층 5.45억)과 대전 전역 5.0억~6.3억 예산권 대체 단지(목동더샵, 둔산더샵엘리프, 도안린풀하우스, 노은열매9단지)를 실거주·학군·미래가치·환금성 기준으로 정량 평가했습니다.<br>
+        <strong>"지금 당장은 가장 낡았지만, 2,000~2,500만원 인테리어를 선투자하고 10년을 버티면 가장 크게 자산이 증식할 승자는 탄방 산호입니다."</strong>
+      </p>
+    </div>
+  </header>
+
+  <!-- 1. 종합 비교 매트릭스 -->
+  <section>
+    <h2 style="font-size:1.35rem; margin-bottom:4px;">1. 대전 5억대 5대 단지 종합 평가 매트릭스</h2>
+    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:12px;">각 항목 10점 만점 정량 평가 (총점 40점 만점)</p>
+    
+    <div style="overflow-x:auto;">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>평가 단지</th>
+            <th>실거주 만족도</th>
+            <th>학군·인프라</th>
+            <th>미래 자산가치</th>
+            <th>환금성 (유동성)</th>
+            <th>총점</th>
+            <th>실매수가 / 예산적합성</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td>🥇 탄방 산호 31평 (기준)</td>
+            <td><span class="score-badge score-low">4점</span></td>
+            <td><span class="score-badge score-high">10점</span></td>
+            <td><span class="score-badge score-high">10점</span></td>
+            <td><span class="score-badge score-high">10점</span></td>
+            <td><strong>34점 (1위)</strong></td>
+            <td><strong>5.45억 (적합)</strong></td>
+          </tr>
+          <tr>
+            <td>🥈 목동 더샵리슈빌 84㎡</td>
+            <td><span class="score-badge score-high">9점</span></td>
+            <td><span class="score-badge score-high">10점</span></td>
+            <td><span class="score-badge score-mid">7점</span></td>
+            <td><span class="score-badge score-low">5점</span></td>
+            <td><strong>31점 (2위)</strong></td>
+            <td>5.8~6.3억 (상단 접근)</td>
+          </tr>
+          <tr>
+            <td>🥉 둔산 더샵엘리프 84㎡</td>
+            <td><span class="score-badge score-high">10점</span></td>
+            <td><span class="score-badge score-mid">7점</span></td>
+            <td><span class="score-badge score-mid">6점</span></td>
+            <td><span class="score-badge score-high">8점</span></td>
+            <td><strong>31점 (3위)</strong></td>
+            <td>6.0~6.3억 (예산 초과)</td>
+          </tr>
+          <tr>
+            <td>4위 도안 린풀하우스 84㎡</td>
+            <td><span class="score-badge score-high">9점</span></td>
+            <td><span class="score-badge score-mid">6점</span></td>
+            <td><span class="score-badge score-low">4점</span></td>
+            <td><span class="score-badge score-mid">6점</span></td>
+            <td>25점 (4위)</td>
+            <td>5.6~6.2억 (적합)</td>
+          </tr>
+          <tr>
+            <td>5위 노은 열매마을9단지 84㎡</td>
+            <td><span class="score-badge score-mid">6점</span></td>
+            <td><span class="score-badge score-high">8점</span></td>
+            <td><span class="score-badge score-low">5점</span></td>
+            <td><span class="score-badge score-low">5점</span></td>
+            <td>24점 (5위)</td>
+            <td>4.8~5.3억 (가성비 최우수)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. 단지별 상세 분석 -->
+  <section style="display:flex; flex-direction:column; gap:20px;">
+    <h2 style="font-size:1.35rem; margin-bottom:4px;">2. 단지별 투자 등급 및 상세 장단점 분석</h2>
+
+    <!-- Tier 1 -->
+    <div class="tier-card tier-1">
+      <div class="tier-header">
+        <h3 class="tier-title">🥇 1위: 탄방동 산호 31평 (5.45억)</h3>
+        <span class="tier-tag tag-s">S-Tier (강력 매수)</span>
+      </div>
+      <div class="pros-cons">
+        <div class="pro-box">
+          <strong>핵심 강점 (Why S-Tier)</strong>
+          • 대전 원도심·둔산 통틀어 최상위 대지지분(19.04평) & 저용적률(168%)로 10년 뒤 신축 34평 무상 또는 최저 분담금 재건축 가능.<br>
+          • 둔산 최고 학원가 도보권 + 탄방초 5분으로 전세·매매 환금성 대전 1위.
+        </div>
+        <div class="con-box">
+          <strong>핵심 약점 및 솔루션</strong>
+          • 31년차 구축으로 주차 협소, 단열 취약, 배관 노후화(실거주 4점).<br>
+          • <strong>해결책</strong>: 매수 즉시 2,000~2,500만원 풀인테리어(샷시·욕실·주방)를 투자하여 실질 매수가 5.7억 수준으로 주거 만족도를 70% 이상 끌어올릴 것!
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 2 -->
+    <div class="tier-card tier-2">
+      <div class="tier-header">
+        <h3 class="tier-title">🥈 2위: 중구 목동 더샵리슈빌 84㎡ (5.8~6.3억)</h3>
+        <span class="tier-tag tag-a">A-Tier (조건부 매수)</span>
+      </div>
+      <div class="pros-cons">
+        <div class="pro-box">
+          <strong>핵심 강점</strong>
+          • 2022년 준공 5년차 준신축 993세대 대단지. 실거주 쾌적성 우수(9점).<br>
+          • 대성중·고(자사고), 충남여중·고 등 중·고등 명문 학군 직결.
+        </div>
+        <div class="con-box">
+          <strong>핵심 약점 & 조건</strong>
+          • <strong>조건</strong>: 충청권 광역철도(용두역) 개통 확정 뉴스 발표 시에만 진입할 것.<br>
+          • 중구 원도심 입지 한계로 둔산 대비 환금성이 낮으며, 광역철도 호재 없이 6억 이상 진입은 상방이 제한됨.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 3 -->
+    <div class="tier-card tier-3">
+      <div class="tier-header">
+        <h3 class="tier-title">🥉 3위: 서구 용문 둔산더샵엘리프 84㎡ (6.0~6.3억)</h3>
+        <span class="tier-tag tag-b">B-Tier (예산 초과)</span>
+      </div>
+      <div class="pros-cons">
+        <div class="pro-box">
+          <strong>핵심 강점</strong>
+          • 2025.02 입주 2,763세대 매머드급 신축. 실거주 품질 압도적 1위(10점).<br>
+          • 주차 스트레스 제로, 최신식 커뮤니티.
+        </div>
+        <div class="con-box">
+          <strong>치명적 한계</strong>
+          • 취득세 포함 시 실부담 6.5억 이상으로 5억대 예산 초과.<br>
+          • 2025년 신축은 <strong>2055년까지 재건축 불가</strong> → 장기 자산 가치 상승 탄력 낮음.<br>
+          • (59㎡ 4.6~4.9억은 아이 양육 시 좁아져 추후 갈아타기 비용 발생).
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 4 & 5 -->
+    <div class="tier-card tier-4">
+      <div class="tier-header">
+        <h3 class="tier-title">4위: 유성 도안 18BL 린풀하우스 / 호반 84㎡ (5.6~6.2억)</h3>
+        <span class="tier-tag tag-b">B-Tier (환경 위주)</span>
+      </div>
+      <p style="margin:0; font-size:0.92rem;">
+        도안호수공원과 갑천변 쾌적한 주거환경은 우수하나, 13년차로 접어들며 준구축화 진행 중입니다. 용적률 180~190%로 재건축 불가능하며, 둔산 학원가와 거리가 멀고 도안 2~3단계 공급 폭탄으로 전월세 경쟁이 심화됩니다.
+      </p>
+    </div>
+
+    <div class="tier-card tier-5">
+      <div class="tier-header">
+        <h3 class="tier-title">5위: 유성 노은 지족동 열매마을 9단지 84㎡ (4.8~5.3억)</h3>
+        <span class="tier-tag tag-c">C-Tier (가성비 전용)</span>
+      </div>
+      <p style="margin:0; font-size:0.92rem;">
+        5억 안쪽으로 지족역 초역세권 대형 평형을 매수할 수 있는 가성비는 좋으나, 25년차 구축으로 노후계획도시 특별법 수혜 순위가 밀리며 둔산 대비 시세 상승 천장이 낮아 10년 자산 증식 관점에서는 가장 비추천합니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. 생애주기별 5년 vs 10년 후 가치 -->
+  <section>
+    <h2 style="font-size:1.35rem; margin-bottom:4px;">3. 가족 생애주기별 5년 vs 10년 후 승자 예측</h2>
+    <div class="timeline-grid">
+      <div class="timeline-item">
+        <div class="timeline-yr">2026 ~ 2028년 (영아 양육기)</div>
+        <p style="font-size:0.88rem; margin:0;">
+          <strong>실거주 편의성 승자: 신축/준신축</strong><br>
+          산호 구축의 불편이 가장 큰 시기이므로, 2,500만원 인테리어(단열·샷시)가 필수적인 방패 역할을 합니다.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-yr">2029 ~ 2031년 (5년 후 / 유아기)</div>
+        <p style="font-size:0.88rem; margin:0;">
+          <strong>단기 시세 승자: 목동더샵리슈빌</strong><br>
+          광역철도 용두역 가시화 및 신축 전세가율 방어로 단기 가치가 강세입니다. 산호는 재건축 추진위 구성 단계 진입.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-yr">2032 ~ 2036년 (10년 후 / 초등·중등기)</div>
+        <p style="font-size:0.88rem; margin:0;">
+          <strong>장기 자산가치 압도적 승자: 탄방 산호</strong><br>
+          재건축 조합인가 및 시공사 선정으로 시세가 8~10억대로 비선형 급등. 둔산 학원가 수요로 전월세 전환 시 공실률 0%.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 결론 및 행동 요령 -->
+  <section class="intro-box" style="border-left-color: var(--accent);">
+    <h3 style="margin-top:0;">💡 부부를 위한 실전 최종 가이드</h3>
+    <ul style="margin:8px 0 0; padding-left:20px; font-size:0.92rem; line-height:1.7;">
+      <li><strong>1순위 집중</strong>: 가로수공인(042-471-1212) 산호 101동 8층(5.45억)에 11/4 7층 실거래가(5.40억)를 바탕으로 <strong>5.42억~5.43억 카운터 오퍼</strong>를 진행합니다.</li>
+      <li><strong>단지 내 Plan B</strong>: 산호 101동 결렬 시 한우리 108동 5층(5.80억)을 5.7억대로 네고 시도하거나, 산호 타 동 5.5억 매물을 조율합니다.</li>
+      <li><strong>인테리어 필수 집행</strong>: 산호 매수 시 아낀 매매대금 중 2,000~2,500만원을 샷시·욕실·주방에 과감히 투자하여 실거주 쾌적성을 극대화합니다.</li>
+    </ul>
+  </section>
+
+  <footer>
+    탄방동 아파트 매수 모니터링 시스템 | Claude Code & Gemini Flash Dual Agent Engine | GitHub Pages Hosted
+  </footer>
+
+</div>
+</body>
+</html>
