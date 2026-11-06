@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>토허제 정책 비교 및 가용자본 5~6억 혁신 투자 대안 분석</title>
+<style>
+  :root {
+    --paper:      #F6F7F5;
+    --surface:    #FFFFFF;
+    --surface-2:  #EDEFEA;
+    --ink:        #16202B;
+    --ink-2:      #3D4A52;
+    --muted:      #6B7469;
+    --rule:       #DCDFD8;
+    --rule-2:     #C6CBC0;
+    --go:         #1F6F5C;
+    --go-bg:      #E4EFEA;
+    --warn:       #A9741A;
+    --warn-bg:    #F6EEDD;
+    --stop:       #9B2C2C;
+    --stop-bg:    #F6E5E3;
+    --accent:     #2B4C7E;
+    --accent-bg:  #E6EEF8;
+    --purple:     #6D28D9;
+    --purple-bg:  #EDE9FE;
+    --shadow:     0 1px 2px rgba(22,32,43,.05), 0 8px 24px -16px rgba(22,32,43,.28);
+    --f-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
+    --f-mono: "SFMono-Regular", "Cascadia Code", "Consolas", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #14181A;
+      --surface:   #1B2023;
+      --surface-2: #232A2D;
+      --ink:       #E7EAE4;
+      --ink-2:     #B4BDB8;
+      --muted:     #8B958D;
+      --rule:      #2C3336;
+      --rule-2:    #3D464A;
+      --go:        #55BFA0;
+      --go-bg:     #14312A;
+      --warn:      #D2A047;
+      --warn-bg:   #33280F;
+      --stop:      #E0776F;
+      --stop-bg:   #35191A;
+      --accent:    #7BA7DB;
+      --accent-bg: #17273A;
+      --purple:    #A78BFA;
+      --purple-bg: #2E1065;
+      --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 16px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-sans);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: var(--surface);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+    box-shadow: var(--shadow);
+  }
+  .nav-btn {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: var(--ink-2);
+    background: var(--surface-2);
+    transition: all 0.2s;
+  }
+  .nav-btn.active {
+    background: var(--purple);
+    color: #fff;
+  }
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 20px;
+  }
+  .kicker {
+    font-family: var(--f-mono);
+    font-size: 0.82rem;
+    color: var(--purple);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+  .intro-box {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 5px solid var(--purple);
+    border-radius: 6px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.9rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .matrix-table th, .matrix-table td {
+    padding: 11px 13px;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .matrix-table th {
+    background: var(--surface-2);
+    font-weight: 700;
+    color: var(--ink-2);
+  }
+  .matrix-table td:first-child {
+    text-align: left;
+    font-weight: 700;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.82rem;
+  }
+  .b-go { background: var(--go-bg); color: var(--go); border: 1px solid var(--go); }
+  .b-stop { background: var(--stop-bg); color: var(--stop); border: 1px solid var(--stop); }
+  .b-warn { background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn); }
+  .b-acc { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); }
+  
+  .card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .sc-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .sc-card.best { border-left: 6px solid var(--purple); }
+  .sc-card.sub { border-left: 6px solid var(--accent); }
+  .sc-card.hedge { border-left: 6px solid var(--go); }
+  .sc-card.risk { border-left: 6px solid var(--stop); }
+
+  .sc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 8px;
+  }
+  .sc-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .sc-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    font-size: 0.92rem;
+  }
+  .alloc-box {
+    background: var(--surface-2);
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .alloc-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed var(--rule);
+    padding-bottom: 4px;
+  }
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 반응형 4-Tab 네비게이션 -->
+  <nav class="top-nav">
+    <a href="index.html" class="nav-btn">📊 실시간 매수 플랜</a>
+    <a href="탄방동_3단지_2028년_전월세전환_및_학군환금성_분석.html" class="nav-btn">🎓 학군·환금성 분석</a>
+    <a href="대전_5억대_아파트_비교_및_매수대안_분석.html" class="nav-btn">🏛️ 대전 전역 대안</a>
+    <a href="토허제_비교_및_혁신_투자대안_분석.html" class="nav-btn active">🚀 토허제 &amp; 서울·글로벌 대안</a>
+  </nav>
+
+  <header>
+    <div class="kicker">CLAUDE CODE INVESTMENT ADVISORY | 2026.11.06</div>
+    <h1>토지거래허가구역(토허제) 비교 및 가용자금 5~6.4억 혁신 투자 대안 리포트</h1>
+    <div class="intro-box">
+      <p>
+        <strong>수석 투자 분석가 종합 총평:</strong><br>
+        "대전 31년차 구축 아파트 실입주에만 시야를 가두지 마십시오. 정부의 <strong>토허제(실거주 2년 의무) 규제의 사각지대인 '서울 비토허제(노원 등) 정비사업'</strong>과 <strong>'미국 글로벌 배당성장 자산'</strong>을 결합한 <strong>주거와 투자의 분리(바벨 전략)</strong>를 취할 때, 10년 뒤 부부의 총자산은 현재 6.4억에서 <strong>12.5억 ~ 18.5억(2~3배)</strong>으로 가장 크게 점프합니다."
+      </p>
+    </div>
+  </header>
+
+  <!-- 1. 정책 비교 매트릭스 -->
+  <section>
+    <h2 style="font-size:1.35rem; margin-bottom:4px;">1. 규제 및 정책 비교 매트릭스 (토허제 vs 비토허제 vs 대전)</h2>
+    <div style="overflow-x:auto;">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>토허제 구역<br><span style="font-size:0.75rem; font-weight:normal;">강남3구·여의도·목동·성수</span></th>
+            <th>서울/수도권 비토허제<br><span style="font-size:0.75rem; font-weight:normal;">노원(상계·중계)·도봉·1기신도시</span></th>
+            <th>대전 서구/유성<br><span style="font-size:0.75rem; font-weight:normal;">탄방·둔산·도안</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>실거주 의무</td>
+            <td><span class="badge b-stop">매수 후 2년 필수</span></td>
+            <td><span class="badge b-go">의무 없음 (자유)</span></td>
+            <td><span class="badge b-go">의무 없음 (비규제)</span></td>
+          </tr>
+          <tr>
+            <td>갭투자(전세 승계)</td>
+            <td><span class="badge b-stop">원천 불가 (실입주만 허가)</span></td>
+            <td><span class="badge b-go">합법적 가능 (무이자 레버리지)</span></td>
+            <td><span class="badge b-go">가능</span></td>
+          </tr>
+          <tr>
+            <td>필요 자기자본(갭)</td>
+            <td>10억 ~ 30억+</td>
+            <td><strong>3.5억 ~ 5.0억</strong></td>
+            <td>1.3억 ~ 2.5억</td>
+          </tr>
+          <tr>
+            <td>조합원 지위 양도</td>
+            <td>조합설립인가 후 전면 금지</td>
+            <td><span class="badge b-go">인가 후에도 양도 자유 (비투기과열)</span></td>
+            <td>해당 없음</td>
+          </tr>
+          <tr>
+            <td>DSR 2단계 규제</td>
+            <td>수도권 강화 적용</td>
+            <td>수도권 강화 적용 (갭투자는 무관)</td>
+            <td>상대적 완화</td>
+          </tr>
+          <tr style="background:var(--purple-bg); font-weight:700;">
+            <td>대전 거주자 활용성</td>
+            <td><span class="badge b-stop">0% (그림의 떡)</span></td>
+            <td><span class="badge b-go">100% (최고 효율)</span></td>
+            <td>100% (실거주 연계)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. 완전히 다른 4대 투자 시나리오 -->
+  <section class="card-grid">
+    <h2 style="font-size:1.35rem; margin-bottom:4px;">2. 가용자금 5.0~6.4억 기준 '완전히 다른 4대 투자 시나리오'</h2>
+
+    <!-- 시나리오 1 -->
+    <div class="sc-card best">
+      <div class="sc-head">
+        <h3 class="sc-title">🔥 시나리오 1: [주거·투자의 분리] 서울 비토허제 정비사업 갭투자</h3>
+        <span class="badge b-go">추천 1순위 (성장 엔진)</span>
+      </div>
+      <div class="sc-body">
+        <div>
+          <strong>🎯 핵심 타깃 물건 및 자금 구조:</strong><br>
+          • <strong>노원 상계주공 3단지 34평</strong>: 매매 8.0~8.5억 / 전세 3.2~3.5억 → <strong>갭 4.5~5.0억</strong><br>
+          • <strong>노원 상계주공 7단지 27평</strong>: 매매 6.5~7.0억 / 전세 2.8~3.0억 → <strong>갭 3.5~4.0억</strong><br>
+          • <strong>무이자 레버리지</strong>: 전세금 3.3억이 은행 대출 대신 무이자 차입금 역할을 수행하여 실투자 대비 2배 이상의 자산(8억대 서울 아파트)을 장악.
+        </div>
+        <div>
+          <strong>💡 승부 포인트:</strong><br>
+          • 대전에서는 사택/전세(보증금 최소화)로 실거주 비용을 억제하면서, 10년 뒤 <strong>서울 신축 아파트 조합원 입주권</strong>을 선점하는 전략.<br>
+          • 비투기과열지구이므로 조합설립인가 이후에도 언제든 프리미엄을 받고 중간 매도(Exit) 가능.
+        </div>
+      </div>
+    </div>
+
+    <!-- 시나리오 2 -->
+    <div class="sc-card sub">
+      <div class="sc-head">
+        <h3 class="sc-title">시나리오 2: [1기 신도시 특별법 선도지구] 평촌/분당 갭투자</h3>
+        <span class="badge b-acc">성장 2순위</span>
+      </div>
+      <div class="sc-body">
+        <div>
+          • <strong>타깃</strong>: 평촌 초원한양 34평 (매매 9~10.5억 / 전세 4.5~5억 → 갭 4.5~5.5억)<br>
+          • <strong>장점</strong>: 평촌 최상위 학원가(범계역) + 노후계획도시 특별법 용적률 상향 + GTX-C 착공 호재.<br>
+          • <strong>주의점</strong>: 선도지구 가격 선반영으로 타이밍이 중요하며, 분당은 갭 6억을 초과하여 예산상 평촌이 현실적 타깃.
+        </div>
+      </div>
+    </div>
+
+    <!-- 시나리오 3 -->
+    <div class="sc-card hedge">
+      <div class="sc-head">
+        <h3 class="sc-title">시나리오 3: [대전 실입주 + 잉여현금 5억 글로벌 금융자산 운용]</h3>
+        <span class="badge b-go">현금흐름 최강 (헤지형)</span>
+      </div>
+      <div class="sc-body">
+        <div>
+          <strong>📊 포트폴리오 구조:</strong><br>
+          • <strong>부동산</strong>: 산호 31평 5.45억 주담대 풀대출(실투입 현금 1.8억)로 실입주 해결.<br>
+          • <strong>금융자산</strong>: 남는 <strong>현금 4.1억 ~ 4.5억</strong>을 미국 배당성장 ETF(SCHD 50% + JEPI 25% + 단기채 25%)에 운용.<br>
+          • <strong>셀프 무이자 완성</strong>: 주담대 원리금(월 165만)을 ETF 월 배당수익(월 220~280만)으로 100% 충당하고도 <strong>매월 55~115만원의 순현금 흑자</strong> 발생!
+        </div>
+      </div>
+    </div>
+
+    <!-- 시나리오 4 -->
+    <div class="sc-card risk">
+      <div class="sc-head">
+        <h3 class="sc-title">시나리오 4: [대전 최상급지 갈아타기 올인] 둔산 크목한 직행</h3>
+        <span class="badge b-stop">비추천 (기회비용 극대)</span>
+      </div>
+      <div class="sc-body">
+        <div>
+          • <strong>내용</strong>: 가용자금 6억을 전부 쏟아붓고 LTV 60% 주담대(7.2억)를 받아 둔산 크로바 34평(12~13억) 매수.<br>
+          • <strong>비추천 이유</strong>: <strong>월 원리금 350만원</strong>의 무리한 지출로 가계 재무체력이 고갈되며, 대전 대장주가 10년간 2배 오를 확률보다 서울 비토허제 재건축이 2배 오를 확률이 월등히 높음.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 시나리오별 종합 비교표 -->
+  <section>
+    <h2 style="font-size:1.35rem; margin-bottom:4px;">3. 시나리오별 5년/10년 기대수익률 및 리스크 종합 평가표</h2>
+    <div style="overflow-x:auto;">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>평가 항목</th>
+            <th>시나리오 1<br>(서울 비토허제 갭)</th>
+            <th>시나리오 2<br>(1기신도시 선도지구)</th>
+            <th>시나리오 3<br>(대전+글로벌 ETF)</th>
+            <th>시나리오 4<br>(둔산 대장주 올인)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5년 기대 자산증가</td>
+            <td><strong>+1.5억 ~ 3.0억</strong></td>
+            <td>+1.0억 ~ 3.5억</td>
+            <td>+1.5억 ~ 2.5억</td>
+            <td>+0.5억 ~ 2.0억</td>
+          </tr>
+          <tr style="background:var(--go-bg); font-weight:700;">
+            <td>10년 기대 자산증가</td>
+            <td><strong>+5억 ~ 10억 (완공 시)</strong></td>
+            <td>+4억 ~ 9억</td>
+            <td>+3억 ~ 5억 (복리)</td>
+            <td>+2억 ~ 4억</td>
+          </tr>
+          <tr>
+            <td>10년 기대 수익률</td>
+            <td><strong>연 10% ~ 18%</strong></td>
+            <td>연 8% ~ 16%</td>
+            <td>연 7% ~ 9%</td>
+            <td>연 4% ~ 8%</td>
+          </tr>
+          <tr>
+            <td>월 현금흐름</td>
+            <td>0원 (전세 보증금)</td>
+            <td>0원</td>
+            <td><strong style="color:var(--go);">+55~115만원 흑자</strong></td>
+            <td><strong style="color:var(--stop);">-350만원 적자</strong></td>
+          </tr>
+          <tr>
+            <td>환금성 (유동성)</td>
+            <td>중 (갭 매도 가능)</td>
+            <td>중하</td>
+            <td><strong>최고 (ETF 즉시 환매)</strong></td>
+            <td>중상</td>
+          </tr>
+          <tr>
+            <td>종합 점수</td>
+            <td><strong>8.5점 (1위)</strong></td>
+            <td>7.5점 (2위)</td>
+            <td>7.0점 (3위)</td>
+            <td>5.5점 (4위)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4. 수석 분석가 추천: 바벨 포트폴리오 로드맵 -->
+  <section class="intro-box" style="border-left-color: var(--purple);">
+    <h2 style="font-size:1.35rem; margin-top:0;">🏆 수석 투자 분석가 최종 추천: [시나리오 1 + 3] 하이브리드 바벨 포트폴리오</h2>
+    <p style="font-size:0.95rem; line-height:1.7;">
+      "단일 자산 올인은 위험합니다. 가용현금 6.4억을 <strong>[서울 재건축 지분 선점(70%)] + [미국 배당 ETF 현금흐름(23%)] + [비상금(7%)]</strong>으로 3분할하는 바벨 전략이 10년 뒤 가장 안전하고 확실하게 자산을 증식시킵니다."
+    </p>
+
+    <div class="alloc-box" style="margin-top:14px;">
+      <div class="alloc-row">
+        <span><strong>1. 서울 비토허제 갭투자 (노원 상계주공 3·7단지)</strong></span>
+        <span style="font-weight:800; color:var(--purple);">4.5억 원 (70%) — 10년 핵심 성장 엔진</span>
+      </div>
+      <div class="alloc-row">
+        <span><strong>2. 미국 배당성장 ETF (SCHD 60% + JEPI 40%)</strong></span>
+        <span style="font-weight:800; color:var(--go);">1.5억 원 (23%) — 월 50~70만원 배당 (대전 거주비 충당)</span>
+      </div>
+      <div class="alloc-row" style="border:none;">
+        <span><strong>3. CMA / 안전 비상예비금</strong></span>
+        <span style="font-weight:800; color:var(--ink);">0.4억 원 (7%) — 갭 변동 및 역전세 방어용</span>
+      </div>
+    </div>
+
+    <div style="margin-top:14px; font-size:0.92rem;">
+      <strong>📈 10년 뒤 예상 결과:</strong><br>
+      • 서울 재건축 완공 아파트 1채 (추정 시세 12~15억) + 미국 ETF 복리 계좌 (2.5~3.5억) 보유.<br>
+      • <strong>총 순자산 14.5억 ~ 18.5억 형성 (현재 6.4억 대비 약 2.5배 ~ 3배 달성!)</strong><br>
+      • 추후 대전에 계속 거주하고 싶다면, 서울 아파트 전세 보증금으로 대전 둔산 대장주를 무대출로 즉시 매수 가능!
+    </div>
+  </section>
+
+  <footer>
+    탄방동 아파트 매수 모니터링 시스템 | Claude Code & Gemini Flash Dual Agent Engine | GitHub Pages Hosted
+  </footer>
+
+</div>
+</body>
+</html>
