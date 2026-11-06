@@ -1,0 +1,22 @@
+# Ignore temp and backup files
+*.zip
+*.pdf
+.last_ntfy_id.txt
+.ntfy_bridge_last_id.txt
+.ntfy_bridge_seen.json
+*.json
+*.py
+*.txt
+*.ps1
+경매물건_2026-08/
+이전보고서/
+참고자료(분류전)/
+한우리802_법무사검토요청/
+한우리802_변호사전달자료/
+
+# Keep web assets
+!index.html
+!탄방동_개나리_한우리_산호_매수계획.html
+!탄방동_3단지_2028년_전월세전환_및_학군환금성_분석.html
+!대화_및_답변_기준_원칙.md
+!GEMINI.md

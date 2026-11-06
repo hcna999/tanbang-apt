@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>탄방동 개나리·산호·한우리 — 재건축 지연 & 2028년 전·월세 전환 및 학군·환금성 분석</title>
+<style>
+  :root {
+    --paper:      #F6F7F5;
+    --surface:    #FFFFFF;
+    --surface-2:  #EDEFEA;
+    --ink:        #16202B;
+    --ink-2:      #3D4A52;
+    --muted:      #6B7469;
+    --rule:       #DCDFD8;
+    --go:         #1F6F5C;
+    --go-bg:      #E4EFEA;
+    --warn:       #A9741A;
+    --warn-bg:    #F6EEDD;
+    --stop:       #9B2C2C;
+    --stop-bg:    #F6E5E3;
+    --accent:     #2B4C7E;
+    --accent-bg:  #E6EEF8;
+    --shadow:     0 1px 2px rgba(22,32,43,.05), 0 8px 24px -16px rgba(22,32,43,.28);
+    --f-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+              "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
+    --f-mono: "SFMono-Regular", "Cascadia Code", "Consolas", "Menlo", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #14181A;
+      --surface:   #1B2023;
+      --surface-2: #232A2D;
+      --ink:       #E7EAE4;
+      --ink-2:     #B4BDB8;
+      --muted:     #8B958D;
+      --rule:      #2C3336;
+      --go:        #55BFA0;
+      --go-bg:     #14312A;
+      --warn:      #D2A047;
+      --warn-bg:   #33280F;
+      --stop:      #E0776F;
+      --stop-bg:   #35191A;
+      --accent:    #7BA7DB;
+      --accent-bg: #17273A;
+      --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 44px 20px 84px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+  .masthead { display: flex; flex-direction: column; gap: 16px; }
+  .kicker {
+    font-family: var(--f-mono);
+    font-size: .74rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--go);
+    font-weight: 700;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(1.75rem, 4vw, 2.45rem);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.18;
+  }
+  .standfirst { margin: 0; max-width: 82ch; font-size: 1.01rem; color: var(--ink-2); }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .meta-item { background: var(--surface); padding: 14px 16px; }
+  .meta-item .lbl { font-family: var(--f-mono); font-size: .7rem; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
+  .meta-item .val { font-size: 1.15rem; font-weight: 800; letter-spacing: -.02em; }
+  .meta-item .sub { font-size: .78rem; color: var(--ink-2); margin-top: 3px; }
+
+  section { display: flex; flex-direction: column; gap: 18px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 9px; }
+  .sec-num { font-family: var(--f-mono); font-size: .82rem; font-weight: 700; color: var(--go); letter-spacing: .08em; }
+  h2 { margin: 0; font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; }
+  p { margin: 0; max-width: 82ch; }
+  .lede { color: var(--ink-2); font-size: .98rem; }
+
+  .tscroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; font-size: .855rem; min-width: 760px; }
+  caption {
+    caption-side: bottom;
+    text-align: left;
+    padding: 11px 16px;
+    font-size: .78rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    background: var(--surface-2);
+    line-height: 1.55;
+  }
+  th, td { padding: 11px 13px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    background: var(--surface-2);
+    font-family: var(--f-mono);
+    font-size: .72rem;
+    color: var(--ink-2);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: none; }
+  tbody th { font-weight: 700; white-space: nowrap; }
+  .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  thead th.num { text-align: right; }
+  tr.hl { background: var(--go-bg); }
+  tr.hl th, tr.hl td { font-weight: 700; }
+  .t-go   { color: var(--go); font-weight: 700; }
+  .t-warn { color: var(--warn); font-weight: 700; }
+  .t-stop { color: var(--stop); font-weight: 700; }
+  .t-acc  { color: var(--accent); font-weight: 700; }
+  .sub-txt { display: block; font-size: .74rem; color: var(--muted); font-weight: 400; margin-top: 2px; line-height: 1.45; }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: .68rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .p-go   { background: var(--go-bg);   color: var(--go); }
+  .p-warn { background: var(--warn-bg); color: var(--warn); }
+  .p-acc  { background: var(--accent-bg); color: var(--accent); }
+
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--go);
+    border-radius: 0 6px 6px 0;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+  .callout.acc { border-left-color: var(--accent); background: var(--accent-bg); }
+  .callout-label {
+    font-family: var(--f-mono);
+    font-size: .74rem;
+    letter-spacing: .06em;
+    font-weight: 800;
+    color: var(--go);
+  }
+  .callout.acc .callout-label { color: var(--accent); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--go);
+    border-radius: 6px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+  .card.acc { border-top-color: var(--accent); }
+  .card h3 { margin: 0; font-size: 1.06rem; }
+  .card p { font-size: .88rem; color: var(--ink-2); }
+
+  footer {
+    border-top: 2px solid var(--ink);
+    padding-top: 18px;
+    font-size: .8rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div style="background: #1e293b; color: #fff; padding: 12px 20px; border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 14px;">
+      <div style="font-weight: 700; display: flex; align-items: center; gap: 8px;">
+        <span>🏠 탄방동 내집마련 클라우드 대시보드</span>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <a href="index.html" style="color: #cbd5e1; text-decoration: none; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.08);">📊 실시간 매수 플랜</a>
+        <a href="탄방동_3단지_2028년_전월세전환_및_학군환금성_분석.html" style="color: #38bdf8; text-decoration: none; font-weight: 700; padding: 4px 10px; background: rgba(56,189,248,0.15); border-radius: 6px;">🎓 학군·환금성 심층분석</a>
+      </div>
+    </div>
+
+    <div class="kicker">2026. 10. 30. 16:10 국토교통부 실거래 · 네이버 부동산 · 호갱노노 실시간 데이터 기반 (공유용 리포트)</div>
+    <h1>탄방동 3단지(개나리·산호·한우리) 재건축 지연 &amp; 2028년 타지역 이동 시 「전·월세 전환 및 학군·환금성」 분석</h1>
+    <p class="standfirst">
+      당장 풀대출(LTV 70~80%)을 받아 실입주한 뒤, <strong>재건축이 지연되거나 2028년 이후 대전을 떠나 세(전세·월세)를 줘야 하는 상황</strong>을 대비한 시뮬레이션입니다.<br>
+      ① <strong>단지별 31평(84㎡) 현재 전·월세 시세 및 매물</strong>, ② <strong>"내놓으면 바로 나가나?"(국토부 전·월세 거래량·회전율 및 초등학교 통학거리·학군 비교)</strong>, ③ <strong>풀대출 상태에서 월세 vs 전세 전환 시 내 통장 캐시플로우</strong>를 정리했습니다.
+    </p>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="lbl">🔥 풀대출 시 2028년 최적 임대 방식</div>
+        <div class="val t-go">월세 5,000만 / 95~100만</div>
+        <div class="sub">주담대 유지 + 보증금 5천 회수 + 순이자 월 4~18만!</div>
+      </div>
+      <div class="meta-item">
+        <div class="lbl">💡 대출 완전 말소(이자 0원) 원할 때</div>
+        <div class="val t-acc">전세 3.1억 ~ 3.5억 전환</div>
+        <div class="sub">LTV 70% 매수 시 전세금으로 주담대 거의 1:1 상환!</div>
+      </div>
+      <div class="meta-item">
+        <div class="lbl">🏆 31평 전·월세 회전율 &amp; 올라운더 1위</div>
+        <div class="val t-go">산호 (회전율 10% · 33건)</div>
+        <div class="sub">탄방역 3분 + 탄방초 9분 · 최근 두 달간 5건 체결!</div>
+      </div>
+      <div class="meta-item">
+        <div class="lbl">🎯 개나리 31평 임대 핵심 타겟</div>
+        <div class="val t-warn">역세권 신혼부부 (회전율 9%)</div>
+        <div class="sub">둔산초(12분) 약점을 탄방역 2분(157m) + 올수리로 상쇄</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 1: 3단지 31평 전·월세 시세 및 실거래가 -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>탄방동 3단지 31평(전용 84㎡) 전세 · 월세 시세 및 실시간 매물 (2026.10.30 기준)</h2>
+    </div>
+    <p class="lede">
+      네이버 부동산(`fin.land.naver.com`)에 등록된 실시간 전·월세 매물 호가와 KB시세, 2026년 국토교통부 실거래가 전수 조사 결과입니다.
+      30년 차 구축 특성상 <strong>샤시 포함 올수리 여부</strong>에 따라 전세가는 <code>3,000만 ~ 4,000만 원</code>, 월세는 <code>월 20만 ~ 25만 원</code> 차이가 납니다.
+    </p>
+
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr>
+            <th>단지명 (31평 · 전용 84㎡)</th>
+            <th class="num">KB시세 전세가<br><span class="sub-txt">(전세가율)</span></th>
+            <th>2026년 전세 실거래가 &amp;<br>현재 네이버 전세 매물</th>
+            <th>2026년 월세 실거래가 &amp;<br>현재 네이버 월세 매물</th>
+            <th>2028년 임대 전환 시<br>기대 시세 (올수리 기준)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <th>개나리 31평<br><span class="sub-txt">103.01 / 84.84㎡ (180세대)</span></th>
+            <td class="num">
+              <strong>일반 3억 0,000만</strong>
+              <span class="sub-txt">상위 3.15억 / 하위 2.70억<br>(전세가율 63 ~ 66%)</span>
+            </td>
+            <td>
+              • <strong>실거래(26.07, 3층): `3억 0,000만`</strong><br>
+              • <strong>실거래(26.01, 9층): `3억 1,000만`</strong> <span class="sub-txt">(직전 3.3억)</span><br>
+              • 실거래(26.07, 1층): `2억 7,000만`<br>
+              • <span class="sub-txt">현재 네이버 31평 전세 매물 0건 (품귀)</span>
+            </td>
+            <td>
+              • <strong>실거래(26.09, 6층): `5,000만 / 월 100만` ★</strong><br>
+              • 실거래(26.04, 10층): `1.5억 / 월 45만`<br>
+              • 실거래(26.03, 2층): `5,000만 / 월 70만`<br>
+              • <span class="sub-txt">KB월세시세: `3,000만 / 월 75~100만`</span>
+            </td>
+            <td class="t-go">
+              • 전세: <strong>3.0억 ~ 3.2억</strong><br>
+              • 월세: <strong>5,000 / 95~100만</strong>
+            </td>
+          </tr>
+          <tr class="hl">
+            <th>산호 31평<br><span class="sub-txt">103.05 / 84.94㎡ (324세대)</span></th>
+            <td class="num">
+              <strong>일반 3억 0,500만</strong>
+              <span class="sub-txt">상위 3.20억 / 하위 2.80억<br>(전세가율 60 ~ 64%)</span>
+            </td>
+            <td>
+              • <strong>실거래(26.10.23, 10층): `3억 2,000만`</strong> (6일 전!)<br>
+              • <strong>실거래(26.10.07, 2층): `3억 1,000만`</strong><br>
+              • <strong>현 전세(101동 7층 공실/103동 7층 올수리): `3억 3,000만`</strong><br>
+              • 현 전세(101동 고층 `3.5억` / 103동 1층 `3.0억`) (총 4건)
+            </td>
+            <td>
+              • <strong>실거래(26.09.28, 5층): `5,000만 / 월 95만`</strong><br>
+              • <strong>현 매물(101동 중층, 남향): `5,000만 / 월 95만` ★</strong><br>
+              • <span class="sub-txt">(즉시입주 가능 매물 현재 등록 중)</span>
+            </td>
+            <td class="t-acc">
+              • 전세: <strong>3.1억 ~ 3.2억</strong><br>
+              • 월세: <strong>5,000 / 95~100만</strong>
+            </td>
+          </tr>
+          <tr>
+            <th>한우리 31평<br><span class="sub-txt">103.32 / 84.72㎡ (432세대)</span></th>
+            <td class="num">
+              <strong>일반 3억 3,500만</strong>
+              <span class="sub-txt">상위 3.50억 / 하위 3.10억<br>(전세가율 60 ~ 62%)</span>
+            </td>
+            <td>
+              • <strong>실거래(26.10.20, 2층): `3억 2,000만`</strong> (9일 전!)<br>
+              • <strong>실거래(26.09.18, 8층): `3억 2,000만`</strong><br>
+              • <strong>현 매물(106동 3층, 올수리): `3억 5,000만` ★</strong><br>
+              • 현 매물(110동 2/6층): `3억 3,000만`
+            </td>
+            <td>
+              • <strong>현 매물(103동 9/12층): `3,000만 / 월 130만` ★</strong> <span class="sub-txt">(10/30 신규 등록, 우리공인)</span><br>
+              • <strong>실거래(26.09.29, 9층): `3,000만 / 월 110만`</strong><br>
+              • 지역난방 + 탄방초·문정중 학군 수요로 월세 강세<br>
+              • <span class="sub-txt">(참고: 26평형도 월세 `3,000/90만`, `3,500/88만` 실거래)</span>
+            </td>
+            <td class="t-acc">
+              • 전세: <strong>3.3억 ~ 3.5억</strong><br>
+              • 월세: <strong>5,000 / 100~115만</strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 거래 실적(회전율) 및 학군·환금성 검증 -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>"내놓으면 바로 나가나?" — 전·월세 거래 실적(회전율) 및 초등학교 통학거리 팩트체크</h2>
+    </div>
+    <p class="lede">
+      <em>"개나리는 학교가 좀 멀어서 자녀 있는 사람들이 비선호한다"</em>는 이야기가 실제 전·월세 거래량과 환금성에 어떤 영향을 주는지 국토교통부·호갱노노 데이터로 검증했습니다.
+    </p>
+
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr>
+            <th>검증 항목</th>
+            <th>개나리 (366세대 · 31평 180세대)</th>
+            <th>산호 (654세대 · 31평 324세대)</th>
+            <th>한우리 (598세대 · 31평 432세대)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <th>① 31평(103㎡) 전·월세<br>실거래 건수 &amp; 회전율</th>
+            <td class="num">
+              <strong>실거래 16건 / 회전율 9%</strong>
+              <span class="sub-txt">• 24평(79㎡)은 <strong>38건(회전율 20%)</strong> 폭발<br>• 31평은 총 180세대로 모수가 작아 16건이나 회전율(9%)은 한우리(8%)보다 높음</span>
+            </td>
+            <td class="num t-go">
+              <strong>실거래 33건 / 회전율 10% ★1위</strong>
+              <span class="sub-txt">• 17평(56㎡)은 <strong>73건(회전율 22%)</strong><br>• 31평도 최근 두 달(8~10월)에만 <strong>5건 연속 체결</strong>될 정도로 회전 속도 1위</span>
+            </td>
+            <td class="num t-acc">
+              <strong>실거래 36건 / 회전율 8% (건수 1위)</strong>
+              <span class="sub-txt">• 26평(88㎡)은 <strong>16건(회전율 10%)</strong><br>• 31평 세대수(432세대)가 가장 많아 최근 두 달간 <strong>5건 연속 체결</strong></span>
+            </td>
+          </tr>
+          <tr class="hl">
+            <th>② 배정 초등학교 &amp;<br>실제 도보 통학거리</th>
+            <td class="t-warn">
+              <strong>대전둔산초등학교 (767m / 도보 12분)</strong>
+              <span class="sub-txt">• 큰길을 건너야 하고 초등 저학년 걸음으로 15분 이상 걸려 <strong>초등 자녀 가구 선호도는 3단지 중 가장 낮음 (소문 팩트 맞음!)</strong></span>
+            </td>
+            <td class="t-acc">
+              <strong>대전탄방초등학교 (578m / 도보 9분)</strong>
+              <span class="sub-txt">• 선호도 높은 <strong>탄방초 + 문정중</strong> 학군 라인에 묶여 있어 초·중등 학부모 수요가 탄탄함</span>
+            </td>
+            <td class="t-go">
+              <strong>대전탄방초등학교 (378m / 도보 6분) ★1위</strong>
+              <span class="sub-txt">• 탄방초·문정중이 도보 5~6분 컷으로 가장 가까워 <strong>초·중등 학부모 전·월세 선호도 압도적 1위</strong></span>
+            </td>
+          </tr>
+          <tr class="hl">
+            <th>③ 지하철(탄방역) 거리 &amp;<br>생활 편의성</th>
+            <td class="t-go">
+              <strong>탄방역 157m (도보 2분) ★초역세권 1위</strong>
+              <span class="sub-txt">• 단지 바로 앞 여성병원·산후조리원 2곳 + 단지 내 어린이집(8m) + <strong>주차·상시 분리수거 1위</strong></span>
+            </td>
+            <td class="t-acc">
+              <strong>탄방역 212m (도보 3분)</strong>
+              <span class="sub-txt">• 남선공원 바로 옆 + 롯데백화점(522m) 도보권 + 역세권·학군 동시 충족</span>
+            </td>
+            <td>
+              <strong>탄방역 344m (도보 5분)</strong>
+              <span class="sub-txt">• <strong>지역난방(관리비 저렴)</strong> + 유흥가와 떨어진 가장 쾌적하고 조용한 주거 분위기</span>
+            </td>
+          </tr>
+          <tr>
+            <th>④ 2028년 세 놓을 때<br>주력 세입자 &amp; 환금성 결론</th>
+            <td>
+              <span class="pill p-warn">타겟: 역세권 맞벌이 신혼부부</span>
+              <span class="sub-txt">• 초등 학부모 대신 <strong>탄방역 도보 2분 출퇴근 신혼부부·영유아 가구</strong>가 주력 세입자입니다.<br>• 31평 세대수가 180세대뿐이라 평소 나오는 매물이 0~1건(현재도 0건)이므로, <strong>올수리 집을 전세 3.0~3.1억 / 월세 5,000/95만</strong>에 내놓으면 경쟁 없이 바로 빠집니다.</span>
+            </td>
+            <td>
+              <span class="pill p-go">타겟: 학부모 + 신혼부부 올라운더 ★</span>
+              <span class="sub-txt">• <strong>탄방초 학부모 수요 + 탄방역 3분 직장인 수요를 양쪽 다 흡수</strong>하여 10월 한 달에만 31평 전세가 2건(`3.1억`, `3.2억`) 체결되었습니다.<br>• <strong>2028년 임대 환금성(빠르게 세 빼기)과 대지지분(19.04평)을 동시에 중시한다면 산호가 최고</strong>입니다.</span>
+            </td>
+            <td>
+              <span class="pill p-acc">타겟: 탄방초·문정중 학부모</span>
+              <span class="sub-txt">• 학부모 수요가 가장 두터워 9월 말에도 31평 9층이 <strong>`보증금 3,000만 / 월세 110만 원`</strong>에 바로 계약되었습니다.<br>• 매수가가 비싼 대신 세입자 구하기는 가장 수월합니다.</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 2028년 월세 vs 전세 캐시플로우 비교 -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>2028년 말(2년 실거주 후) 타지역 이동 시 「옵션 A: 월세 전환」 vs 「옵션 B: 전세 전환」 비교</h2>
+    </div>
+    <p class="lede">
+      40년 만기 원리금균등상환(금리 3.9% 가정)으로 2년간 실거주하면 2028년 말 기준 대출 원금이 약 <code>800만 ~ 1,000만 원</code> 줄어듭니다.
+      이 상태에서 대전을 떠나 세를 줄 때 <strong>① 주담대를 그대로 두고 월세를 받을지(옵션 A)</strong>, <strong>② 전세보증금으로 주담대를 다 갚고 무대출로 만들지(옵션 B)</strong> 비교한 표입니다.
+    </p>
+
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr>
+            <th>매수 매물 &amp; 초기 풀대출 조건</th>
+            <th class="num">2028년 말<br>남은 주담대 원금<br><span class="sub-txt">(월 원리금)</span></th>
+            <th class="num">🔥 <strong>[옵션 A · 강추] 월세(5,000 / 95~105만) 전환</strong><br>주담대 그대로 유지 + 월세로 대출원리금 충당!<br><span class="sub-txt">(보증금 5,000만 현금 회수 + 세입자가 내 대출 갚아줌)</span></th>
+            <th class="num">💡 <strong>[옵션 B] 전세(3.1 ~ 3.5억) 전환</strong><br>전세금으로 주담대 전액 상환(말소) → 월 이자 0원!<br><span class="sub-txt">(선순위 근저당 말소 조건부 전세 계약 시)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <th>🥇 개나리 101동 12층 (올수리)<br><span class="pill p-go">LTV 70% 기본 풀대출 (3.255억)</span></th>
+            <td class="num">
+              잔액 <strong>3억 1,700만</strong>
+              <span class="sub-txt">(월 원리금 137만<br>= 이자 104만 + 원금 33만)</span>
+            </td>
+            <td class="num t-go">
+              • <strong>보증금 `5,000만 원` 즉시 내 통장으로 현금 회수!</strong><br>
+              • 세입자 월세 `100만` 수령 → <strong>내 월 지출 단 `37만 원`!</strong>
+              <span class="sub-txt">👉 그 37만 원 중 <strong>33만 원은 내 대출 원금이 갚아지는 강제저축</strong>이므로, <strong>실제 순이자 비용은 월 4만 원(사실상 0원)!</strong></span>
+            </td>
+            <td class="num t-go">
+              • 올수리 전세 <strong>`3억 1,000만 ~ 3억 2,000만`</strong> 맞춤<br>
+              • <strong>내 돈 추가 투입 `0원 ~ 700만 원`으로 주담대 100% 완납!</strong>
+              <span class="sub-txt">👉 2028년부터 <strong>대출 0원 · 월 이자 0원</strong> 상태로 재건축까지 무한 보유 가능!</span>
+            </td>
+          </tr>
+          <tr class="hl">
+            <th>🥇 개나리 101동 12층 (올수리)<br><span class="pill p-go">LTV 80% 극한 풀대출 (3.72억)</span></th>
+            <td class="num">
+              잔액 <strong>3억 6,250만</strong>
+              <span class="sub-txt">(월 원리금 156만<br>= 이자 118만 + 원금 38만)</span>
+            </td>
+            <td class="num t-go">
+              • <strong>보증금 `5,000만 원` 회수 → 실투입 현금 `7,930만 원`으로 축소!</strong><br>
+              • 세입자 월세 `100만` 수령 → <strong>내 월 지출 단 `56만 원`!</strong>
+              <span class="sub-txt">👉 원금상환(월 38만) 제외 시 <strong>실제 순이자 비용은 월 18만 원!</strong> 투자 시드 `5.1억`을 안 깨고 그대로 굴릴 수 있어 최상의 선택!</span>
+            </td>
+            <td class="num">
+              • 올수리 전세 `3억 1,500만` 수령 시<br>
+              • 대출 말소를 위해 <strong>내 현금 `4,750만 원` 추가 상환 필요</strong>
+              <span class="sub-txt">👉 전세로 돌리려면 투자 시드에서 4,750만 원을 꺼내야 하므로, <strong>LTV 80%일 때는 무조건 [옵션 A: 월세]가 유리!</strong></span>
+            </td>
+          </tr>
+          <tr>
+            <th>🥈 산호 101동 8층 (올수리 가정)<br><span class="pill p-acc">LTV 70% 기본 풀대출 (3.605억)</span></th>
+            <td class="num">
+              잔액 <strong>3억 5,100만</strong>
+              <span class="sub-txt">(월 원리금 151만<br>= 이자 114만 + 원금 37만)</span>
+            </td>
+            <td class="num t-acc">
+              • <strong>보증금 `5,000만 원` 즉시 현금 회수!</strong><br>
+              • 세입자 월세 `95~100만` 수령 → <strong>내 월 지출 `51~56만 원`</strong>
+              <span class="sub-txt">👉 원금상환(월 37만) 제외 시 <strong>실제 순이자 비용은 월 14~19만 원!</strong> (대지지분 19.04평 보유 비용으로 극소액)</span>
+            </td>
+            <td class="num">
+              • 올수리 전세 <strong>`3억 2,000만`</strong> 수령 시<br>
+              • 대출 전액 말소에 <strong>내 현금 `3,100만 원` 추가 상환 필요</strong>
+              <span class="sub-txt">👉 3,100만 원만 보태면 주담대 완전 말소 후 월 이자 0원 전환 가능</span>
+            </td>
+          </tr>
+          <tr>
+            <th>5위 · 한우리 107동 7층 (올수리)<br><span class="pill p-acc">LTV 70% 기본 풀대출 (3.955억)</span></th>
+            <td class="num">
+              잔액 <strong>3억 8,500만</strong>
+              <span class="sub-txt">(월 원리금 166만<br>= 이자 125만 + 원금 41만)</span>
+            </td>
+            <td class="num t-acc">
+              • <strong>보증금 `5,000만 원` 즉시 현금 회수!</strong><br>
+              • 세입자 월세 `105~110만` 수령 → <strong>내 월 지출 `56~61만 원`</strong>
+              <span class="sub-txt">👉 원금상환(월 41만) 제외 시 <strong>실제 순이자 비용은 월 15~20만 원!</strong></span>
+            </td>
+            <td class="num">
+              • 올수리 전세 <strong>`3억 5,000만`</strong> 수령 시<br>
+              • 대출 전액 말소에 <strong>내 현금 `3,500만 원` 추가 상환 필요</strong>
+              <span class="sub-txt">👉 한우리는 전세가가 3.5억까지 나와 전세 전환 시 방어력이 우수함</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards" style="margin-top: 8px;">
+      <div class="card">
+        <h3>🎯 선택 1: 초기 현금 최소 + 신혼부부 임대 전략 👉 개나리 101동 12층(5.1억)</h3>
+        <p>
+          • 이미 <strong>외부샤시까지 완벽 올수리(수리비 0원)</strong>가 되어 있어 2년 깔끔하게 거주 후 2028년에 추가 지출 없이 그대로 임대를 놓을 수 있습니다.<br>
+          • 둔산초 통학거리(12분) 때문에 초등 학부모 선호도는 낮지만, <strong>탄방역 도보 2분(157m) 초역세권 + 주차 편리성</strong> 덕분에 신혼부부·직장인 수요로 <strong>전세 3.1억 / 월세 5,000·95~100만 원</strong>에 빠르게 소진됩니다.
+        </p>
+      </div>
+      <div class="card acc">
+        <h3>🏆 선택 2: 2028년 임대 환금성 1위 + 대지지분 1위 👉 산호 101동 8층(5.45억 네고)</h3>
+        <p>
+          • 만약 2028년에 대전을 나갈 때 <strong>"학부모 + 신혼부부 양쪽 수요로 하루라도 빨리 세를 빼고 싶다"</strong>면 <strong>산호 31평(전·월세 회전율 10% 1위, 10월에만 전세 2건 체결)</strong>이 개나리보다 한 수 위입니다.<br>
+          • <strong>탄방초(도보 9분) 학군 + 탄방역(도보 3분) 역세권 + 대지지분 1위(19.04평)</strong>를 모두 갖췄으므로, 101동 8층·7층을 <strong>5.15~5.30억</strong>에 네고할 수 있다면 최상의 올라운더 선택이 됩니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    본 리포트는 2026년 10월 30일 국토교통부 실거래가 공개시스템, 네이버 부동산(`land.naver.com`), 호갱노노(`hogangnono.com`)의 탄방동 개나리·산호·한우리 실시간 데이터를 바탕으로 최신화되었습니다.
+  </footer>
+
+</div>
+
+</body>
+</html>
