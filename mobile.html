@@ -1,261 +1,705 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>탄방동 내집마련 현황</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-      background: #f0f2f5;
-      color: #1a1a1a;
-      font-size: 15px;
-      padding: 12px;
-    }
-    h1 {
-      font-size: 17px;
-      font-weight: 700;
-      text-align: center;
-      padding: 14px 0 4px;
-      color: #111;
-    }
-    .date {
-      font-size: 12px;
-      color: #888;
-      text-align: center;
-      margin-bottom: 14px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>탄방동 내집마련 모바일 대시보드 (11.12 고도화판)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --ink: #0f172a;
+    --ink-sub: #334155;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --navy: #1e293b;
+    --blue: #2563eb;
+    --blue-bg: #eff6ff;
+    --green: #059669;
+    --green-bg: #ecfdf5;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --red: #dc2626;
+    --red-bg: #fef2f2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    padding-bottom: 84px;
+    font-size: 14px;
+    word-break: keep-all;
+  }
 
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 10px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    }
-    .card-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #555;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
-    .badge-green { background: #e6f9f0; color: #1a8a4a; }
-    .badge-red   { background: #fdecea; color: #c0392b; }
-    .badge-gray  { background: #f0f0f0; color: #666; }
+  /* Header */
+  .app-header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    color: #fff;
+    padding: 18px 16px 14px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 10px rgba(15,23,42,0.18);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .badge-live {
+    background: rgba(59, 130, 246, 0.25);
+    border: 1px solid rgba(147, 197, 253, 0.4);
+    color: #93c5fd;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 99px;
+  }
+  .pc-link {
+    color: #cbd5e1;
+    font-size: 11px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .app-header h1 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .app-header p {
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 2px;
+  }
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 7px 0;
-      border-bottom: 1px solid #f3f3f3;
-      gap: 8px;
-    }
-    .row:last-child { border-bottom: none; }
-    .row-label {
-      font-size: 13px;
-      color: #666;
-      flex-shrink: 0;
-    }
-    .row-value {
-      font-size: 13px;
-      font-weight: 600;
-      color: #111;
-      text-align: right;
-    }
-    .highlight { color: #1a6fdb; }
-    .accent    { color: #c0392b; }
-    .green     { color: #1a8a4a; }
+  /* Top KPI Strip */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 10px 12px;
+    background: #1e293b;
+    color: #fff;
+    border-bottom: 1px solid #334155;
+  }
+  .kpi-mini {
+    background: rgba(255,255,255,0.06);
+    padding: 7px 6px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .kpi-mini .lbl { font-size: 10px; color: #94a3b8; display: block; }
+  .kpi-mini .val { font-size: 13px; font-weight: 800; color: #f8fafc; margin-top: 1px; display: block; }
+  .kpi-mini .val.accent { color: #38bdf8; }
+  .kpi-mini .val.warn { color: #fbbf24; }
 
-    .big-price {
-      font-size: 26px;
-      font-weight: 800;
-      color: #1a6fdb;
-      margin: 4px 0 2px;
-    }
-    .sub-text {
-      font-size: 12px;
-      color: #888;
-      margin-bottom: 10px;
-    }
-    .nego-box {
-      background: #e8f4fd;
-      border-radius: 10px;
-      padding: 10px 12px;
-      margin-top: 8px;
-    }
-    .nego-box p {
-      font-size: 13px;
-      color: #1a5fab;
-    }
-    .nego-box strong { font-weight: 700; }
+  /* Tabs Navigation (Bottom Bar + Top Pill Fallback) */
+  .tab-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 6px 8px 10px;
+    z-index: 100;
+    box-shadow: 0 -4px 12px rgba(15,23,42,0.06);
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    padding: 6px 4px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+  }
+  .tab-btn .ico { font-size: 17px; line-height: 1; }
+  .tab-btn.active {
+    color: var(--blue);
+    background: var(--blue-bg);
+  }
 
-    .phone-link {
-      display: block;
-      text-align: center;
-      margin-top: 12px;
-      padding: 11px;
-      background: #1a6fdb;
-      color: #fff;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-    }
+  /* Main Container & Sections */
+  .container { padding: 12px; max-width: 600px; margin: 0 auto; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 
-    .pass-box {
-      background: #fdecea;
-      border-radius: 10px;
-      padding: 10px 12px;
-      margin-top: 4px;
-    }
-    .pass-box p { font-size: 13px; color: #c0392b; line-height: 1.6; }
+  /* Cards */
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--ink);
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .tag-green { background: var(--green-bg); color: var(--green); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber); }
+  .tag-red { background: var(--red-bg); color: var(--red); }
+  .tag-blue { background: var(--blue-bg); color: var(--blue); }
 
-    .loan-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 4px;
-    }
-    .loan-item {
-      background: #f7f8fa;
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
-    }
-    .loan-item .l-label { font-size: 11px; color: #888; margin-bottom: 4px; }
-    .loan-item .l-value { font-size: 16px; font-weight: 800; color: #1a6fdb; }
-    .loan-item .l-sub   { font-size: 11px; color: #aaa; margin-top: 2px; }
-  </style>
+  /* Target Item Boxes */
+  .target-box {
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+  .target-box.primary { border-color: #93c5fd; background: #f8fafc; }
+  .target-box.planb { border-color: #6ee7b7; background: #f0fdf4; }
+  .target-box.pass { border-color: #fca5a5; background: #fef2f2; }
+
+  .t-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .t-name { font-size: 15px; font-weight: 800; color: var(--ink); }
+  .t-price { font-size: 16px; font-weight: 800; color: var(--blue); }
+  .t-desc { font-size: 12.5px; color: var(--ink-sub); line-height: 1.55; }
+  .t-meta {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* Data Table */
+  .m-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
+  .m-table th, .m-table td { padding: 8px 6px; border-bottom: 1px solid var(--border); text-align: left; }
+  .m-table th { color: var(--muted); font-weight: 700; font-size: 11px; background: #f8fafc; }
+  .m-table td.num, .m-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Calculator Styles */
+  .preset-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .preset-btn {
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-sub);
+    text-align: center;
+    cursor: pointer;
+  }
+  .preset-btn.active {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+  .slider-group { margin-bottom: 12px; }
+  .slider-hdr {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12.5px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .slider-hdr .val { color: var(--blue); font-weight: 800; }
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--blue);
+    height: 6px;
+  }
+  .calc-res-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .res-box {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .res-box.highlight {
+    background: var(--blue-bg);
+    border-color: #93c5fd;
+  }
+  .res-box .lbl { font-size: 11px; color: var(--muted); font-weight: 700; }
+  .res-box .num { font-size: 16px; font-weight: 800; color: var(--ink); margin-top: 2px; }
+  .res-box.highlight .num { color: var(--blue); }
+  .res-box .sub { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+
+  /* Call Button */
+  .call-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #fff;
+  }
+  .call-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    background: var(--navy);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .call-script {
+    background: #f8fafc;
+    border-left: 3px solid var(--blue);
+    padding: 8px 10px;
+    font-size: 12px;
+    color: var(--ink-sub);
+    margin-top: 8px;
+    border-radius: 0 6px 6px 0;
+  }
+</style>
 </head>
 <body>
 
-  <h1>탄방동 내집마련 현황</h1>
-  <p class="date">2026.11.12 16:00 기준 (오후 점검: 매매 매물 변동발생 58건(+1건 신규) · 31평 21건 소폭증가 · 한우리 107동 12층 5.95억 원탑 신규등록 · 산호 31평 2건만 유지 · 개나리 31평 0건 완전멸종 지속 · 한우리 110동 7.5억 유지)</p>
-
-  <!-- 1순위 매물 -->
-  <div class="card">
-    <div class="card-title">
-      ⚠️ 1순위 매물 (포털 삭제 / 계약확인 요망)
-      <span class="badge badge-red">포털삭제</span>
-    </div>
-
-    <div class="big-price" style="color:#c0392b;">5.45억 (마감유력)</div>
-    <div class="sub-text">산호 101동 8층 · 31평(전용84㎡) [11/8 아침 삭제포착]</div>
-
-    <div class="row">
-      <span class="row-label">변동상황</span>
-      <span class="row-value accent">네이버 매물 삭제 (계약/철회 확인필요)</span>
-    </div>
-    <div class="row">
-      <span class="row-label">대지지분</span>
-      <span class="row-value highlight">19.04평 (3단지 1위)</span>
-    </div>
-    <div class="row">
-      <span class="row-label">산호 31평 최저가</span>
-      <span class="row-value accent">103동 저층 5.60억 / 중층 6.00억 (단 2건)</span>
-    </div>
-    <div class="row">
-      <span class="row-label">직전 실거래</span>
-      <span class="row-value">11/4 · 101동 7층 5.40억</span>
-    </div>
-
-    <div class="nego-box" style="background:#fdecea; border-left: 3px solid #c0392b;">
-      <p style="color:#c0392b;">⚡ <strong>중개사 긴급 유선 확인 필요:</strong><br>
-      가계약 체결인지 확인 후, 마감 시 <strong>산호 101동 7층 공실(전세3.3억)의 5.15~5.2억 매매전환</strong> 또는 103동 저층 5.6억 조율로 선회 필요!</p>
-    </div>
-
-    <a href="tel:042-471-1212" class="phone-link" style="background:#c0392b;">📞 가로수공인 사실확인 042-471-1212</a>
+<header class="app-header">
+  <div class="header-top">
+    <span class="badge-live">2026.11.12 17:00 업데이트</span>
+    <a href="index.html" class="pc-link">PC 마스터플랜 보기 →</a>
   </div>
+  <h1>탄방동 내집마련 의사결정 보드</h1>
+  <p>산호 · 개나리 · 한우리 31평 & 대안 단지 실시간 비교</p>
+</header>
 
-  <!-- 한우리 -->
-  <div class="card">
-    <div class="card-title">
-      ❌ 한우리 31평 매물 동향
-      <span class="badge badge-red">PASS</span>
-    </div>
-    <div class="row">
-      <span class="row-label">🚨 역대 최고호가 유지</span>
-      <span class="row-value accent">110동 6층 7.50억 (JK공인)</span>
-    </div>
-    <div class="row">
-      <span class="row-label">기존 주요 매물</span>
-      <span class="row-value">107동 12층 5.95억(원탑 추가) / 106동 2층 6.0억</span>
-    </div>
-    <div class="row">
-      <span class="row-label">대지지분 열세</span>
-      <span class="row-value accent">15.5평 (산호 대비 -3.5평)</span>
-    </div>
-    <div class="pass-box">
-      <p>110동 7.5억 등 초고호가 진입했으나, 분담금 5~8천만원 추가 감안 시 6.0억 이상 전원 <strong>[매수 배제/패스]</strong> 확고 유지</p>
-    </div>
+<div class="kpi-strip">
+  <div class="kpi-mini">
+    <span class="lbl">부부 총시드</span>
+    <span class="val">3.30억</span>
   </div>
-
-  <!-- 개나리 -->
-  <div class="card">
-    <div class="card-title">
-      🔍 개나리 매물 현황
-      <span class="badge badge-gray">완전멸종</span>
-    </div>
-    <div class="row">
-      <span class="row-label">31평 전체 매물</span>
-      <span class="row-value accent">0건 (완전 멸종 지속)</span>
-    </div>
-    <div class="row">
-      <span class="row-label">🚨 최신 실거래</span>
-      <span class="row-value highlight">11/6 계약 12층 5.05억 (신고가!)</span>
-    </div>
-    <div class="row">
-      <span class="row-label">변동 분석</span>
-      <span class="row-value">5.05억 실거래로 31평 전멸 원인 실증</span>
-    </div>
+  <div class="kpi-mini">
+    <span class="lbl">부부합산 연봉</span>
+    <span class="val">1.09억</span>
   </div>
+  <div class="kpi-mini">
+    <span class="lbl">1순위 타겟</span>
+    <span class="val accent">산호 5.4억</span>
+  </div>
+  <div class="kpi-mini">
+    <span class="lbl">31평 매물수</span>
+    <span class="val warn">산2·개0·한19</span>
+  </div>
+</div>
 
-  <!-- 자금 -->
-  <div class="card">
-    <div class="card-title">💰 자금 계획 (산호 8층 기준)</div>
-    <div class="loan-grid">
-      <div class="loan-item">
-        <div class="l-label">최대 대출 (LTV 80%)</div>
-        <div class="l-value">4.36억</div>
-        <div class="l-sub">생애최초 디딤돌 등</div>
+<div class="container">
+
+  <!-- TAB 1: 핵심현황 -->
+  <div id="tab-status" class="tab-panel active">
+    
+    <div class="card">
+      <div class="card-title">
+        <span>🎯 11/12 핵심 타겟 매물 & 대응</span>
+        <span class="tag tag-blue">타임아웃·전환 투트랙</span>
       </div>
-      <div class="loan-item">
-        <div class="l-label">최소 필요 현금</div>
-        <div class="l-value">1.25억~</div>
-        <div class="l-sub">풀대출+올수리 기준</div>
+
+      <div class="target-box primary">
+        <div class="t-head">
+          <span class="t-name">Plan A. 산호 101동 8층 (로열층)</span>
+          <span class="t-price">5.45억 (보류)</span>
+        </div>
+        <div class="t-desc">
+          • 11/4 직하층(7층) <b>5.40억 실거래</b> 직후 집주인 변심으로 11/8 포털 노출 중단<br>
+          • <b>대응:</b> 추격 매수 금지. 가로수공인에 <b>"5.40~5.42억 복귀 시 당일 가계약금 입금"</b> 대기선 유지
+        </div>
+        <div class="t-meta">
+          <span>대지지분 19.04평 (1위)</span>
+          <span>필요현금 약 1.48억 (LTV 80%)</span>
+        </div>
+      </div>
+
+      <div class="target-box planb">
+        <div class="t-head">
+          <span class="t-name">Plan B. 산호 101동 7층 (즉시입주 공실)</span>
+          <span class="t-price">5.15~5.25억 타진</span>
+        </div>
+        <div class="t-desc">
+          • 현재 <b>전세 3.3억(한우리타운)</b>으로 나온 기본상태 공실 매물<br>
+          • <b>대응:</b> 중개소를 통해 임대인에게 <b>5.15~5.25억 매매 전환</b> 역제안 → 성사 시 3,000만 원 올수리 후에도 총투입 5.45~5.55억으로 신축급 실거주 완성
+        </div>
+        <div class="t-meta">
+          <span>대지지분 19.04평 (1위)</span>
+          <span>올수리 포함 필요현금 약 1.54억</span>
+        </div>
+      </div>
+
+      <div class="target-box pass">
+        <div class="t-head">
+          <span class="t-name">🚫 한우리 31평 6.0억+ 호가군</span>
+          <span class="t-price" style="color:var(--red);">전면 PASS</span>
+        </div>
+        <div class="t-desc">
+          • 11/12 108동 5층(6.0억) 삭제, 110동 6층 <b>7.50억</b> 신고가 호가 출현, 107동 12층(5.95억)·106동 2층(6.0억) 대기 중<br>
+          • <b>판단 근거:</b> 대지지분 <b>15.98평</b>으로 산호 대비 재건축 분담금이 <b>약 8,500만 원 더 발생</b>. 6.0억 매수 시 산호 대비 실질 1.4억 원 비싸게 사는 꼴이므로 철저히 패스 (단, 107동 7층 올수리 매물이 5.65억 이하 급매 조정 시에만 예외 검토)
+        </div>
       </div>
     </div>
-    <div class="row" style="margin-top:10px;">
-      <span class="row-label">LTV 70% 시 현금</span>
-      <span class="row-value">1.76억</span>
+
+    <div class="card">
+      <div class="card-title">
+        <span>📊 3개 단지 31평 수급 요약 (11.12 17:00)</span>
+      </div>
+      <table class="m-table">
+        <thead>
+          <tr>
+            <th>단지명</th>
+            <th class="num">대지지분</th>
+            <th class="num">31평 매물</th>
+            <th>최근 실거래 / 핵심 동향</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>산호</b></td>
+            <td class="num" style="color:var(--blue);font-weight:700;">19.04평</td>
+            <td class="num"><b>2건</b></td>
+            <td>11/4 7층 <b>5.40억</b> 실거래<br><span style="color:var(--muted);font-size:11px;">현재 103동 저층 5.6억 / 중층 6.0억</span></td>
+          </tr>
+          <tr>
+            <td><b>개나리</b></td>
+            <td class="num">17.87평</td>
+            <td class="num" style="color:var(--red);font-weight:700;">0건 (멸실)</td>
+            <td>11/6 12층 <b>5.05억 신고가</b><br><span style="color:var(--muted);font-size:11px;">11/10 1층(4.5억) 삭제로 매물 전무</span></td>
+          </tr>
+          <tr>
+            <td><b>한우리</b></td>
+            <td class="num" style="color:var(--red);">15.98평</td>
+            <td class="num"><b>19건</b></td>
+            <td>5.5억(1층)~7.5억(6층)<br><span style="color:var(--muted);font-size:11px;">매도자 호가 과열로 거래 소강</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="row">
-      <span class="row-label">잔여 유동자금</span>
-      <span class="row-value green">4~5억 보존 가능</span>
+
+  </div>
+
+  <!-- TAB 2: 대출/현금 계산기 -->
+  <div id="tab-calc" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>🧮 실시간 대출·현금·재건축 시뮬레이터</span>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">
+        매물 버튼을 누르거나 슬라이더를 움직이면 부부 총시드(3.3억) 기준 필요현금과 보존 시드가 즉시 계산됩니다.
+      </p>
+
+      <div class="preset-grid">
+        <button type="button" class="preset-btn active" onclick="mPreset(54200, 1500, 80, 'sanho', this)">산호 8층 (5.42억)</button>
+        <button type="button" class="preset-btn" onclick="mPreset(52000, 3000, 80, 'sanho', this)">산호 7층+올수리</button>
+        <button type="button" class="preset-btn" onclick="mPreset(59500, 500, 80, 'hanwoori', this)">한우리 7/12층 (5.95억)</button>
+        <button type="button" class="preset-btn" onclick="mPreset(61000, 0, 70, 'new84', this)">인근 준신축 (6.1억)</button>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-hdr">
+          <span>매수 체결가</span>
+          <span class="val" id="m-price-lbl">5.42억 (54,200만)</span>
+        </div>
+        <input type="range" id="m-price" min="45000" max="68000" step="100" value="54200" oninput="mCalc()">
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-hdr">
+          <span>인테리어 수리비</span>
+          <span class="val" id="m-repair-lbl">1,500만 원</span>
+        </div>
+        <input type="range" id="m-repair" min="0" max="5000" step="500" value="1500" oninput="mCalc()">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div>
+          <label style="font-size:11px;font-weight:700;color:var(--muted);">대출 트랙 (LTV)</label>
+          <select id="m-ltv" onchange="mCalc()" style="width:100%;padding:7px;border-radius:8px;border:1px solid #cbd5e1;font-size:12px;font-weight:700;margin-top:2px;">
+            <option value="80" selected>생애최초 80%</option>
+            <option value="70">일반 주담대 70%</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700;color:var(--muted);">금리 (30년 원리금)</label>
+          <select id="m-rate" onchange="mCalc()" style="width:100%;padding:7px;border-radius:8px;border:1px solid #cbd5e1;font-size:12px;font-weight:700;margin-top:2px;">
+            <option value="3.8">3.8% (특례/우대)</option>
+            <option value="4.0" selected>4.0% (시중 기준)</option>
+            <option value="4.3">4.3% (보수적)</option>
+          </select>
+        </div>
+      </div>
+
+      <input type="hidden" id="m-complex" value="sanho">
+
+      <div class="calc-res-grid">
+        <div class="res-box highlight">
+          <div class="lbl">최대 주담대 대출액</div>
+          <div class="num" id="m-out-loan">4.34억</div>
+          <div class="sub" id="m-out-loan-sub">5.42억 × 80%</div>
+        </div>
+        <div class="res-box highlight">
+          <div class="lbl">실제 필요 현금</div>
+          <div class="num" id="m-out-cash">1.30억</div>
+          <div class="sub" id="m-out-cash-sub">계약+부대+수리 합산</div>
+        </div>
+        <div class="res-box">
+          <div class="lbl">매수 후 잔여 보존 시드</div>
+          <div class="num" id="m-out-seed" style="color:var(--green);">2.00억</div>
+          <div class="sub">부부 총시드 3.30억 기준</div>
+        </div>
+        <div class="res-box">
+          <div class="lbl">월 원리금 (소득대비)</div>
+          <div class="num" id="m-out-pmt">207만/월</div>
+          <div class="sub" id="m-out-dsr">월 세후소득 대비 29%</div>
+        </div>
+      </div>
+
+      <div class="res-box" style="margin-top:8px;background:#fffbeb;border-color:#fde68a;">
+        <div class="lbl" style="color:#b45309;">재건축 34평 입주 시 총 원가 추정 (매수가+수리+추정분담금)</div>
+        <div class="num" id="m-out-recon" style="color:#b45309;">8.07억</div>
+        <div class="sub" id="m-out-recon-sub" style="color:#92400e;">산호 추정 분담금 2.50억 반영 (인근 신축 11.5억 대비 안전마진 확보)</div>
+      </div>
     </div>
   </div>
 
-  <!-- 전체 마스터플랜 링크 -->
-  <div style="margin-top: 14px; text-align: center; display: flex; flex-direction: column; gap: 8px;">
-    <a href="index.html" style="display:block; padding: 12px; background: #fff; color: #1a6fdb; border-radius: 10px; font-weight: 700; text-decoration: none; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
-      📊 전체 종합 마스터플랜 (상세 리포트) ➜
-    </a>
-    <a href="https://t.me/tanbang_helper_bot" style="display:block; padding: 10px; background: #229ED9; color: #fff; border-radius: 10px; font-weight: 700; text-decoration: none;">
-      💬 텔레그램 질문방 돌아가기
-    </a>
+  <!-- TAB 3: 플랜B / 대안비교 -->
+  <div id="tab-planb" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>🔄 플랜B: 6억 예산 대안 단지 냉정 비교</span>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink-sub);margin-bottom:10px;">
+        산호 31평이 5.45억 이하로 나오지 않을 경우, 무리하게 한우리 6.0억+를 추격하기보다 아래 3가지 대안과 비교해야 합니다.
+      </p>
+
+      <div class="target-box primary">
+        <div class="t-head">
+          <span class="t-name">대안 1. 인근 준신축·신축 84㎡ 직행</span>
+          <span class="tag tag-green">실거주 만족도 최고</span>
+        </div>
+        <div class="t-desc">
+          • <b>목동 더샵리슈빌 (2022년, 715세대):</b> 84㎡ 급매 <b>5.8~6.2억</b><br>
+          • <b>용문 둔산더샵엘리프 (2025년, 2,763세대):</b> 84㎡ 입주장 급매 <b>6.0~6.3억</b><br>
+          • <b>비교 결론:</b> 한우리 31평을 6.0~6.2억에 사서 10년 뒤 분담금 3.35억을 또 내는 것보다, 처음부터 지하주차장 완비된 5.8~6.2억 신축·준신축 84㎡로 가는 것이 자금·삶의 질 모두 압도적 우위입니다.
+        </div>
+      </div>
+
+      <div class="target-box">
+        <div class="t-head">
+          <span class="t-name">대안 2. 둔산동 구축 31평 (국화·둥지 등)</span>
+          <span class="tag tag-amber">사업성 열위 주의</span>
+        </div>
+        <div class="t-desc">
+          • <b>국화 31평 (5.6~6.3억) / 둥지 31평 (6.5~7.2억)</b><br>
+          • 용적률 220~244%, 대지지분 <b>13.5~14.2평</b>으로 산호(19.04평)보다 대지지분이 약 5평 작습니다.<br>
+          • 재건축 시 추가 분담금만 4억 원 이상 예상되므로 투자·재건축 관점에서는 산호·개나리가 훨씬 유리합니다.
+        </div>
+      </div>
+
+      <div class="target-box planb">
+        <div class="t-head">
+          <span class="t-name">대안 3. 산호·개나리 24~27평 시드 보존</span>
+          <span class="tag tag-blue">현금 2.4억 보존</span>
+        </div>
+        <div class="t-desc">
+          • <b>산호 24평 (3.3~3.5억) / 개나리 27평 (3.95~4.15억)</b><br>
+          • 초기 투입 현금을 9,000만 원 이하로 줄이고 <b>잔여 시드 2.4억 원을 미국 주식·채권 포트폴리오로 운용</b>하면서 동일하게 탄방동 재건축 조합원 지위를 확보하는 실속형 플랜B입니다.
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- TAB 4: 중개소 통화 & 멘트 -->
+  <div id="tab-call" class="tab-panel">
+    <div class="card">
+      <div class="card-title">
+        <span>📞 핵심 중개소 원터치 연결 & 협상 멘트</span>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">
+        포털에 올라오기 전 <b>네이버 미등재(장부 매물)</b>를 선점하기 위한 현장 중개소 직통 번호와 실전 멘트입니다.
+      </p>
+
+      <div class="call-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <b>1. 가로수공인중개사 (산호 101동 8층 전속)</b>
+          <span class="tag tag-blue">최우선 관리</span>
+        </div>
+        <div class="call-script">
+          "소장님, 산호 101동 8층 보류 건 혹시 집주인분 마음 바뀌셨을까요? 저희는 대출·현금 다 준비되어 있어서 <b>5억 4,000~4,200만 원</b>에 진행 가능하시면 당일 바로 가계약금 입금하겠습니다."
+        </div>
+        <a href="tel:042-471-1212" class="call-btn">📞 가로수공인 전화걸기 (042-471-1212)</a>
+      </div>
+
+      <div class="call-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <b>2. 한우리타운공인중개사 (산호 101동 7층 공실)</b>
+          <span class="tag tag-green">플랜B 매매전환</span>
+        </div>
+        <div class="call-script">
+          "소장님, 지금 산호 101동 7층 전세 3.3억으로 나온 공실 매물이요. 혹시 집주인분께서 전세 대신 <b>5억 1,500~2,500만 원 선에서 바로 매매로 파실 의향</b>은 없으실지 여쭤봐 주실 수 있을까요? 실거주 목적이라 잔금 일정도 다 맞춰드릴 수 있습니다."
+        </div>
+        <a href="tel:042-485-8400" class="call-btn">📞 한우리타운공인 전화걸기 (042-485-8400)</a>
+      </div>
+
+      <div class="call-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <b>3. 산호공인중개사 (산호·한우리 단지내 핵심)</b>
+          <span class="tag tag-amber">장부매물 대기등록</span>
+        </div>
+        <div class="call-script">
+          "소장님, 산호 31평 로열층 급매(5.4억대)나 개나리 31평(5.0억 안팎) 네이버에 올리시기 전에 연락 주시면 바로 브리핑 듣고 당일 가계약금 쏘겠습니다. 진성 매수 대기자로 꼭 메모 부탁드립니다."
+        </div>
+        <a href="tel:042-472-0119" class="call-btn">📞 산호공인 전화걸기 (042-472-0119)</a>
+      </div>
+
+      <div class="call-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <b>4. 정보공인중개사 (산호 103동 / 개나리 주력)</b>
+          <span class="tag tag-amber">장부매물 대기등록</span>
+        </div>
+        <div class="call-script">
+          "소장님, 산호나 개나리 31평 실거주 매수 찾고 있습니다. 집주인분 사정상 조용히 파셔야 하는 급매물 나오면 1순위로 연락 부탁드립니다."
+        </div>
+        <a href="tel:042-485-2800" class="call-btn">📞 정보공인 전화걸기 (042-485-2800)</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Bottom Navigation Bar -->
+<nav class="tab-bar">
+  <button type="button" class="tab-btn active" onclick="switchTab('tab-status', this)">
+    <span class="ico">📋</span>
+    <span>핵심현황</span>
+  </button>
+  <button type="button" class="tab-btn" onclick="switchTab('tab-calc', this)">
+    <span class="ico">🧮</span>
+    <span>대출계산기</span>
+  </button>
+  <button type="button" class="tab-btn" onclick="switchTab('tab-planb', this)">
+    <span class="ico">🔄</span>
+    <span>플랜B/대안</span>
+  </button>
+  <button type="button" class="tab-btn" onclick="switchTab('tab-call', this)">
+    <span class="ico">📞</span>
+    <span>중개소통화</span>
+  </button>
+</nav>
+
+<script>
+function switchTab(tabId, btnEl) {
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+  btnEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function mPreset(price, repair, ltv, complex, btnEl) {
+  document.getElementById('m-price').value = price;
+  document.getElementById('m-repair').value = repair;
+  document.getElementById('m-ltv').value = String(ltv);
+  document.getElementById('m-complex').value = complex;
+  document.querySelectorAll('.preset-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btnEl) btnEl.classList.add('active');
+  mCalc();
+}
+
+function fmtEok(man) {
+  var eok = Math.floor(man / 10000);
+  var rem = Math.round(man % 10000);
+  if (eok > 0 && rem > 0) return eok + '억 ' + rem.toLocaleString() + '만';
+  if (eok > 0) return eok + '.00억';
+  return rem.toLocaleString() + '만';
+}
+
+function mCalc() {
+  var price = parseInt(document.getElementById('m-price').value, 10);
+  var repair = parseInt(document.getElementById('m-repair').value, 10);
+  var ltv = parseInt(document.getElementById('m-ltv').value, 10);
+  var rate = parseFloat(document.getElementById('m-rate').value);
+  var complex = document.getElementById('m-complex').value;
+
+  document.getElementById('m-price-lbl').textContent = (price / 10000).toFixed(2) + '억 (' + price.toLocaleString() + '만)';
+  document.getElementById('m-repair-lbl').textContent = repair.toLocaleString() + '만 원';
+
+  var rawLoan = Math.round(price * (ltv / 100));
+  var cap = (ltv === 80) ? 60000 : 50000;
+  var maxLoan = Math.min(rawLoan, cap);
+
+  var taxRate = (ltv === 80) ? 0.008 : 0.011;
+  var extraCost = Math.max(250, Math.round(price * taxRate));
+  var reqCash = (price - maxLoan) + extraCost + repair;
+  var remainSeed = 33000 - reqCash;
+
+  var r = (rate / 100) / 12;
+  var n = 360;
+  var pmt = maxLoan * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  var dsrPct = Math.round((pmt / 710) * 100);
+
+  var reconMap = { 'sanho': 25000, 'gaenari': 27500, 'hanwoori': 33500, 'new84': 0 };
+  var reconName = { 'sanho': '산호 추정 분담금 2.50억 반영', 'gaenari': '개나리 추정 분담금 2.75억 반영', 'hanwoori': '한우리 추정 분담금 3.35억 반영 (대지지분 열위)', 'new84': '신축/준신축 추가 분담금 없음' };
+  var reconAdd = reconMap[complex] || 0;
+  var totalRecon = price + repair + reconAdd;
+
+  document.getElementById('m-out-loan').textContent = (maxLoan / 10000).toFixed(2) + '억';
+  document.getElementById('m-out-loan-sub').textContent = fmtEok(maxLoan) + ' (LTV ' + ltv + '%)';
+
+  document.getElementById('m-out-cash').textContent = (reqCash / 10000).toFixed(2) + '억';
+  document.getElementById('m-out-cash-sub').textContent = fmtEok(reqCash) + ' (수리·부대비용 포함)';
+
+  var seedEl = document.getElementById('m-out-seed');
+  seedEl.textContent = (remainSeed / 10000).toFixed(2) + '억';
+  seedEl.style.color = remainSeed >= 15000 ? '#059669' : (remainSeed >= 8000 ? '#d97706' : '#dc2626');
+
+  document.getElementById('m-out-pmt').textContent = '월 ' + Math.round(pmt).toLocaleString() + '만';
+  document.getElementById('m-out-dsr').textContent = '세후 월소득 대비 ' + dsrPct + '%';
+
+  document.getElementById('m-out-recon').textContent = (totalRecon / 10000).toFixed(2) + '억';
+  document.getElementById('m-out-recon-sub').textContent = reconName[complex] + ' (신축 11.5억 대비 마진 ' + ((115000 - totalRecon)/10000).toFixed(2) + '억)';
+}
+
+document.addEventListener('DOMContentLoaded', mCalc);
+</script>
 </body>
 </html>

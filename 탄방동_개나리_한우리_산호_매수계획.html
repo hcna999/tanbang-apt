@@ -278,6 +278,120 @@
     .wrap { padding: 36px 16px 64px; gap: 44px; }
     .tl-row { grid-template-columns: 1fr; gap: 4px; }
   }
+
+  /* ---------- Upgraded Simulator & Decision Matrix ---------- */
+  .sec-intro { color: var(--ink-2); font-size: 1.01rem; line-height: 1.65; margin: 0; max-width: 85ch; }
+  .sim-box {
+    background: var(--surface);
+    border: 2px solid var(--go);
+    border-radius: 10px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .sim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 12px;
+  }
+  .sim-header h3 { margin: 0; font-size: 1.15rem; color: var(--go); }
+  .preset-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .preset-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--rule-2);
+    background: var(--surface-2);
+    color: var(--ink);
+    font-size: .82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .preset-btn.active, .preset-btn:hover {
+    background: var(--go);
+    color: #fff;
+    border-color: var(--go);
+  }
+  .sim-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .sim-ctrl {
+    background: var(--surface-2);
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .sim-ctrl label {
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--ink-2);
+    display: flex;
+    justify-content: space-between;
+  }
+  .sim-ctrl label span.val-disp {
+    font-family: var(--f-mono);
+    color: var(--go);
+    font-size: .92rem;
+    font-weight: 800;
+  }
+  .sim-ctrl input[type="range"] {
+    width: 100%;
+    accent-color: var(--go);
+    cursor: pointer;
+  }
+  .sim-ctrl select {
+    padding: 6px 8px;
+    border-radius: 5px;
+    border: 1px solid var(--rule-2);
+    background: var(--surface);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: .86rem;
+  }
+  .sim-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 12px;
+  }
+  .sim-res-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 13px 15px;
+  }
+  .sim-res-card.primary {
+    background: var(--go-bg);
+    border-color: var(--go);
+  }
+  .sim-res-card .r-lbl {
+    font-size: .74rem;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .sim-res-card .r-val {
+    font-family: var(--f-mono);
+    font-size: 1.22rem;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .sim-res-card.primary .r-val { color: var(--go); }
+  .sim-res-card .r-sub {
+    font-size: .74rem;
+    color: var(--ink-2);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
 </style>
 </head>
 <body>
@@ -286,47 +400,60 @@
 
   <!-- ============ MASTHEAD ============ -->
   <header class="masthead">
-    <div class="kicker">2026. 11. 12. 16:00 (Chrome DevTools MCP 네이버페이 부동산 &amp; 호갱노노 실시간 매매 매물 및 국토부 실거래가 오후 점검 완료)</div>
+    <div style="background: #1e293b; color: #fff; padding: 12px 20px; border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 14px;">
+      <div style="font-weight: 700; display: flex; align-items: center; gap: 8px;">
+        <span>🏠 탄방동 내집마련 클라우드 대시보드</span>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="mobile.html" style="color: #4ade80; text-decoration: none; font-weight: 700; padding: 4px 10px; background: rgba(74,222,128,0.15); border-radius: 6px;">📱 모바일 4탭 웹앱</a>
+        <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: 700; padding: 4px 10px; background: rgba(56,189,248,0.15); border-radius: 6px;">📊 상세 마스터 플랜</a>
+        <a href="탄방동_3단지_2028년_전월세전환_및_학군환금성_분석.html" style="color: #cbd5e1; text-decoration: none; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.08);">🎓 학군·환금성 심층분석</a>
+        <a href="대전_5억대_아파트_비교_및_매수대안_분석.html" style="color: #cbd5e1; text-decoration: none; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.08);">🏛️ 대전 대안 비교</a>
+        <a href="토허제_비교_및_혁신_투자대안_분석.html" style="color: #c084fc; text-decoration: none; padding: 4px 10px; border-radius: 6px; background: rgba(192,132,252,0.12);">🚀 토허제 &amp; 서울·글로벌 대안</a>
+      </div>
+    </div>
+
+    <div class="kicker">2026. 11. 12. 17:00 (네이버 부동산 58건 &amp; 국토부 실거래가 전수 동기화 · 실시간 대출 시뮬레이터 탑재 고도화 버전)</div>
     <h1>탄방동 개나리 · 산호 · 한우리 「즉시 실입주 &amp; 풀대출 &amp; 2028년 임대전환」 마스터 플랜</h1>
     <p class="standfirst">
-      <strong>혼인신고 전 · 나학채 단독명의 · 당장 실입주 · 주담대 풀대출(레버리지 최대화) · 2028년 이후 타지역 이동 시 전·월세 전환</strong>까지 모두 고려한 통합 계획서입니다.<br>
-      기존 1순위였던 개나리 101동 12층(5.1억)의 계약 완료 상황을 즉시 반영하여, <strong>① [새로운 1위] 산호 101동 8층(5.45억, 10월 실거래 5.5억 하회 초급매) 중심 타격 전략</strong>, <strong>② 3단지 핵심 매물 서열 및 목표 타겟가 전면 재조정</strong>, <strong>③ LTV 70%~80% 풀대출 현금 스케줄</strong>을 새롭게 업데이트했습니다.
+      <strong>혼인신고 전 단독명의 · 생애최초 주담대 풀대출(LTV 70~80%) · 당장 실입주 · 2028년 타지역 이동 시 월세/전세 전환</strong>까지 완벽 통합한 의사결정 리포트입니다.<br>
+      현재 <strong>개나리 31평 완전 전멸(11/6 12층 5.05억 신고가 체결 후 0건)</strong>, <strong>산호 101동 8층(5.45억) 매도인 보류(포털 삭제)</strong>, <strong>한우리 6.0~7.5억 고호가 행진</strong>이라는 현장 상황을 100% 반영하여 <strong>① Plan A·B·C 협상 타격 시나리오</strong>, <strong>② 실시간 인터랙티브 풀대출·현금 계산기</strong>, <strong>③ 정제된 핵심 매물 서열표</strong>로 전면 고도화했습니다.
     </p>
 
     <div class="meta-grid">
       <div class="meta-item">
-        <div class="lbl">🥇 새로운 전체 1위 (가로수공인)</div>
+        <div class="lbl">🥇 Plan A · 최우선 타겟 (가로수공인)</div>
         <div class="val t-go">산호 101동 8층 (5.45억)</div>
-        <div class="sub">10/28 실거래(5.50억) 하회 급매 · 타겟 5.20~5.35억</div>
+        <div class="sub">매도인 보류(포털삭제) · 타결선 5.40~5.42억 대기</div>
       </div>
       <div class="meta-item">
-        <div class="lbl">🥈 2위 공실 급매 타겟 (한우리타운)</div>
-        <div class="val" style="color:var(--accent)">산호 101동 7층 (공실/전세3.3억)</div>
-        <div class="sub">대지지분 19.04평 1위 · 공실 매매전환 타겟 5.15~5.20억</div>
+        <div class="lbl">🥈 Plan B · 공실 역제안 (한우리타운)</div>
+        <div class="val" style="color:var(--accent)">산호 101동 7층 (전세3.3억 공실)</div>
+        <div class="sub">대지지분 19.04평 1위 · 매매전환 5.15~5.25억 타진</div>
       </div>
       <div class="meta-item">
-        <div class="lbl">🥉 3위 한우리 올수리 (산호/88공인)</div>
-        <div class="val t-warn">한우리 107동 7층 올수리 (6.2억)</div>
-        <div class="sub">탄방초 도보 6분 · 타겟 5.55~5.65억 찔러보기</div>
+        <div class="lbl">🥉 Plan C · 올수리/준신축 대안</div>
+        <div class="val t-warn">한우리 7층 / 목동 더샵리슈빌</div>
+        <div class="sub">한우리 5.65억 네고 or 4년차 준신축(5.8~6.2억)</div>
       </div>
       <div class="meta-item">
         <div class="lbl">🚀 산호 8층 풀대출 시 최소 필요현금</div>
         <div class="val t-go">1.25억(80%) ~ 1.76억(70%)</div>
-        <div class="sub">올수리 가정시 · 남는 투자금 4.65~5.16억 보존!</div>
+        <div class="sub">나머지 부부 유동성 4.65~5.16억 안전 보존!</div>
       </div>
     </div>
   </header>
 
   <!-- ============ SECTION 1: 현장+네이버 핵심 매물 전수 판정 및 목표 타겟가 ============ -->
-  <section>
+  <section id="sec-01">
     <div class="sec-head">
       <span class="sec-num">01</span>
-      <h2>현장 확인 + 네이버 발굴 「핵심 매물 11건」 최종 서열 &amp; 목표 타겟가("이 이하면 계약!")</h2>
+      <h2>현장 확인 + 네이버 실시간 「핵심 매물 최종 서열 &amp; 합리적 타결 목표가」</h2>
     </div>
     <p class="lede">
       2026년 11월 12일 16시 00분 Chrome DevTools MCP 네이버 부동산 및 호갱노노 실시간 전수 대조 완료: 3단지 등록 매매 매물 총 58건(개나리 23건, 산호 15건, 한우리 20건) 전체를 단지·동·층·중개사별로 100% 정밀 대조한 결과, 정오(11/12 12:00, 57건) 대비 <strong>[매매 매물 총 1건 순증가(신규 1건, 삭제 0건)]</strong>의 변동이 확인되었습니다. 신규 등록된 1건은 한우리 107동 12층 5.95억 매물로, 기존 산호공인 등록 매물에 대해 원탑공인중개사(010-4689-8015)가 복수 중개로 신규 추가 등록한 건입니다.
       핵심인 <strong>31평(공급 103㎡) 매매 매물은 총 20건에서 21건으로 1건 증가</strong>(개나리 0건, 산호 2건, 한우리 19건)했습니다.
-      ① <strong>산호 31평</strong>: 현재 등록 매물은 <strong>103동 저층 5.60억, 103동 중층 6.00억 등 단 2건뿐</strong>으로 극심한 호가 단절이 지속되고 있습니다. 실입주 1순위였던 『산호 101동 8층 5.45억(가로수 042-471-1212)』은 여전히 보류 상태로 포털 미등재 유지 중이며, 마감 확정 시 <strong>산호 101동 7층 공실(전세 3.3억, 한우리타운 042-485-8400)의 매매 전환(목표 5.15~5.20억 급매 털기)</strong> 타진 전략이 최유효합니다.
+      ① <strong>산호 31평</strong>: 현재 등록 매물은 <strong>103동 저층 5.60억, 103동 중층 6.00억 등 단 2건뿐</strong>으로 극심한 호가 단절이 지속되고 있습니다. 실입주 1순위였던 『산호 101동 8층 5.45억(가로수 042-471-1212)』은 여전히 보류 상태로 포털 미등재 유지 중이며, 마감 확정 시 <strong>산호 101동 7층 공실(전세 3.3억, 한우리타운 042-485-8400)의 매매 전환(목표 5.15~5.25억 급매 털기)</strong> 타진 전략이 최유효합니다.
       ② <strong>한우리 31평</strong>: 107동 12층 5.95억(원탑공인 신규) 추가로 31평 등록 매물이 총 19건이 되었으며, 어제 정오 신규 등록된 역대 최고호가 <strong>110동 6층(탑층) 7.50억(JK공인)</strong>은 그대로 유지 중이나 대지지분(15.5평) 열세로 <strong>[6.0억 이상 전원 매수 배제/패스]</strong> 원칙을 확고히 고수합니다.
       ③ <strong>개나리 31평</strong>: 11/06 계약 12층 5.05억 신고가 실거래(국토부 공시) 이후 <strong>전체 매물 0건(완전 멸종) 상태를 지속</strong>하고 있으며, 24평 소형 매물만 23건 유지 중입니다. (※ 전세·월세 매물 및 거래는 점검/보고 대상에서 완전 제외)
     </p>
@@ -334,34 +461,34 @@
     <div class="tscroll">
       <table>
         <caption>
-          ※ <strong>개나리 101동 12층 종료 후, 왜 '산호 101동 8층(5.45억)'이 새로운 전체 1등인가?</strong><br>
-          10월 28일 국토교통부에 <strong>산호 31평 6층이 5.50억에 실거래 확정</strong>되었습니다! 현재 실입주 가능한 31평 중 <strong>101동 8층(5.45억, 가로수공인)은 10월 실거래가보다도 500만 원 저렴한 단지 내 유일한 최저가 매물</strong>입니다. 게다가 산호는 대지지분이 19.04평으로 3단지 중 가장 넓어 재건축 분담금이 2.00억 수준(한우리 2.85억 대비 -8,500만 원 절감)입니다.
+          ※ <strong>왜 '산호 31평(대지지분 19.04평)'이 부동의 1순위인가?</strong><br>
+          10/28 산호 6층 5.50억, 11/04 산호 7층 5.40억, 11/06 개나리 12층 5.05억 실거래가 연이어 체결되며 3단지 5억대 초반 급매가 모두 소진되었습니다. 산호는 대지지분이 <strong>19.04평(3단지 1위)</strong>으로 재건축 시 신축 84㎡ 분담금이 약 2.00억 수준에 불과해, 한우리(대지지분 15.98평 · 분담금 2.85억) 대비 <strong>미래 분담금을 약 8,500만 원 아낄 수 있습니다.</strong>
         </caption>
         <thead>
           <tr>
-            <th>서열 · 단지 및 동·층·향</th>
-            <th class="num">현재 호가<br><span class="sub-txt">(확인일 · 등록 중개소)</span></th>
-            <th>매물 핵심 스펙 &amp; 수리 상태<br><span class="sub-txt">(네이버 원문 + 현장 확인 대조)</span></th>
+            <th>전략 등급 · 단지 및 동·층·향</th>
+            <th class="num">현재 호가 / 상태<br><span class="sub-txt">(확인일 · 중개소)</span></th>
+            <th>매물 핵심 스펙 &amp; 현장 팩트 분석</th>
             <th class="num">추가 수리비<br><span class="sub-txt">(대출불가 현금)</span></th>
             <th class="num">신축 84㎡<br>추정 분담금<br><span class="sub-txt">(실측 대지지분)</span></th>
-            <th class="num">호가 그대로 살 때<br>재건축 총원가<br><span class="sub-txt">(호가+수리+분담금)</span></th>
-            <th class="num">🎯 부동산 통보 목표가<br><span class="sub-txt">("이 이하면 바로 계약!")</span></th>
+            <th class="num">호가 기준<br>재건축 총원가<br><span class="sub-txt">(매수가+수리+분담금)</span></th>
+            <th class="num">🎯 실전 타결 목표가<br><span class="sub-txt">(현실적 조율선)</span></th>
           </tr>
         </thead>
         <tbody>
           <tr class="hl">
-            <th>🥇 [새로운 1위] 산호 101동<br>8/12층 · 남향 (31평)<br><span class="pill p-warn">11/8 포털삭제(확인중) · 1위 후보</span></th>
+            <th>🥇 [Plan A · 1순위] 산호 101동<br>8/12층 · 남향 (31평)<br><span class="pill p-warn">매도인 보류 · 타임아웃 대기</span></th>
             <td class="num t-go">
               <strong>5억 4,500만</strong>
-              <span class="sub-txt">26.11.08 포털삭제(계약확인요망)</span>
+              <span class="sub-txt">11/08 보류 후 포털 미등재</span>
               <span class="sub-txt">가로수공인(042-471-1212)</span>
             </td>
             <td>
-              <strong>"101동 8/12층 남향 · 입주협의 · 10/28 실거래(5.50억) 하회"</strong>
-              <span class="sub-txt">• 6층 5.50억 거래 직후 남은 31평 유일한 최저가 로열층 매물!<br>• 둔산 17구역 대지지분 1위(19.04평)의 최고 사업성</span>
+              <strong>"101동 8층 로열층 남향 · 입주협의 · 11/4 7층 실거래(5.40억) 직후 보류"</strong>
+              <span class="sub-txt">• 3단지 31평 로열층 중 유일한 5.4억대 매물. 매도인이 7층 실거래(5.40억) 인지 후 보류 중.<br>• <strong>대응:</strong> 무리한 저가 네고 대신 <strong>7층 실거래가 근거로 5.40~5.42억 제시</strong> 후 연락 대기.</span>
             </td>
             <td class="num">
-              올수리시 <strong>0원</strong><br>
+              수리양호시 <strong>0원</strong><br>
               미수리시 <strong>+0.38억</strong>
             </td>
             <td class="num t-go">
@@ -369,23 +496,24 @@
               <span class="sub-txt">(19.04평 · 1위)</span>
             </td>
             <td class="num t-go">
-              올수리시 <strong>7.45억</strong><br>
-              미수리시 <strong>7.83억</strong>
+              양호시 <strong>7.45억</strong><br>
+              미수리 <strong>7.83억</strong>
             </td>
             <td class="num t-go">
-              <strong>올수리: 5.30~5.35억</strong><br>
-              <strong>미수리: 5.15~5.25억</strong>
+              <strong>현실 타결: 5.40~5.43억</strong><br>
+              <span class="sub-txt">(미수리시 5.25~5.35억)</span>
             </td>
           </tr>
           <tr class="hl">
-            <th>🥈 2위 · 산호 101동<br>7/12층 · 남향 (31평)<br><span class="pill p-acc">공실 · 매매전환 협상용</span></th>
+            <th>🥈 [Plan B · 2순위] 산호 101동<br>7/12층 · 남향 (31평)<br><span class="pill p-acc">공실 전세3.3억 · 매매전환 타겟</span></th>
             <td class="num">
-              <strong>전세 3.3억 (원 호가 5.5억)</strong>
-              <span class="sub-txt">한우리타운공인</span>
+              <strong>전세 3.3억 (구 매매 5.5억)</strong>
+              <span class="sub-txt">현재 공실 상태 유지</span>
+              <span class="sub-txt">한우리타운(042-485-8400)</span>
             </td>
             <td>
-              <strong>"공실 즉시입주 · 싱크대만 소라색 교체"</strong>
-              <span class="sub-txt">• 매매 5.5억에 안 나가서 전세 3.3억으로 전환된 공실 매물.<br>• 8층(5.45억)과 비교해 <strong>"수리비 감안해서 5.15~5.20억에 매매로 털어달라"</strong>고 공실 집주인 급매 압박 타겟!</span>
+              <strong>"즉시 실입주 가능 공실 · 싱크대만 부분교체(나머지 기본)"</strong>
+              <span class="sub-txt">• 매매 5.5억에 안 나가서 전세 3.3억으로 돌린 공실.<br>• 8층 보류 장기화 시 <strong>"수리비 3.8천 감안해 5.15~5.25억에 매매로 털자"</strong>고 역제안하기 최적!</span>
             </td>
             <td class="num t-warn">
               <strong>+ 0.38억</strong>
@@ -396,133 +524,50 @@
               <span class="sub-txt">(19.04평 · 1위)</span>
             </td>
             <td class="num">
-              <strong>7.88억</strong>
-              <span class="sub-txt">(5.20억시 7.58억)</span>
+              <strong>7.58억</strong>
+              <span class="sub-txt">(5.20억 매수 기준)</span>
             </td>
             <td class="num t-go">
-              <strong>5.15 ~ 5.20억 이하</strong>
-              <span class="sub-txt">(최대 마지노선 5.25억)</span>
-            </td>
-          </tr>
-          <tr class="hs">
-            <th>[계약종료] 개나리 101동<br>12/12층 · 남향 (31평)<br><span class="pill p-stop">거래 완료 마감</span></th>
-            <td class="num t-stop">
-              <strong>5억 1,000만</strong>
-              <span class="sub-txt">계약 완료</span>
-            </td>
-            <td>
-              <strong>"외부샤시포함 완벽 올수리 · 계약 완료"</strong>
-              <span class="sub-txt">• 현장 확인 결과 계약 체결 완료되어 매수 대상에서 제외</span>
-            </td>
-            <td class="num">0원</td>
-            <td class="num">약 2.40억</td>
-            <td class="num">7.50억</td>
-            <td class="num t-stop"><strong>계약 완료</strong></td>
-          </tr>
-          <tr>
-            <th>3위 · 한우리 107동<br>7/12층 · 남향 (31평)<br><span class="pill p-acc">샤시올수리 협의입주</span></th>
-            <td class="num">
-              <strong>6억 2,000만</strong>
-              <span class="sub-txt">26.10.30 갱신 등록</span>
-              <span class="sub-txt">산호공인 등 3곳</span>
-            </td>
-            <td>
-              <strong>"탄방초학군 · 샤시포함 올수리 · 협의입주"</strong>
-              <span class="sub-txt">• 한우리 유일한 31평 로열층 샤시포함 올수리 매물.<br>• 지역난방+탄방초 학군 메리트 있으나 호가가 높으므로 5.65억(KB일반가) 수준 조율 시에만 고려.</span>
-            </td>
-            <td class="num t-go">
-              <strong>0원 ★</strong>
-              <span class="sub-txt">올수리 완료</span>
-            </td>
-            <td class="num t-warn">
-              약 2.85억
-              <span class="sub-txt">(15.98평)</span>
-            </td>
-            <td class="num">
-              <strong>9.05억</strong>
-              <span class="sub-txt">(5.65억시 8.50억)</span>
-            </td>
-            <td class="num t-acc">
-              <strong>5.55 ~ 5.65억 이하</strong>
-              <span class="sub-txt">(KB일반가 5.65억 상한)</span>
+              <strong>5.15 ~ 5.25억 이하</strong>
+              <span class="sub-txt">(공실 즉시 잔금 조건)</span>
             </td>
           </tr>
           <tr>
-            <th>4위 · 한우리 106동<br>2/12층 · 남향 (31평)<br><span class="pill p-acc">올수리 · 저층</span></th>
+            <th>🥉 3위 · 산호 103동<br>저/12층(5.6억) &amp; 중/12층(6.0억)<br><span class="pill p-warn">포털 현존 유일 산호 31평 2건</span></th>
             <td class="num">
-              <strong>6억 0,000만</strong>
-              <span class="sub-txt">26.10.08 등록</span>
-              <span class="sub-txt">한우리타운공인</span>
+              <strong>5.60억 (저층)<br>6.00억 (중층)</strong>
+              <span class="sub-txt">산호공인(042-472-0119)</span>
             </td>
             <td>
-              <strong>"올수리 · 거실폴딩도어 · 중문설치 · 협의입주"</strong>
-              <span class="sub-txt">• 인테리어 완료된 저층 매물. 2층 KB하위가(5.35억) 이하로 대폭 네고 시 검토.</span>
-            </td>
-            <td class="num t-go">
-              <strong>0원 ★</strong>
-              <span class="sub-txt">올수리 완료</span>
-            </td>
-            <td class="num t-warn">
-              약 2.85억
-              <span class="sub-txt">(15.98평)</span>
+              <strong>"현재 네이버 포털에 남아있는 유이한 산호 31평 매매 매물"</strong>
+              <span class="sub-txt">• 101동 8층(5.45억) 삭제 이후 포털 최저가가 저층 5.60억, 중층 6.00억으로 단절됨.<br>• 중층(수리됨) 매도인이 <strong>5.45~5.50억 이하</strong>로 대폭 호가 조정 시에만 실입주 타겟 편입.</span>
             </td>
             <td class="num">
-              <strong>8.85억</strong>
-              <span class="sub-txt">(5.35억시 8.20억)</span>
-            </td>
-            <td class="num">
-              <strong>5.25 ~ 5.35억 이하</strong>
-              <span class="sub-txt">(2층 KB하위가 5.35억)</span>
-            </td>
-          </tr>
-          <tr>
-            <th>5위 · 산호 103동<br>중/12층 · 남향 (31평)<br><span class="pill p-warn">수리됨 · 고호가</span></th>
-            <td class="num">
-              <strong>6억 0,000만</strong>
-              <span class="sub-txt">26.10.22 등록</span>
-              <span class="sub-txt">산호공인</span>
-            </td>
-            <td>
-              <strong>"수리됨 · 남향 중층"</strong>
-              <span class="sub-txt">• 101동 8층(5.45억)보다 호가가 5,500만 원 높음. 5.50억 선 조율 시에만 고려.</span>
-            </td>
-            <td class="num t-go">
-              <strong>0원</strong>
-              <span class="sub-txt">수리됨</span>
+              중층 <strong>0원</strong><br>
+              저층 <strong>+0.30억</strong>
             </td>
             <td class="num t-go">
               <strong>약 2.00억 ★</strong>
               <span class="sub-txt">(19.04평 · 1위)</span>
             </td>
             <td class="num">
-              <strong>8.00억</strong>
-              <span class="sub-txt">(5.50억시 7.50억)</span>
+              중층 <strong>8.00억</strong><br>
+              <span class="sub-txt">(5.45억시 7.45억)</span>
             </td>
             <td class="num">
-              <strong>5.40 ~ 5.50억 이하</strong>
-            </td>
-          </tr>
-              <strong>약 2.00억 ★</strong>
-              <span class="sub-txt">(19.04평 · 1위)</span>
-            </td>
-            <td class="num">
-              <strong>8.00억</strong>
-              <span class="sub-txt">(5.35억시 7.35억)</span>
-            </td>
-            <td class="num">
-              <strong>5.35 ~ 5.40억 이하</strong>
+              <strong>중층: 5.40~5.50억</strong><br>
+              <strong>저층: 5.15~5.25억</strong>
             </td>
           </tr>
           <tr>
-            <th>5위 · 한우리 107동 ★신규<br>7/12층 · 남향 (31평)<br><span class="pill p-acc">한우리 중 유일한 정상픽</span></th>
+            <th>4위 · 한우리 107동<br>7/12층 · 남향 (31평)<br><span class="pill p-acc">한우리 유일 로열층 올수리</span></th>
             <td class="num">
               <strong>6억 2,000만</strong>
-              <span class="sub-txt">26.09.30 등록</span>
-              <span class="sub-txt">88공인중개사</span>
+              <span class="sub-txt">산호·한양타운 등 등록</span>
             </td>
             <td>
-              <strong>"주인세대 · 샤시포함·중문 내부 올수리 · 협의입주"</strong>
-              <span class="sub-txt">• <strong>한우리 미수리(5.8억)+수리비(4천)=6.2억</strong>인데, 이 집은 이미 <strong>7층 로열층에 샤시포함 올수리가 되어 6.2억!</strong></span>
+              <strong>"탄방초 도보 6분 + 지역난방 + 샤시포함 올수리 · 주인거주 협의입주"</strong>
+              <span class="sub-txt">• 실거주 만족도는 최상이나 대지지분(15.98평) 열세로 분담금이 2.85억 발생.<br>• 6.20억 호가 추격 매수는 불가하며, <strong>KB일반가(5.65억) 전후 급매 조율 시에만</strong> 유효.</span>
             </td>
             <td class="num t-go">
               <strong>0원 ★</strong>
@@ -538,19 +583,19 @@
             </td>
             <td class="num t-acc">
               <strong>5.55 ~ 5.65억 이하</strong>
-              <span class="sub-txt">(KB일반가 5.65억 기준)</span>
+              <span class="sub-txt">(KB일반가 5.65억 상한)</span>
             </td>
           </tr>
           <tr>
-            <th>6위 · 한우리 106동 ★신규<br>2/12층 · 남향 (31평)<br><span class="pill p-warn">2층 저층 올수리</span></th>
+            <th>5위 · 한우리 106동<br>2/12층 · 남향 (31평)<br><span class="pill p-warn">11/10 재등록 · 2층 저층 올수리</span></th>
             <td class="num">
               <strong>6억 0,000만</strong>
-              <span class="sub-txt">26.10.08 확인</span>
-              <span class="sub-txt">한우리타운공인</span>
+              <span class="sub-txt">11/10 재등록 확인</span>
+              <span class="sub-txt">한우리타운(042-485-8400)</span>
             </td>
             <td>
-              <strong>"올수리 · 거실폴딩도어 · 중문 · 협의입주"</strong>
-              <span class="sub-txt">• 올수리되어 있으나 2층 저층이라 은행 대출이 <strong>KB하위가(5.35억)</strong> 기준으로만 나옴.</span>
+              <strong>"올수리 · 거실폴딩도어 · 중문 · 채광양호 협의입주"</strong>
+              <span class="sub-txt">• 인테리어는 완성되어 있으나 2층 저층이라 은행 주담대가 <strong>KB하위가(5.35억)</strong> 기준으로만 산정됨. 5.30~5.35억 이하 급매 시에만 검토.</span>
             </td>
             <td class="num t-go">
               <strong>0원</strong>
@@ -562,93 +607,71 @@
             </td>
             <td class="num">
               <strong>8.85억</strong>
-              <span class="sub-txt">(5.30억시 8.15억)</span>
+              <span class="sub-txt">(5.35억시 8.20억)</span>
             </td>
             <td class="num">
               <strong>5.25 ~ 5.35억 이하</strong>
-              <span class="sub-txt">(2층 KB하위가 5.35억)</span>
+              <span class="sub-txt">(2층 KB하위가 기준)</span>
             </td>
           </tr>
           <tr>
-            <th>7위 · 한우리 101동 ★신규<br>2/12층 · 남동향 (26평)<br><span class="pill p-warn">26평 유일한 실입주</span></th>
+            <th>6위 · [초가성비 플랜B] 산호·개나리<br>24평/17평 로열층 올수리<br><span class="pill p-go">현금 5억 보존용 차선책</span></th>
             <td class="num">
-              <strong>4억 6,000만</strong>
-              <span class="sub-txt">26.10.12 등록</span>
-              <span class="sub-txt">한우리타운공인</span>
+              <strong>개나리24평: 3.30~3.50억<br>산호17평: 2.70~3.00억</strong>
+              <span class="sub-txt">106동 등 다수 등록</span>
             </td>
             <td>
-              <strong>"88/72㎡ · 거실·작은방 확장 · 협의입주"</strong>
-              <span class="sub-txt">• 10월 12층 실거래가(4.40억)보다 비싼 2층 저층 매물. 2층 KB하위가(4.15억) 수준 네고 시에만 유효.</span>
+              <strong>"31평 매물 품귀 장기화 시 시드머니 5억 원 보존용 징검다리"</strong>
+              <span class="sub-txt">• 개나리 24평(지분 12.33평) 로열층 올수리 3.3~3.5억 매수 시 필요 현금 8천만~1억 원.<br>• 단, 대지지분 가성비는 31평(산호 19.04평)이 압도적이므로 31평 타진이 우선.</span>
             </td>
-            <td class="num">
-              <strong>+ 0.25억</strong>
-              <span class="sub-txt">부분수리 예상</span>
-            </td>
-            <td class="num t-warn">
-              약 3.40억
-              <span class="sub-txt">(13.76평)</span>
-            </td>
-            <td class="num">
-              <strong>8.25억</strong>
-              <span class="sub-txt">(4.20억시 7.85억)</span>
-            </td>
-            <td class="num">
-              <strong>4.15 ~ 4.25억 이하</strong>
-              <span class="sub-txt">(2층 KB하위가 4.15억)</span>
-            </td>
+            <td class="num">0 ~ 0.15억</td>
+            <td class="num">약 3.10억<br><span class="sub-txt">(24평 12.33평)</span></td>
+            <td class="num">6.40 ~ 6.60억</td>
+            <td class="num"><strong>개나리24: 3.20~3.30억<br>산호17: 2.65~2.75억</strong></td>
           </tr>
           <tr class="hw">
-            <th>8위 · 한우리 108동 5층 [11/12 포털삭제]<br>9위 · 한우리 107동 12층 (5.95억 · 산호/원탑 복수등록)<br><span class="pill p-stop">108동 만료삭제 · 패스</span></th>
+            <th>❌ [패스 확정 아카이브]<br>한우리 108동 5층(6.0억 인상 후 삭제)<br>한우리 107동 12층(5.95억 복수등록)<br>한우리 110동 6층(7.50억 최고호가)<br><span class="pill p-stop">전원 매수 배제 (PASS)</span></th>
             <td class="num t-stop">
-              <strong>6.00억 / 5.95억</strong>
-              <span class="sub-txt">한우리타운 / 산호공인</span>
+              <strong>5.95억 ~ 7.50억</strong>
+              <span class="sub-txt">108동 5층(11/12 포털삭제)</span>
+              <span class="sub-txt">107동 12층(산호·원탑)</span>
+              <span class="sub-txt">110동 6층(JK공인 7.5억)</span>
             </td>
             <td>
-              <strong>"주인거주 협의입주 · 둘 다 미수리"</strong>
-              <span class="sub-txt">• 5위(107동 7층 샤시포함 올수리 6.20억)와 비교하면 <strong>미수리 집을 5.8~5.95억에 사서 현금 4천 들여 수리할 이유가 0%!</strong></span>
+              <strong>"대지지분 열세(15.5~15.98평) + 미수리/탑층 고호가 → 실질 원가 9억 돌파"</strong>
+              <span class="sub-txt">• <strong>한우리 108동 506호:</strong> 5.8억→6.0억 인상 통보 후 11/12 포털 삭제. 미수리에 분담금(+8,500만) 합산 시 실질 6.5억 이상 매수와 동일하여 패스 확정.<br>• <strong>한우리 107동 12층(5.95억):</strong> 탑층 미수리 매물로 오늘 원탑공인이 추가 복수등록했으나 수리비 4천 감안 시 메리트 전무.<br>• <strong>한우리 110동 6층(7.50억):</strong> 6층 탑층 초고호가 배짱 매물로 분석 대상 외.</span>
             </td>
             <td class="num t-stop">
               <strong>+ 0.40~0.42억</strong>
-              <span class="sub-txt">전체 올수리 필수</span>
+              <span class="sub-txt">(미수리 세대 기준)</span>
             </td>
             <td class="num t-warn">
               약 2.85억
               <span class="sub-txt">(15.98평)</span>
             </td>
             <td class="num t-stop">
-              <strong>9.05 ~ 9.22억</strong>
+              <strong>9.05 ~ 10.35억</strong>
             </td>
             <td class="num t-stop">
-              <strong>5층: 5.25~5.35억 이하</strong><br>
-              <strong>12층: 5.10~5.15억 이하</strong>
+              <strong>매수 배제 (PASS)</strong>
             </td>
           </tr>
           <tr class="hs">
-            <th>10위 · 개나리 104동 고층 (4.83억) / 8층 (4.85억)<br>11위 · 개나리 102동 1층 (4.50억)<br><span class="pill p-stop">전세 껴서 실입주 불가</span></th>
-            <td class="num">
-              <strong>4.83억 / 4.85억 / 4.50억</strong>
-              <span class="sub-txt">일번지 / 개나리공인 / 한우리타운·산성</span>
+            <th>🏁 [거래종료 · 완전멸종 아카이브]<br>개나리 31평 전 매물 (0건)<br><span class="pill p-stop">12층 5.05억 신고가 후 전멸</span></th>
+            <td class="num t-stop">
+              <strong>현재 등록 0건</strong>
+              <span class="sub-txt">11/06 12층 5.05억 실거래</span>
+              <span class="sub-txt">11/10 102동 1층 4.5억 삭제</span>
             </td>
             <td>
-              <strong>"104동 고층(좀된 샷시포함수리, 일번지공인 10/30 신규 4.83억) / 8층(샤시·확장, 4.85억) / 102동 1층(3년전 샷시포함수리, 4.50억)"</strong>
-              <span class="sub-txt">• 3건 모두 전세가 껴 있어 <strong>매도인이 세입자 퇴거 합의(공실 인도)</strong>해 주지 않는 한 당장 실입주 불가 매물입니다. 특히 102동 1층(4.50억)은 7월 1층 실거래가(3.25억) 대비 호가 거품이 1.25억에 달합니다.</span>
+              <strong>"개나리 31평은 실입주·전세낀 갭투자 포함 전체 매물 0건(완전 멸종)"</strong>
+              <span class="sub-txt">• 기존 1순위 개나리 101동 12층(5.1억 호가)이 <strong>11/06 5.05억 신고가 실거래 체결</strong>로 마감.<br>• 마지막 남아있던 102동 1층(4.50억 전세안고 3건)마저 11/10 일제히 삭제 마감됨.</span>
             </td>
-            <td class="num">
-              고층/8층: +0.25~0.35억<br>
-              1층: 0원
-            </td>
-            <td class="num">
-              약 2.40억
-              <span class="sub-txt">(17.61평)</span>
-            </td>
-            <td class="num">
-              고층/8층: 7.50~7.55억<br>
-              1층: 6.95억
-            </td>
-            <td class="num">
-              <strong>고층/8층: 4.55~4.60억 이하</strong><br>
-              <strong>1층: 4.20~4.30억 이하</strong><br>
-              <span class="sub-txt">(※ 모두 세입자 퇴거 조건 필수)</span>
+            <td class="num">-</td>
+            <td class="num">약 2.40억<br><span class="sub-txt">(17.61평)</span></td>
+            <td class="num">7.45억<br><span class="sub-txt">(5.05억 실거래 기준)</span></td>
+            <td class="num t-stop">
+              <strong>신규 출현 대기<br>(목표 5.00~5.15억)</strong>
             </td>
           </tr>
         </tbody>
@@ -656,19 +679,186 @@
     </div>
   </section>
 
-  <!-- ============ SECTION 2: 풀대출(레버리지 최대화) 시 최소 필요 현금 총괄표 ============ -->
-  <section>
+  <!-- ============ SECTION 2: 인터랙티브 시뮬레이터 & 풀대출 최소 필요 현금 총괄표 ============ -->
+  <section id="sec-02">
     <div class="sec-head">
       <span class="sec-num">02</span>
-      <h2>「레버리지 최대화(풀대출)」 매물별 최대 주담대 &amp; 최소 필요 현금 총괄표</h2>
+      <h2>🧮 실시간 인터랙티브 「풀대출 · 최소 필요 현금 · 재건축 총원가 시뮬레이터」 &amp; 총괄표</h2>
     </div>
-    <p class="lede">
-      2026년 11월 12일 16시 00분 Chrome DevTools MCP 네이버 부동산 및 호갱노노 실시간 전수 대조 완료: 3단지 등록 매매 매물 총 58건(개나리 23건, 산호 15건, 한우리 20건) 전체를 단지·동·층·중개사별로 100% 정밀 대조한 결과, 정오(11/12 12:00, 57건) 대비 <strong>[매매 매물 총 1건 순증가(신규 1건, 삭제 0건)]</strong>의 변동이 확인되었습니다. 신규 등록된 1건은 한우리 107동 12층 5.95억 매물로, 기존 산호공인 등록 매물에 대해 원탑공인중개사(010-4689-8015)가 복수 중개로 신규 추가 등록한 건입니다.
-      핵심인 <strong>31평(공급 103㎡) 매매 매물은 총 20건에서 21건으로 1건 증가</strong>(개나리 0건, 산호 2건, 한우리 19건)했습니다.
-      ① <strong>산호 31평</strong>: 현재 등록 매물은 <strong>103동 저층 5.60억, 103동 중층 6.00억 등 단 2건뿐</strong>으로 극심한 호가 단절이 지속되고 있습니다. 실입주 1순위였던 『산호 101동 8층 5.45억(가로수 042-471-1212)』은 여전히 보류 상태로 포털 미등재 유지 중이며, 마감 확정 시 <strong>산호 101동 7층 공실(전세 3.3억, 한우리타운 042-485-8400)의 매매 전환(목표 5.15~5.20억 급매 털기)</strong> 타진 전략이 최유효합니다.
-      ② <strong>한우리 31평</strong>: 107동 12층 5.95억(원탑공인 신규) 추가로 31평 등록 매물이 총 19건이 되었으며, 어제 정오 신규 등록된 역대 최고호가 <strong>110동 6층(탑층) 7.50억(JK공인)</strong>은 그대로 유지 중이나 대지지분(15.5평) 열세로 <strong>[6.0억 이상 전원 매수 배제/패스]</strong> 원칙을 확고히 고수합니다.
-      ③ <strong>개나리 31평</strong>: 11/06 계약 12층 5.05억 신고가 실거래(국토부 공시) 이후 <strong>전체 매물 0건(완전 멸종) 상태를 지속</strong>하고 있으며, 24평 소형 매물만 23건 유지 중입니다. (※ 전세·월세 매물 및 거래는 점검/보고 대상에서 완전 제외)
+    <p class="sec-intro">
+      현장 협상 중 매도인이 부르는 가격이나 수리비 조건이 바뀔 때, <strong>실제 은행 주담대 한도(KB시세 상한 자동 적용)와 내가 당장 준비해야 할 최소 생현금, 월 원리금, 그리고 부부 잔여 시드머니(총 6.41억 기준)</strong>를 1초 만에 계산하는 시뮬레이터입니다. 아래 단지 버튼을 누르거나 슬라이더를 움직여 보세요.
     </p>
+
+    <!-- INTERACTIVE SIMULATOR -->
+    <div class="sim-box">
+      <div class="sim-header">
+        <h3>⚡ 매수 조건별 실시간 현금 · 대출 · 분담금 계산기</h3>
+        <div class="preset-btns">
+          <button type="button" class="preset-btn active" onclick="setSimPreset('sanho8', this)">🥇 산호 8층 (5.42억 네고)</button>
+          <button type="button" class="preset-btn" onclick="setSimPreset('sanho7', this)">🥈 산호 7층 공실 (5.20억+수리)</button>
+          <button type="button" class="preset-btn" onclick="setSimPreset('hanwoori7', this)">🥉 한우리 7층 올수리 (5.65억)</button>
+          <button type="button" class="preset-btn" onclick="setSimPreset('new84', this)">🏢 목동/용문 준신축 (6.00억)</button>
+        </div>
+      </div>
+
+      <div class="sim-controls">
+        <div class="sim-ctrl">
+          <label>① 대상 단지 (KB시세·분담금 연동)</label>
+          <select id="sim-complex" onchange="updateSim()">
+            <option value="sanho" data-kb="51500" data-bundam="20000" data-jibun="19.04평">산호 31평 (KB 5.15억 · 지분 19.04평)</option>
+            <option value="hanwoori" data-kb="56500" data-bundam="28500" data-jibun="15.98평">한우리 31평 (KB 5.65억 · 지분 15.98평)</option>
+            <option value="gaenari" data-kb="47500" data-bundam="24000" data-jibun="17.61평">개나리 31평 (KB 4.75억 · 지분 17.61평)</option>
+            <option value="new84" data-kb="60000" data-bundam="0" data-jibun="신축급(분담금 없음)">목동더샵/둔산엘리프 84㎡ (KB=매수가)</option>
+          </select>
+        </div>
+
+        <div class="sim-ctrl">
+          <label>② 매매 협상 타결가 <span class="val-disp" id="disp-price">5억 4,200만</span></label>
+          <input type="range" id="sim-price" min="48000" max="65000" step="100" value="54200" oninput="updateSim()">
+        </div>
+
+        <div class="sim-ctrl">
+          <label>③ 인테리어 수리비 (생현금) <span class="val-disp" id="disp-repair">0만 (올수리/양호)</span></label>
+          <input type="range" id="sim-repair" min="0" max="4500" step="100" value="0" oninput="updateSim()">
+        </div>
+
+        <div class="sim-ctrl">
+          <label>④ 주담대 LTV &amp; 금리 (40년 만기)</label>
+          <div style="display:flex; gap:6px;">
+            <select id="sim-ltv" onchange="updateSim()" style="flex:1;">
+              <option value="0.8">생애최초 LTV 80%</option>
+              <option value="0.7">일반 풀대출 LTV 70%</option>
+            </select>
+            <select id="sim-rate" onchange="updateSim()" style="width:95px;">
+              <option value="3.7">연 3.7%</option>
+              <option value="3.9" selected>연 3.9%</option>
+              <option value="4.1">연 4.1%</option>
+              <option value="4.3">연 4.3%</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="sim-results">
+        <div class="sim-res-card primary">
+          <div class="r-lbl">🏦 최대 주담대 실행액</div>
+          <div class="r-val" id="res-loan">4억 1,200만</div>
+          <div class="r-sub" id="res-loan-sub">담보인정가 5.15억 × 80%</div>
+        </div>
+        <div class="sim-res-card primary">
+          <div class="r-lbl">💵 최소 필요 생현금 (총투입)</div>
+          <div class="r-val" id="res-cash">1억 3,690만</div>
+          <div class="r-sub" id="res-cash-sub">매수가 - 대출 + 부대비(690만) + 수리비</div>
+        </div>
+        <div class="sim-res-card">
+          <div class="r-lbl">📅 계약~잔금 현금 스케줄</div>
+          <div class="r-val" id="res-sched" style="font-size:1.02rem;">계약 5,420만 / 잔금 6,270만</div>
+          <div class="r-sub">중도금(3주뒤) 2,000만 별도 포함</div>
+        </div>
+        <div class="sim-res-card">
+          <div class="r-lbl">💳 월 원리금 (28년 월세전환시)</div>
+          <div class="r-val" id="res-monthly">월 173만</div>
+          <div class="r-sub" id="res-monthly-sub">이자 134만 + 원금 39만 (월세전환시 순이자 34만)</div>
+        </div>
+        <div class="sim-res-card">
+          <div class="r-lbl">🛡️ 남는 부부 보존 시드머니</div>
+          <div class="r-val" id="res-seed" style="color:var(--go);">5억 0,410만</div>
+          <div class="r-sub">총 시드(6.41억) 중 안전 보존액</div>
+        </div>
+        <div class="sim-res-card">
+          <div class="r-lbl">🏗️ 신축 84㎡ 재건축 총원가</div>
+          <div class="r-val" id="res-total-cost" style="color:var(--accent);">7억 4,200만</div>
+          <div class="r-sub" id="res-total-sub">매수가 + 수리비 + 분담금(2.00억)</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function fmtEok(man) {
+        man = Math.round(man);
+        if (man <= 0) return "0원";
+        const eok = Math.floor(man / 10000);
+        const rem = man % 10000;
+        if (eok > 0 && rem > 0) return eok + "억 " + rem.toLocaleString() + "만";
+        if (eok > 0) return eok + "억 0,000만";
+        return rem.toLocaleString() + "만";
+      }
+
+      function updateSim() {
+        const sel = document.getElementById('sim-complex');
+        const opt = sel.options[sel.selectedIndex];
+        const cVal = sel.value;
+        let kb = parseInt(opt.getAttribute('data-kb'), 10);
+        const bundam = parseInt(opt.getAttribute('data-bundam'), 10);
+        const jibun = opt.getAttribute('data-jibun');
+
+        const price = parseInt(document.getElementById('sim-price').value, 10);
+        const repair = parseInt(document.getElementById('sim-repair').value, 10);
+        const ltv = parseFloat(document.getElementById('sim-ltv').value);
+        const rate = parseFloat(document.getElementById('sim-rate').value) / 100;
+
+        if (cVal === 'new84') kb = price;
+
+        document.getElementById('disp-price').textContent = fmtEok(price);
+        document.getElementById('disp-repair').textContent = repair === 0 ? "0원 (올수리/양호)" : "+" + repair.toLocaleString() + "만";
+
+        const baseCollateral = Math.min(price, kb);
+        const loan = Math.round(baseCollateral * ltv);
+        // 부대비용(생애최초 취득세 감면 반영 약 1.25% 수준)
+        const taxAndFee = Math.round(price * 0.0128);
+        const neededCash = price - loan + taxAndFee + repair;
+
+        const contractDep = Math.round(price * 0.10);
+        const midPay = 2000;
+        const balanceCash = neededCash - contractDep - midPay;
+
+        // 40년(480개월) 원리금균등
+        const r = rate / 12;
+        const n = 480;
+        const monthlyPmt = Math.round((loan * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1));
+        const firstInterest = Math.round(loan * r);
+        const firstPrincipal = monthlyPmt - firstInterest;
+        const netInterestAfterRent = Math.max(0, firstInterest - 100);
+
+        const totalSeed = 64100; // 6.41억
+        const remainSeed = totalSeed - neededCash;
+        const reconTotal = price + repair + bundam;
+
+        document.getElementById('res-loan').textContent = fmtEok(loan);
+        document.getElementById('res-loan-sub').textContent = "담보기준 " + fmtEok(baseCollateral) + " × LTV " + Math.round(ltv * 100) + "%";
+
+        document.getElementById('res-cash').textContent = fmtEok(neededCash);
+        document.getElementById('res-cash-sub').textContent = "매수차액 + 부대비(" + taxAndFee + "만) + 수리(" + repair + "만)";
+
+        document.getElementById('res-sched').textContent = "계약 " + contractDep.toLocaleString() + "만 / 잔금 " + Math.max(0, balanceCash).toLocaleString() + "만";
+
+        document.getElementById('res-monthly').textContent = "월 " + monthlyPmt + "만";
+        document.getElementById('res-monthly-sub').textContent = "이자 " + firstInterest + "만+원금 " + firstPrincipal + "만 (월세100전환시 순이자 " + netInterestAfterRent + "만)";
+
+        document.getElementById('res-seed').textContent = fmtEok(remainSeed);
+        document.getElementById('res-total-cost').textContent = bundam > 0 ? fmtEok(reconTotal) : fmtEok(price + repair) + " (신축)";
+        document.getElementById('res-total-sub').textContent = bundam > 0 ? "매수+수리+추정분담금(" + fmtEok(bundam) + "·" + jibun + ")" : "준신축/신축으로 재건축 분담금 없음";
+      }
+
+      function setSimPreset(type, btn) {
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        const sel = document.getElementById('sim-complex');
+        const pIn = document.getElementById('sim-price');
+        const rIn = document.getElementById('sim-repair');
+        if (type === 'sanho8') {
+          sel.value = 'sanho'; pIn.value = 54200; rIn.value = 0;
+        } else if (type === 'sanho7') {
+          sel.value = 'sanho'; pIn.value = 52000; rIn.value = 3800;
+        } else if (type === 'hanwoori7') {
+          sel.value = 'hanwoori'; pIn.value = 56500; rIn.value = 0;
+        } else if (type === 'new84') {
+          sel.value = 'new84'; pIn.value = 60000; rIn.value = 0;
+        }
+        updateSim();
+      }
+      window.addEventListener('DOMContentLoaded', updateSim);
+    </script>
 
     <div class="tscroll">
       <table>
@@ -882,12 +1072,12 @@
         1. <strong>은행 창구·대출상담사에게 딱 이 한 문장으로 요청하세요:</strong><br>
         &nbsp;&nbsp;<em>"혼인신고 전 단독명의 생애최초 주택구입자인데, <strong>HF(주택금융공사) 생애최초 특례보증이나 MCI 가입해서 방공제(2,800만 원) 차감 없이 KB시세의 LTV 80%(안 되면 70% 꽉 채워서)</strong> 나오는지, 그리고 DSR 한도 최대로 늘리게 <strong>40년 만기</strong> 되는지 확인해 주세요."</em><br>
         2. <strong>안 쓰는 마이너스통장·신용대출 사전 해지:</strong><br>
-        &nbsp;&nbsp;단독명의 대출이므로 <strong>학채 님 단독 연소득 기준 DSR 40%</strong>가 적용됩니다. 마이너스통장은 잔액이 0원이어도 개설 한도 전체가 DSR을 깎아먹으므로, 주담대 심사 전에 마통을 해지(또는 한도 축소)하면 주담대 한도가 3,000만~5,000만 원 더 늘어납니다.<br>
+        &nbsp;&nbsp;단독명의 대출이므로 <strong>매수인(단독) 님 단독 연소득 기준 DSR 40%</strong>가 적용됩니다. 마이너스통장은 잔액이 0원이어도 개설 한도 전체가 DSR을 깎아먹으므로, 주담대 심사 전에 마통을 해지(또는 한도 축소)하면 주담대 한도가 3,000만~5,000만 원 더 늘어납니다.<br>
         3. <strong>계약일 ~ 잔금일 내 통장 현금 지출 스케줄 (🥇 1위 산호 101동 8층 5.35억 네고 + LTV 80% 풀대출 4.12억 기준):</strong><br>
-        &nbsp;&nbsp;• <strong>계약일 당일 (계약금 10%): `5,350만 원`</strong> (학채 보유 현금 1억에서 이체)<br>
-        &nbsp;&nbsp;• <strong>계약 3주 뒤 (중도금): `2,000만 원`</strong> (매도인의 배액배상 파기 방지용 · 학채 현금 잔액에서 이체)<br>
+        &nbsp;&nbsp;• <strong>계약일 당일 (계약금 10%): `5,350만 원`</strong> (매수인(단독) 보유 현금 1억에서 이체)<br>
+        &nbsp;&nbsp;• <strong>계약 3주 뒤 (중도금): `2,000만 원`</strong> (매도인의 배액배상 파기 방지용 · 매수인(단독) 현금 잔액에서 이체)<br>
         &nbsp;&nbsp;• <strong>잔금일 당일 (계약 6~8주 뒤): 현금 `5,830만 원`(매도인 잔금 5,150만 + 생애최초 취득세·중개·법무 680만) + 은행 풀대출 `4억 1,200만 원`</strong><br>
-        &nbsp;&nbsp;👉 결국 <strong>학채 주식 2억 원 + 영아 자금 2.41억 원 + 남은 현금 6,820만 원 = 총 `5억 0,920만 원`의 투자 시드머니가 100% 온전히 보존</strong>됩니다!
+        &nbsp;&nbsp;👉 결국 <strong>매수인(단독) 주식 2억 원 + 배우자 자금 2.41억 원 + 남은 현금 6,820만 원 = 총 `5억 0,920만 원`의 투자 시드머니가 100% 온전히 보존</strong>됩니다!
       </p>
     </div>
   </section>
@@ -898,12 +1088,8 @@
       <span class="sec-num">03</span>
       <h2>네이버 부동산 실시간 등록 매물 전수 요약 &amp; 2026년 실거래가 대조 (거품 판독기)</h2>
     </div>
-    <p class="lede">
-      2026년 11월 12일 16시 00분 Chrome DevTools MCP 네이버 부동산 및 호갱노노 실시간 전수 대조 완료: 3단지 등록 매매 매물 총 58건(개나리 23건, 산호 15건, 한우리 20건) 전체를 단지·동·층·중개사별로 100% 정밀 대조한 결과, 정오(11/12 12:00, 57건) 대비 <strong>[매매 매물 총 1건 순증가(신규 1건, 삭제 0건)]</strong>의 변동이 확인되었습니다. 신규 등록된 1건은 한우리 107동 12층 5.95억 매물로, 기존 산호공인 등록 매물에 대해 원탑공인중개사(010-4689-8015)가 복수 중개로 신규 추가 등록한 건입니다.
-      핵심인 <strong>31평(공급 103㎡) 매매 매물은 총 20건에서 21건으로 1건 증가</strong>(개나리 0건, 산호 2건, 한우리 19건)했습니다.
-      ① <strong>산호 31평</strong>: 현재 등록 매물은 <strong>103동 저층 5.60억, 103동 중층 6.00억 등 단 2건뿐</strong>으로 극심한 호가 단절이 지속되고 있습니다. 실입주 1순위였던 『산호 101동 8층 5.45억(가로수 042-471-1212)』은 여전히 보류 상태로 포털 미등재 유지 중이며, 마감 확정 시 <strong>산호 101동 7층 공실(전세 3.3억, 한우리타운 042-485-8400)의 매매 전환(목표 5.15~5.20억 급매 털기)</strong> 타진 전략이 최유효합니다.
-      ② <strong>한우리 31평</strong>: 107동 12층 5.95억(원탑공인 신규) 추가로 31평 등록 매물이 총 19건이 되었으며, 어제 정오 신규 등록된 역대 최고호가 <strong>110동 6층(탑층) 7.50억(JK공인)</strong>은 그대로 유지 중이나 대지지분(15.5평) 열세로 <strong>[6.0억 이상 전원 매수 배제/패스]</strong> 원칙을 확고히 고수합니다.
-      ③ <strong>개나리 31평</strong>: 11/06 계약 12층 5.05억 신고가 실거래(국토부 공시) 이후 <strong>전체 매물 0건(완전 멸종) 상태를 지속</strong>하고 있으며, 24평 소형 매물만 23건 유지 중입니다. (※ 전세·월세 매물 및 거래는 점검/보고 대상에서 완전 제외)
+        <p class="sec-intro">
+      2026년 국토교통부 실거래가(개나리 12층 5.05억, 산호 7층 5.40억·6층 5.50억, 한우리 4층 5.60억)와 현재 네이버 부동산에 등록된 매매 매물 58건을 단지·평형별로 대조한 <strong>호가 거품 판독표</strong>입니다. 실거래가 대비 호가가 과도하게 부풀려진 매물을 걸러내고 안전마진이 확보된 타겟만 선별합니다.
     </p>
 
     <div class="tscroll">
@@ -971,7 +1157,7 @@
             <td>
               • <strong>[31평 실입주] 107동 7/12층: `6.20억`</strong> — 샤시포함올수리 협의입주 (산호공인 10/30 갱신 등록)<br>
               • <strong>[31평 실입주] 106동 2/12층: `6.00억`</strong> — 올수리 폴딩도어 채광양호 (한우리타운 10/8)<br>
-              • <strong>[31평 실입주] 108동 5/12층: `5.80억`</strong> — 기본 미수리, 주인거주 (한우리타운 10/16)<br>
+              • <strong>[31평 실입주 호가인상] 108동 5/12층(506호): `6.00억` (▲2,000만 인상)</strong> — 주인거주, 기본미수리, 호가 띄우기 (포털 등록가 5.8억→6.0억 공식 수정 반영 11/07 16:00, 정보부동산/한우리타운) ★ 고평가 패스 확정<br>
               • <strong>[31평 실입주] 107동 12/12층: `5.95억`</strong> — 기본 미수리, 주인거주 (원탑 10/12, 산호 10/20)<br>
               • <strong>[31평 고호가] 106동 중/7층: `6.80억`</strong> — 올리모델링 상태최상 (한우리타운/몽땅다)<br>
               • <strong>[31평 저층 최저가]</strong> 107동 2층(`5.70억`, <strong>[11/03 신규]</strong> 한우리타운 내부수리 입주협의 등록 추가 및 정보공인 입주협의, 산호공인은 월세안고로 기재), 108동 10층(`6.20억`, 전세안고 4건 중복), 103동 고층(`6.20억`, 전세안고)<br>
@@ -1014,12 +1200,8 @@
       <span class="sec-num">04</span>
       <h2>「엘시크의 재건축 매거진」 프레임으로 본 둔산 17구역 3단지 사업성 해부</h2>
     </div>
-    <p class="lede">
-      2026년 11월 12일 16시 00분 Chrome DevTools MCP 네이버 부동산 및 호갱노노 실시간 전수 대조 완료: 3단지 등록 매매 매물 총 58건(개나리 23건, 산호 15건, 한우리 20건) 전체를 단지·동·층·중개사별로 100% 정밀 대조한 결과, 정오(11/12 12:00, 57건) 대비 <strong>[매매 매물 총 1건 순증가(신규 1건, 삭제 0건)]</strong>의 변동이 확인되었습니다. 신규 등록된 1건은 한우리 107동 12층 5.95억 매물로, 기존 산호공인 등록 매물에 대해 원탑공인중개사(010-4689-8015)가 복수 중개로 신규 추가 등록한 건입니다.
-      핵심인 <strong>31평(공급 103㎡) 매매 매물은 총 20건에서 21건으로 1건 증가</strong>(개나리 0건, 산호 2건, 한우리 19건)했습니다.
-      ① <strong>산호 31평</strong>: 현재 등록 매물은 <strong>103동 저층 5.60억, 103동 중층 6.00억 등 단 2건뿐</strong>으로 극심한 호가 단절이 지속되고 있습니다. 실입주 1순위였던 『산호 101동 8층 5.45억(가로수 042-471-1212)』은 여전히 보류 상태로 포털 미등재 유지 중이며, 마감 확정 시 <strong>산호 101동 7층 공실(전세 3.3억, 한우리타운 042-485-8400)의 매매 전환(목표 5.15~5.20억 급매 털기)</strong> 타진 전략이 최유효합니다.
-      ② <strong>한우리 31평</strong>: 107동 12층 5.95억(원탑공인 신규) 추가로 31평 등록 매물이 총 19건이 되었으며, 어제 정오 신규 등록된 역대 최고호가 <strong>110동 6층(탑층) 7.50억(JK공인)</strong>은 그대로 유지 중이나 대지지분(15.5평) 열세로 <strong>[6.0억 이상 전원 매수 배제/패스]</strong> 원칙을 확고히 고수합니다.
-      ③ <strong>개나리 31평</strong>: 11/06 계약 12층 5.05억 신고가 실거래(국토부 공시) 이후 <strong>전체 매물 0건(완전 멸종) 상태를 지속</strong>하고 있으며, 24평 소형 매물만 23건 유지 중입니다. (※ 전세·월세 매물 및 거래는 점검/보고 대상에서 완전 제외)
+        <p class="sec-intro">
+      둔산지구 노후계획도시 특별법 선도지구·정비구역 지정 기준, <strong>개나리(366세대)·한우리(598세대)·산호(654세대) 3단지는 총 1,618세대 규모의 「둔산 17구역 통합재건축」</strong>으로 묶입니다. 재건축 사업성에서 가장 중요한 핵심 지표는 <strong>현재 호가가 아니라 세대당 실측 대지지분(대지권 면적)</strong>입니다. 산호 31평은 대지지분이 <strong>19.04평</strong>으로 한우리(15.98평)보다 3.06평 넓어 향후 신축 84㎡ 분양 시 분담금을 <strong>약 8,000만~8,500만 원 절감</strong>합니다.
     </p>
 
     <div class="tscroll">
@@ -1164,62 +1346,60 @@
     </div>
   </section>
 
-  <!-- ============ SECTION 6: 오늘 바로 전화·방문할 부동산 4곳 액션 플랜 ============ -->
-  <section>
+    <!-- ============ SECTION 6: 현시점(11/12) 교착 타개 3단계 액션 플랜 & 부동산 협상 대본 ============ -->
+  <section id="sec-06">
     <div class="sec-head">
       <span class="sec-num">06</span>
-      <h2>오늘 바로 실행할 「부동산 4곳 전화·방문 순서 &amp; 흥정 대본」</h2>
+      <h2>현시점(11/12) 매도자 우위 · 매물 품귀 타개를 위한 「3단계 실전 협상 &amp; 대안 액션 플랜」</h2>
     </div>
+    <p class="sec-intro">
+      개나리 31평이 12층 5.05억 신고가 체결 후 <strong>완전 전멸(0건)</strong>하고, 1순위 타겟이던 산호 101동 8층(5.45억) 매도인이 <strong>일단 보류(포털 삭제)</strong>로 돌아선 상황입니다. 매도자 우위 시장에서 호가를 무리하게 따라붙으면 고점 추격 매수가 되고, 반대로 너무 낮은 가격만 고집하면 계약을 성사시킬 수 없습니다. 아래 <strong>Plan A → Plan B → Plan C 동시 타진 전략</strong>으로 협상 주도권을 확보하세요.
+    </p>
 
     <div class="timeline">
       <div class="tl-row">
-        <div class="tl-when">🚨 최우선 1순위 타격<br>가로수공인<br>(042-471-1212)</div>
+        <div class="tl-when">🥇 Plan A (최우선)<br>가로수공인<br>(042-471-1212)</div>
         <div class="tl-body">
-          <div class="tl-what">🥇 산호 101동 8/12층 남향 (5.45억) → 🎯 1차 타겟 5.25 ~ 5.30억 (마지노선 5.35억)</div>
+          <div class="tl-what">산호 101동 8/12층 남향 (호가 5.45억 · 현재 보류/포털 미등재) → 🎯 합리적 타결선 5.40 ~ 5.42억 제시 후 타임아웃 대기</div>
           <div class="tl-note">
-            • <strong>핵심 상황:</strong> 개나리 12층(5.1억) 종료 후, <strong>3단지 전체 31평 중 실입주 가능한 유일한 최저가 로열층 매물</strong>입니다. 10월 28일 같은 단지 6층이 5.50억에 거래 확정되었으므로 호가(5.45억) 자체도 이미 실거래가보다 500만 원 쌉니다.<br>
-            • <strong>전화 확인 필수 1가지:</strong> 내부 수리 상태(샤시 교체 여부 및 욕실/싱크대 수리 여부) 확인.<br>
-            • <strong>흥정 대본:</strong> <em>"소장님, 101동 8층 5.45억 매물이요, 실입주하려고 보는데 수리 상태가 어떻게 되나요? 올수리되어 있으면 <strong>5억 3,000만~5억 3,500만 원</strong>, 수리가 좀 필요하면 <strong>5억 2,000만~5억 2,500만 원</strong>에 맞춰주시면 오늘 계약금 바로 쏘겠습니다."</em>
+            • <strong>현황 및 심리 분석:</strong> 11/4 바로 아래 7층이 5.40억에 실거래 체결된 직후 집주인이 매도를 일시 보류하고 포털에서 매물을 내렸습니다. 현시점 무리한 저가 네고(5.1~5.2억)는 역효과를 내지만, <strong>7층 실거래가(5.40억)를 명분으로 5.40~5.42억(300~500만 원 조율)</strong>을 제시하는 것은 매도인도 수용 가능한 가장 현실적인 타협점입니다.<br>
+            • <strong>실전 전달 대본:</strong> <em>"소장님, 저희는 대출 한도와 계약금 현금 준비가 100% 끝나 있어서 101동 8층 집주인분이 보류만 풀고 <strong>7층 실거래가 수준인 5.40~5.42억 선</strong>에 맞춰주시면 당일 즉시 계약금 쏘겠습니다. 다만 저희도 무한정 기다릴 수는 없어서 이번 주말까지만 대기하고 연락 없으면 다른 단지 급매로 넘어가려고 하니 집주인분께 꼭 의사 확인 부탁드립니다."</em>
           </div>
         </div>
       </div>
 
       <div class="tl-row">
-        <div class="tl-when">2순위 급매 유도<br>한우리타운공인<br>(042-485-8400)</div>
+        <div class="tl-when">🥈 Plan B (역제안)<br>한우리타운공인<br>(042-485-8400)</div>
         <div class="tl-body">
-          <div class="tl-what">🥈 산호 101동 7/12층 남향 (공실 · 전세 3.3억 전환) → 🎯 매매 급매 5.15 ~ 5.20억 역제안</div>
+          <div class="tl-what">산호 101동 7/12층 남향 (현재 공실 · 전세 3.3억 등록 중) → 🎯 매매 전환 급매 5.15 ~ 5.25억 역제안 타격</div>
           <div class="tl-note">
-            • <strong>공실 집주인 심리 공략:</strong> 원래 매매 5.5억에 내놓았다가 안 나가서 전세 3.3억으로 돌려놓은 공실입니다. 집주인은 매달 관리비와 이자 부담을 안고 있습니다.<br>
-            • <strong>흥정 대본:</strong> <em>"소장님, 산호 101동 7층 공실 전세 3.3억 올려두신 것 봤는데요, 바로 위 8층도 5.45억에 나와 있잖아요. 7층은 샤시랑 전체 인테리어가 안 되어 있어서 저희가 들어가려면 수리비 4,000만 원이 생현금으로 깨집니다. 집주인분께 <strong>5억 1,500만~5억 2,000만 원에 매매로 깔끔하게 털어주시면</strong> 공실이니 바로 계약하겠다고 전해주세요."</em>
+            • <strong>핵심 기회 요인:</strong> 원래 매매 5.5억에 내놓았다가 안 팔려서 전세 3.3억으로 돌려놓은 <strong>즉시 입주 가능 공실</strong>입니다. 세입자 퇴거 협의가 전혀 필요 없고 대지지분 19.04평(1위)을 그대로 확보할 수 있습니다.<br>
+            • <strong>실전 전달 대본:</strong> <em>"소장님, 산호 101동 7층 공실 전세 3.3억 물건이요, 저희가 당장 실입주할 현금·대출 준비된 매수자인데 전세 대신 매매로 깔끔하게 정리하실 의향 없으신가요? 샤시·인테리어 수리비를 감안해 <strong>5억 2,000만 원 선</strong>에 매매 전환해 주시면 오늘 바로 계약서 쓰겠습니다."</em>
           </div>
         </div>
       </div>
 
       <div class="tl-row">
-        <div class="tl-when">3순위 대안 타진<br>산호공인 / 88공인<br>(042-472-0119)</div>
+        <div class="tl-when">🥉 Plan C (그물망)<br>산호·정보·개나리<br>3대 중개소 동시등록</div>
         <div class="tl-body">
-          <div class="tl-what">🥉 한우리 107동 7/12층 남향 샤시포함 올수리 (6.20억) → 🎯 5.60 ~ 5.65억 찔러보기</div>
+          <div class="tl-what">신규 급매물 포털 등록 전 선점("준비된 1순위 매수자" 각인) + 인근 준신축(목동 더샵리슈빌·용문 더샵엘리프) 비교 임장</div>
           <div class="tl-note">
-            • 탄방초·문정중 도보 6분 + 지역난방이라 실거주는 최상이지만 6.20억 호가는 과다합니다.<br>
-            • <strong>흥정 대본:</strong> <em>"한우리 107동 7층 올수리 매물이요, 은행 KB일반가가 5.65억이라 대출이 그 이상 절대 안 나옵니다. 혹시 집주인분이 <strong>KB일반가(5.60~5.65억)</strong> 수준으로 급매 절충해 주실 의향 있으시면 바로 계약하겠습니다"</em>라고 걸어두기.
+            • <strong>중개소 3곳 동시 예약:</strong> 산호공인(`042-472-0119`), 정보공인(`042-485-2800`), 개나리공인(`042-489-4949`)에 <em>"산호·개나리 31평 중고층 실입주 매물 5.3~5.45억 선 나오면 네이버 올리기 전에 가장 먼저 연락 달라, 자금 100% 준비 완료되어 당일 가계약금 입금 가능하다"</em>고 등록해 둡니다.<br>
+            • <strong>시야 확장 (신축/준신축 및 플랜B):</strong> 한우리 6.0억+(지분 15.5평)나 둔산 국화·둥지 5.8~6.5억(지분 14평대) 구축을 비싸게 추격 매수하는 것은 절대 금물입니다. 예산이 6.0억을 넘어간다면 차라리 <strong>중구 목동 더샵리슈빌 84㎡(5.8~6.2억, 2022년 준신축·목양초 초품아)</strong>나 <strong>서구 용문 둔산 더샵엘리프 84㎡(6.0~6.3억, 2025년 최신축 대단지)</strong>를 비교 임장해 두는 것이 협상력을 극대화합니다.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION 7: 재건축 지연 & 2028년 이후 타지역 이동 시 전세·월세 전환 시뮬레이션 ============ -->
+<!-- ============ SECTION 7: 재건축 지연 & 2028년 이후 타지역 이동 시 전세·월세 전환 시뮬레이션 ============ -->
   <section id="sec-07">
     <div class="sec-head">
       <span class="sec-num">07</span>
       <h2>재건축 지연 &amp; 2028년 이후 대전 외 타지역 이동 시 「전세 · 월세 전환 &amp; 학군·환금성 완벽 시뮬레이션」</h2>
     </div>
-    <p class="lede">
-      2026년 11월 12일 16시 00분 Chrome DevTools MCP 네이버 부동산 및 호갱노노 실시간 전수 대조 완료: 3단지 등록 매매 매물 총 58건(개나리 23건, 산호 15건, 한우리 20건) 전체를 단지·동·층·중개사별로 100% 정밀 대조한 결과, 정오(11/12 12:00, 57건) 대비 <strong>[매매 매물 총 1건 순증가(신규 1건, 삭제 0건)]</strong>의 변동이 확인되었습니다. 신규 등록된 1건은 한우리 107동 12층 5.95억 매물로, 기존 산호공인 등록 매물에 대해 원탑공인중개사(010-4689-8015)가 복수 중개로 신규 추가 등록한 건입니다.
-      핵심인 <strong>31평(공급 103㎡) 매매 매물은 총 20건에서 21건으로 1건 증가</strong>(개나리 0건, 산호 2건, 한우리 19건)했습니다.
-      ① <strong>산호 31평</strong>: 현재 등록 매물은 <strong>103동 저층 5.60억, 103동 중층 6.00억 등 단 2건뿐</strong>으로 극심한 호가 단절이 지속되고 있습니다. 실입주 1순위였던 『산호 101동 8층 5.45억(가로수 042-471-1212)』은 여전히 보류 상태로 포털 미등재 유지 중이며, 마감 확정 시 <strong>산호 101동 7층 공실(전세 3.3억, 한우리타운 042-485-8400)의 매매 전환(목표 5.15~5.20억 급매 털기)</strong> 타진 전략이 최유효합니다.
-      ② <strong>한우리 31평</strong>: 107동 12층 5.95억(원탑공인 신규) 추가로 31평 등록 매물이 총 19건이 되었으며, 어제 정오 신규 등록된 역대 최고호가 <strong>110동 6층(탑층) 7.50억(JK공인)</strong>은 그대로 유지 중이나 대지지분(15.5평) 열세로 <strong>[6.0억 이상 전원 매수 배제/패스]</strong> 원칙을 확고히 고수합니다.
-      ③ <strong>개나리 31평</strong>: 11/06 계약 12층 5.05억 신고가 실거래(국토부 공시) 이후 <strong>전체 매물 0건(완전 멸종) 상태를 지속</strong>하고 있으며, 24평 소형 매물만 23건 유지 중입니다. (※ 전세·월세 매물 및 거래는 점검/보고 대상에서 완전 제외)
+        <p class="sec-intro">
+      단독명의·생애최초 풀대출로 당장 실입주한 뒤, <strong>재건축이 지연되거나 2028년 이후 타지역으로 근무지·거주지를 이동해야 할 때</strong>의 출구 전략(Exit Plan)입니다. 국토교통부 전·월세 실거래 회전율과 초등학교 통학 거리를 대조한 결과, 풀대출(LTV 70~80%) 상태에서는 2028년에 전세보다 <strong>『보증금 5,000만 / 월세 95~105만 원』 전환(옵션 A)</strong>이 주담대를 깨지 않고 월 순이자 14~30만 원으로 재건축 대지지분을 보유할 수 있는 최상의 시나리오입니다.
     </p>
 
     <div class="tscroll">
@@ -1500,8 +1680,8 @@
     </div>
   </section>
 
-  <footer>
-    본 마스터 플랜은 2026년 11월 4일 16시 00분 Chrome DevTools MCP 기반 네이버 부동산 실시간 등록 매물 82건(고유 매매 65건: 개나리 28·산호 16·한우리 21) 및 국토부 매매 실거래 데이터(★ 개나리 31평 10월 31일 8층 4.75억 및 산호 17평 11월 1일 2층 2.80억, 산호 31평 10월 27일 6층 5.50억 반영), 생애최초 LTV 80% / 일반 LTV 70% 풀대출 계산, 2028년 타지역 이동 시 전세·월세 전환 시뮬레이션, 「엘시크의 재건축 매거진」 둔산 17구역 사업성 분석, 호갱노노·집품 실거주 후기를 모두 통합하여 최신화되었습니다.
+    <footer>
+    본 마스터 플랜은 2026년 11월 12일 17시 00분 기준 네이버 부동산 실시간 매매 매물(총 58건: 개나리 23·산호 15·한우리 20) 및 국토교통부 실거래가(개나리 31평 11/6 12층 5.05억 신고가, 산호 31평 11/4 7층 5.40억·10/28 6층 5.50억, 한우리 31평 4층 5.60억), 생애최초 LTV 80% / 일반 LTV 70% 실시간 대출 시뮬레이터, 2028년 타지역 이동 시 전·월세 전환 시뮬레이션, 둔산 17구역 통합재건축 사업성 데이터를 통합하여 고도화되었습니다. (모바일 알림은 텔레그램 @tanbang_helper_bot 단일 채널로 일원화 운영 중)
   </footer>
 
 </div>
