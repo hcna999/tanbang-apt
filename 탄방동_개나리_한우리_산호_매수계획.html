@@ -415,12 +415,12 @@
 
     <div class="kicker">2026. 11. 13. 14:40 (네이버 매물 62건 &amp; 탄방·둔산·갈마 16개 단지 국토부 실거래 전수 동기화 · 주변시세 비교 탑재판)</div>
     <h1>탄방동 개나리 · 산호 · 한우리 「즉시 실입주 &amp; 풀대출 &amp; 2028년 임대전환」 마스터 플랜</h1>
-        <p class="standfirst">
+            <p class="standfirst">
       <strong>혼인신고 전 단독명의 · 생애최초 주담대 풀대출(LTV 70~80%) · 당장 실입주 · 2028년 타지역 이동 시 월세/전세 전환</strong>까지 통합한 의사결정 리포트입니다.<br>
       2026년 11월 13일 기준 <strong>개나리 102동 2층(31평) 5.20억 신규 매물 출현(은하수공인)</strong>, <strong>산호 101동 8층(5.45억) 보류 추적 및 7층(전세 3.3억 공실) 매매전환 타진</strong>과 함께, 주변 <strong>한가람·공작한양(14구역 선도지구), 햇님·둥지, 국화 5개 단지·청솔·가람, 둔산 녹원(용적률 181%), 갈마 경성큰마을(15구역 2,910세대)</strong>의 최신 실거래가와 사업성 비교를 완벽 반영했습니다.
     </p>
 
-        <div class="meta-grid">
+            <div class="meta-grid">
       <div class="meta-item">
         <div class="lbl">🥇 Plan A · 최우선 타겟 (가로수공인)</div>
         <div class="val t-go">산호 101동 8층 (5.45억)</div>
@@ -457,6 +457,7 @@
       ① <strong>산호 31평 (용적률 168% · 대지지분 19.04평 1위)</strong>: 포털 등록 매물은 <strong>103동 저층 5.60억, 103동 중층 6.00억 2건</strong>입니다. 『산호 101동 8층 5.45억(가로수 042-471-1212)』 보류 복귀 타진(Plan A)과 함께, <strong>산호 101동 7층 공실(전세 3.3억, 한우리타운 042-485-8400)의 매매 전환(목표 5.15~5.25억)</strong> 역제안(Plan B)이 가장 유효합니다.<br>
       ② <strong>개나리 31평 (용적률 175% · 대지지분 17.61평 2위)</strong>: 11/06 12층 5.05억 신고가 실거래 이후 품절 상태였으나, <strong>11/13 『개나리 102동 2/11층 5.20억(내부수리됨, 은하수공인 042-489-0051)』 신규 매물 1건이 출현</strong>했습니다. 2층 저층임을 감안해 <strong>5.00~5.10억 선 네고 및 실입주 가능 여부 확인(Plan C)</strong>이 필요합니다.<br>
       ③ <strong>한우리 31평 (대지지분 15.98평)</strong>: 총 19건(5.50억~7.50억)이 등록되어 있으나 대지지분 열위로 분담금이 산호 대비 약 8,500만 원 더 발생하므로 <strong>6.0억 이상 고호가 매물은 전면 배제(PASS)</strong>합니다.
+    </p>
     </p>
     </p>
 
@@ -693,7 +694,7 @@
 
     <!-- INTERACTIVE SIMULATOR -->
     <div class="sim-box">
-            <div class="sim-header">
+                  <div class="sim-header">
         <h3>⚡ 매수 조건별 실시간 현금 · 대출 · 분담금 계산기 (탄방 3단지 + 주변 주요 단지 비교)</h3>
         <div class="preset-btns">
           <button type="button" class="preset-btn active" onclick="setSimPreset('sanho8', this)">🥇 산호 8층 (5.42억)</button>
@@ -727,6 +728,7 @@
         <div class="sim-ctrl">
           <label>② 매매 협상 타결가 <span class="val-disp" id="disp-price">5억 4,200만</span></label>
           <input type="range" id="sim-price" min="36000" max="78000" step="100" value="54200" oninput="updateSim()">
+        </div>
         </div>
         </div>
 
@@ -853,7 +855,7 @@
         document.getElementById('res-total-sub').textContent = bundam > 0 ? "매수+수리+추정분담금(" + fmtEok(bundam) + "·" + jibun + ")" : "준신축/신축으로 재건축 분담금 없음";
       }
 
-            function setSimPreset(type, btn) {
+                  function setSimPreset(type, btn) {
         document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
         if (btn) btn.classList.add('active');
         const sel = document.getElementById('sim-complex');
@@ -1296,6 +1298,7 @@
   </section>
 
   
+  
   <!-- ============ SECTION 4-B: 탄방·둔산·갈마 16개 단지 전수 시세 및 사업성 비교 ============ -->
   <section id="sec-surrounding">
     <div class="sec-head">
@@ -1550,6 +1553,81 @@
       </table>
     </div>
 
+    <div class="tscroll" style="margin-top: 22px;">
+      <table>
+        <caption>
+          ※ <strong>[임장 필수] 단지별 선호 로열동 · 로열층 · 향(라인) 실전 가이드</strong> (실거래 동별 분포 · 단지 배치도 · 실거주 선호도 종합)
+        </caption>
+        <thead>
+          <tr>
+            <th>단지명</th>
+            <th>주력 평형별 해당 동</th>
+            <th>선호 로열동 &amp; 이유</th>
+            <th class="num">선호 로열층 · 향/라인</th>
+            <th>피해야 할 동·층 (체크포인트)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <th>🥇 탄방 산호<br><span class="sub-txt">(7개동 · 최고 12층)</span></th>
+            <td><strong>31평: 101 · 103 · 105동</strong><br><span class="sub-txt">(17평: 102·104·106동 위주)</span></td>
+            <td>• <strong>101동:</strong> 탄방역 출입 동선 최단·남향<br>• <strong>103동:</strong> 단지 중앙 배치·소음 적고 트임 우수<br>• <strong>105동:</strong> 남선공원 인접·산책 및 조망 양호</td>
+            <td class="num t-go"><strong>5층 ~ 11층</strong><br><span class="sub-txt">정남향 판상형<br>(중·고층 선호)</span></td>
+            <td>• 1층·저층(채광/사생활)<br>• 12층 탑층(구축 단열·누수 확인 필수)</td>
+          </tr>
+          <tr class="hl">
+            <th>🆕 탄방 개나리<br><span class="sub-txt">(6개동 · 최고 6~12층)</span></th>
+            <td><strong>31평: 101 · 102 · 103 · 104동</strong><br><span class="sub-txt">(24평: 105·106동 위주)</span></td>
+            <td>• <strong>101동:</strong> 탄방역 도보 1분 초역세권 동선<br>• <strong>102·104동:</strong> 단지 안쪽 조용한 정남향 라인</td>
+            <td class="num t-go"><strong>5층 ~ 10층</strong><br><span class="sub-txt">남향 위주<br>(일부 남동향)</span></td>
+            <td>• 1~2층 저층(가격 절충 필수)<br>• 12층 탑층(외부샤시·결로 확인)</td>
+          </tr>
+          <tr>
+            <th>탄방 한우리<br><span class="sub-txt">(10개동 · 최고 6~15층)</span></th>
+            <td><strong>31평: 103·106·107·108·109·110동</strong><br><span class="sub-txt">(26평: 101·104동 등)</span></td>
+            <td>• <strong>107동 · 106동:</strong> 단지 안쪽 조용 + 탄방초·문정중 도보 5분 최선호<br>• <strong>108동 · 103동:</strong> 정남향 판상형 (R동 R층 선호)</td>
+            <td class="num"><strong>5층 ~ 10층</strong><br><span class="sub-txt">정남향 판상형<br>(109·110동은 6층형)</span></td>
+            <td>• 1~2층 저층(KB하위가 대출 제한)<br>• 12층 탑층 및 도로변 소음 라인</td>
+          </tr>
+          <tr class="hl">
+            <th>⭐ 둔산 녹원<br><span class="sub-txt">(12개동 · 최고 12층)</span></th>
+            <td><strong>31평/23평: 101~112동</strong><br><span class="sub-txt">(59㎡ 624 · 84㎡ 576세대)</span></td>
+            <td>• <strong>105동 (대표 로열동):</strong> 단지 중앙부·동간거리·조망 최우수<br>• <strong>101·103동:</strong> 남향 + 탄방역·둔산초 동선 편리</td>
+            <td class="num t-go"><strong>6층 ~ 11층</strong><br><span class="sub-txt">남향 · 남동향<br>(108·110동 조용)</span></td>
+            <td>• 대덕대로/둔산남로 외곽 저층(소음)<br>• 중앙난방 배관·샤시 교체 여부</td>
+          </tr>
+          <tr class="hl">
+            <th>💰 갈마 경성큰마을<br><span class="sub-txt">(25개동 · 최고 15층)</span></th>
+            <td><strong>32평: 105·110·115·120동 등</strong><br><span class="sub-txt">(24평 1,470 / 32평 1,440세대)</span></td>
+            <td>• <strong>단지 내부 남향 동:</strong> 대덕대로 차량 소음 차단<br>• <strong>둔원초·중 인접 동:</strong> 통학 안전 + 상가·출입구 동선 우수</td>
+            <td class="num t-acc"><strong>6층 ~ 13층</strong><br><span class="sub-txt">남향 라인<br>(중간층 난방효율)</span></td>
+            <td>• 대덕대로변 인접 동 저층(소음·먼지)<br>• 중앙난방 동절기 난방·수압 체크</td>
+          </tr>
+          <tr>
+            <th>🏫 둔산 국화 5단지<br><span class="sub-txt">(26개동 · 14~15층)</span></th>
+            <td><strong>라이프 201동(30평) · 신동아 302동(31평) · 우성 501동(30평) · 한신 603동(30평)</strong></td>
+            <td>• <strong>문정초·문정중 인접 동 (한신·우성 안쪽동)</strong><br>• <strong>단지 내 중앙 동 (동성·라이프·신동아):</strong> 도로 소음 차단</td>
+            <td class="num"><strong>7층 ~ 13층</strong><br><span class="sub-txt">남향 · 남동향<br>(유등천 방향 트임)</span></td>
+            <td>• 상가·로데오거리 인접 외곽 저층<br>• 1층(시세 -5천~1억 낮음)</td>
+          </tr>
+          <tr>
+            <th>탄방 한가람 · 공작한양<br><span class="sub-txt">(14구역 · 최고 15층)</span></th>
+            <td><strong>한가람: 9·10동(31평), 11·12동(30평)</strong><br><span class="sub-txt">(한가람 2동 21평 / 1·7동 16평)</span></td>
+            <td>• <strong>한가람 유등천 조망 동(동측):</strong> 천변 뷰 프리미엄<br>• <strong>공작한양:</strong> 문정초 통학 동선 가까운 단지 안쪽 남향 동</td>
+            <td class="num"><strong>7층 ~ 13층</strong><br><span class="sub-txt">남향 · 남동향</span></td>
+            <td>• 공작한양 지하주차장 협소(세대당 0.7대) 동선 확인 필수</td>
+          </tr>
+          <tr>
+            <th>둔산 청솔 · 햇님<br><span class="sub-txt">(14~15층)</span></th>
+            <td><strong>청솔: 2·3동(27평)</strong><br><strong>햇님: 1·2동(28평/중형)</strong></td>
+            <td>• <strong>청솔:</strong> 유등천 조망 동 및 단지 안쪽 정숙 동<br>• <strong>햇님:</strong> 뒤편 햇님공원 숲세권 인접 동(2동 등)</td>
+            <td class="num"><strong>6층 ~ 13층</strong><br><span class="sub-txt">남향 배치</span></td>
+            <td>• 햇님은 맞은편 그랑르피에드(47층) 신축 간섭·일조 확인 필요</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="callout go" style="margin-top: 18px;">
       <span class="callout-label">주변 16개 단지 전수 비교를 통해 검증된 4대 핵심 전략 결론</span>
       <p>
@@ -1642,7 +1720,7 @@
     </div>
   </section>
 
-      <!-- ============ SECTION 6: 현시점(11/13) 교착 타개 4단계 액션 플랜 & 부동산 협상 대본 ============ -->
+        <!-- ============ SECTION 6: 현시점(11/13) 교착 타개 4단계 액션 플랜 & 부동산 협상 대본 ============ -->
   <section id="sec-06">
     <div class="sec-head">
       <span class="sec-num">06</span>
@@ -1985,7 +2063,7 @@
     </div>
   </section>
 
-      <footer>
+        <footer>
     본 마스터 플랜은 2026년 11월 13일 기준 네이버 부동산 실시간 매매 매물(탄방 3단지 62건: 개나리 102동 2층 5.20억 신규 포함) 및 탄방·둔산·갈마 16개 주요 단지(산호·개나리·한우리·한가람·공작한양·국화5단지·청솔·가람·햇님·둥지·녹원·경성큰마을·은하수) 국토교통부 실거래가, 생애최초 LTV 80% / 일반 LTV 70% 실시간 대출 시뮬레이터를 통합하여 고도화되었습니다. (모바일 알림은 텔레그램 @tanbang_helper_bot 단일 채널로 일원화 운영 중)
   </footer>
 
