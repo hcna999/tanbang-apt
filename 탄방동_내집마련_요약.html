@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>탄방동 내집마련 모바일 대시보드 (11.12 고도화판)</title>
+<title>탄방동 내집마련 모바일 대시보드 (11.13 주변시세 통합판)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   :root {
@@ -299,11 +299,11 @@
 
 <header class="app-header">
   <div class="header-top">
-    <span class="badge-live">2026.11.13 12:00 업데이트</span>
+    <span class="badge-live">2026.11.13 14:40 업데이트</span>
     <a href="index.html" class="pc-link">PC 마스터플랜 보기 →</a>
   </div>
   <h1>탄방동 내집마련 의사결정 보드</h1>
-  <p>산호 · 개나리 · 한우리 31평 & 대안 단지 실시간 비교</p>
+  <p>산호·개나리·한우리 &amp; 한가람·햇님·국화·녹원·큰마을 16개 단지 비교</p>
 </header>
 
 <div class="kpi-strip">
@@ -395,7 +395,7 @@
 
     <div class="card">
       <div class="card-title">
-        <span>📊 3개 단지 31평 수급 요약 (11.13 12:00)</span>
+        <span>📊 3개 단지 31평 수급 요약 (11.13 09:00)</span>
       </div>
       <table class="m-table">
         <thead>
@@ -442,10 +442,12 @@
       </p>
 
       <div class="preset-grid">
-        <button type="button" class="preset-btn active" onclick="mPreset(54200, 1500, 80, 'sanho', this)">산호 8층 (5.42억)</button>
-        <button type="button" class="preset-btn" onclick="mPreset(52000, 3000, 80, 'sanho', this)">산호 7층+올수리</button>
-        <button type="button" class="preset-btn" onclick="mPreset(52000, 1000, 80, 'gaenari', this)">개나리 2층 (5.20억)</button>
-        <button type="button" class="preset-btn" onclick="mPreset(59500, 500, 80, 'hanwoori', this)">한우리 7/12층 (5.95억)</button>
+        <button type="button" class="preset-btn active" onclick="mPreset(54200, 1500, 80, 'sanho', this)">🥇 산호 8층 (5.42억)</button>
+        <button type="button" class="preset-btn" onclick="mPreset(52000, 3000, 80, 'sanho', this)">🥈 산호 7층+올수리</button>
+        <button type="button" class="preset-btn" onclick="mPreset(51000, 1000, 80, 'gaenari', this)">🆕 개나리 2층 (5.10억)</button>
+        <button type="button" class="preset-btn" onclick="mPreset(52000, 2500, 80, 'nokwon', this)">⭐ 둔산녹원 31평 (5.20억)</button>
+        <button type="button" class="preset-btn" onclick="mPreset(40000, 2500, 80, 'keunmaul', this)">💰 경성큰마을 32평 (4.00억)</button>
+        <button type="button" class="preset-btn" onclick="mPreset(58000, 2000, 80, 'gukhwa', this)">🏫 국화라이프 30평 (5.80억)</button>
       </div>
 
       <div class="slider-group">
@@ -453,7 +455,7 @@
           <span>매수 체결가</span>
           <span class="val" id="m-price-lbl">5.42억 (54,200만)</span>
         </div>
-        <input type="range" id="m-price" min="45000" max="68000" step="100" value="54200" oninput="mCalc()">
+        <input type="range" id="m-price" min="36000" max="75000" step="100" value="54200" oninput="mCalc()">
       </div>
 
       <div class="slider-group">
@@ -515,48 +517,169 @@
     </div>
   </div>
 
-  <!-- TAB 3: 플랜B / 대안비교 -->
+  <!-- TAB 3: 주변시세 / 대안비교 -->
   <div id="tab-planb" class="tab-panel">
     <div class="card">
       <div class="card-title">
-        <span>🔄 플랜B: 6억 예산 대안 단지 냉정 비교</span>
+        <span>📊 탄방·둔산·갈마 16개 단지 실거래·용적률 비교</span>
+        <span class="tag tag-blue">11/13 기준</span>
       </div>
-      <p style="font-size:12.5px;color:var(--ink-sub);margin-bottom:10px;">
-        산호 31평이 5.45억 이하로 나오지 않을 경우, 무리하게 한우리 6.0억+를 추격하기보다 아래 3가지 대안과 비교해야 합니다.
+      <p style="font-size:12px;color:var(--ink-sub);margin-bottom:8px;">
+        10억+ 초고가(크로바·목련·한마루)는 제외하고, <b>실제 4억~7억 초반 비교군 16개 단지</b>의 2026.08~11월 실거래가와 용적률을 전수 대조했습니다.
       </p>
+      <div style="overflow-x:auto;">
+        <table class="m-table" style="font-size:11.5px;">
+          <thead>
+            <tr>
+              <th>단지명 (세대수)</th>
+              <th class="num">용적률</th>
+              <th>난방/학군</th>
+              <th>최근 실거래 (30~32평 중심)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#eff6ff;">
+              <td><b>🥇 탄방 산호</b> (654)</td>
+              <td class="num" style="color:var(--blue);font-weight:800;">168%</td>
+              <td>중앙/한밭·탄방</td>
+              <td><b>31평 5.40억</b> (전세 3.3억)<br><span style="color:var(--blue);font-size:10.5px;">★지분 19.04평 1위·17구역</span></td>
+            </tr>
+            <tr style="background:#eff6ff;">
+              <td><b>🆕 탄방 개나리</b> (366)</td>
+              <td class="num" style="color:var(--green);font-weight:800;">175%</td>
+              <td>개별/둔산·한밭</td>
+              <td><b>31평 5.05억</b> (2층매물 5.2억)<br><span style="color:var(--green);font-size:10.5px;">★탄방역 1분·지분 17.61평</span></td>
+            </tr>
+            <tr>
+              <td><b>탄방 한우리</b> (598)</td>
+              <td class="num">195%</td>
+              <td>지역/탄방초</td>
+              <td><b>31평 5.30~5.75억</b> (호가 6억+)<br><span style="color:var(--muted);font-size:10.5px;">지분 15.98평·6억+ 패스</span></td>
+            </tr>
+            <tr style="background:#f0fdf4;">
+              <td><b>⭐ 둔산 녹원</b> (1,200)</td>
+              <td class="num" style="color:var(--green);font-weight:800;">181%</td>
+              <td>중앙/둔산초</td>
+              <td><b>31평 5.10~5.72억</b> (1층 4.75억)<br><span style="color:var(--green);font-size:10.5px;">★12층 저밀도·탄방역 6분 알짜</span></td>
+            </tr>
+            <tr style="background:#f0fdf4;">
+              <td><b>💰 경성큰마을</b> (2,910)</td>
+              <td class="num" style="color:var(--amber);font-weight:700;">229%</td>
+              <td>중앙/둔원초</td>
+              <td><b>32평 3.60~4.05억</b> / 24평 3.1억<br><span style="color:var(--blue);font-size:10.5px;">★15구역 단독·가성비 1위</span></td>
+            </tr>
+            <tr>
+              <td><b>둔산 은하수</b> (816)</td>
+              <td class="num">211%</td>
+              <td>중앙/둔산초</td>
+              <td><b>31평 4.73~4.87억</b> (전세 3.2억)<br><span style="color:var(--muted);font-size:10.5px;">갤러리아 타임월드 인접</span></td>
+            </tr>
+            <tr>
+              <td><b>🏫 국화라이프</b> (560)</td>
+              <td class="num">중고밀</td>
+              <td>지역/문정초</td>
+              <td><b>30평 5.70~6.22억</b> / 28평 4.5억<br><span style="color:var(--blue);font-size:10.5px;">⭕국화 중 유일 5억후반 사정권</span></td>
+            </tr>
+            <tr>
+              <td><b>국화동성·신동아</b></td>
+              <td class="num">고밀도</td>
+              <td>지역/문정초</td>
+              <td><b>28평 5.6~5.9억</b> / 30평 6.3~6.9억<br><span style="color:var(--muted);font-size:10.5px;">28평만 예산권 (30평 초과)</span></td>
+            </tr>
+            <tr>
+              <td><b>국화우성·한신</b></td>
+              <td class="num">고밀도</td>
+              <td>지역/문정초앞</td>
+              <td><b>30평 6.65(1층)~7.30억</b><br><span style="color:var(--red);font-size:10.5px;">❌예산 초과 (7.2~7.3억)</span></td>
+            </tr>
+            <tr>
+              <td><b>둔산 청솔</b> (980)</td>
+              <td class="num">중고밀</td>
+              <td>지역/문정권</td>
+              <td><b>27평 4.85억 / 31평 5.5~6.5억</b><br><span style="color:var(--muted);font-size:10.5px;">27평 및 31평 저층 실속</span></td>
+            </tr>
+            <tr>
+              <td><b>둔산 가람</b> (1,260)</td>
+              <td class="num" style="color:var(--red);">230%</td>
+              <td>중앙/문정권</td>
+              <td><b>31평 6.70~7.15억</b> (전세 3.5억)<br><span style="color:var(--red);font-size:10.5px;">❌예산 초과 + 과밀</span></td>
+            </tr>
+            <tr style="background:#fef2f2;">
+              <td><b>⚠️ 탄방 한가람</b> (1,380)</td>
+              <td class="num" style="color:var(--red);font-weight:700;">223%</td>
+              <td>지역/14구역선도</td>
+              <td><b>25평 6.33~6.5억 / 30평 7.0~7.2억</b><br><span style="color:var(--red);font-size:10.5px;">❌선도지구 고점+분담금 위험</span></td>
+            </tr>
+            <tr style="background:#fef2f2;">
+              <td><b>⚠️ 공작한양</b> (1,074)</td>
+              <td class="num" style="color:var(--red);">고밀도</td>
+              <td>개별/14구역선도</td>
+              <td><b>27평 5.9억 / 31평 7.00~7.50억</b><br><span style="color:var(--red);font-size:10.5px;">❌산호 대비 매수가 +2억 비쌈</span></td>
+            </tr>
+            <tr style="background:#fef2f2;">
+              <td><b>둔산 햇님</b> (660)</td>
+              <td class="num" style="color:var(--red);">222%</td>
+              <td>지역/한밭초</td>
+              <td><b>28평 7.30~7.80억</b> (선도탈락)<br><span style="color:var(--red);font-size:10.5px;">❌산호·개나리가 2억+ 저렴</span></td>
+            </tr>
+            <tr>
+              <td><b>둔산 한신둥지</b> (1,230)</td>
+              <td class="num" style="color:var(--red);">227%</td>
+              <td>지역/샘머리권</td>
+              <td><b>26평 5.1억 / 31평 6.65~6.93억</b><br><span style="color:var(--muted);font-size:10.5px;">선도탈락·26평만 사정권</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-      <div class="target-box primary">
+    <div class="card">
+      <div class="card-title">
+        <span>💡 권역별 핵심 비교 판정 요약</span>
+      </div>
+
+      <div class="target-box planb">
         <div class="t-head">
-          <span class="t-name">대안 1. 인근 준신축·신축 84㎡ 직행</span>
-          <span class="tag tag-green">실거주 만족도 최고</span>
+          <span class="t-name">1. 4~5억 초반 알짜 대안: 녹원 &amp; 경성큰마을</span>
+          <span class="tag tag-green">최우선 대안</span>
         </div>
         <div class="t-desc">
-          • <b>목동 더샵리슈빌 (2022년, 715세대):</b> 84㎡ 급매 <b>5.8~6.2억</b><br>
-          • <b>용문 둔산더샵엘리프 (2025년, 2,763세대):</b> 84㎡ 입주장 급매 <b>6.0~6.3억</b><br>
-          • <b>비교 결론:</b> 한우리 31평을 6.0~6.2억에 사서 10년 뒤 분담금 3.35억을 또 내는 것보다, 처음부터 지하주차장 완비된 5.8~6.2억 신축·준신축 84㎡로 가는 것이 자금·삶의 질 모두 압도적 우위입니다.
+          • <b>둔산 녹원 31평 (5.10~5.50억):</b> 탄방역 도보 6분, 1,200세대 대단지이면서 <b>12층 저밀도(용적률 181%)</b>로 산호·개나리 다음으로 재건축 사업성이 뛰어난 둔산동 숨은 보석입니다.<br>
+          • <b>갈마 경성큰마을 32평 (4.00~4.05억):</b> 산호 대비 <b>1.4억 원 저렴한 4.0억</b>에 매수해 대출 부담을 확 줄일 수 있으며, 2,910세대 단일 단지로 <b>15구역(단독 재건축 안전진단 완화 특례)</b>을 추진 중입니다. (단, 용적률 229%·둔원초 학군 감안)
+        </div>
+      </div>
+
+      <div class="target-box pass">
+        <div class="t-head">
+          <span class="t-name">2. 한가람·공작한양(선도) &amp; 햇님 추격 금지</span>
+          <span class="tag tag-red">고평가 주의</span>
+        </div>
+        <div class="t-desc">
+          • <b>한가람(25평 6.5억·30평 7.2억) &amp; 공작한양(31평 7.5억):</b> 14구역 선도지구 기대감으로 이미 산호보다 <b>1.6~2.1억 비싸게</b> 올랐으나, <b>용적률 223% 과밀 단지</b>라 향후 분담금까지 훨씬 많이 내야 합니다.<br>
+          • <b>둔산 햇님(28평 7.5억):</b> 선도지구 탈락 및 용적률 222%입니다. <b>같은 한밭초 학군인 산호·개나리 31평(5.2~5.4억, 용적률 168~175%)이 2억 원 이상 저렴</b>하므로 햇님을 추격할 이유가 없습니다.
         </div>
       </div>
 
       <div class="target-box">
         <div class="t-head">
-          <span class="t-name">대안 2. 둔산동 구축 31평 (국화·둥지 등)</span>
-          <span class="tag tag-amber">사업성 열위 주의</span>
+          <span class="t-name">3. 문정초·지역난방: 국화라이프 &amp; 청솔</span>
+          <span class="tag tag-amber">5억 후반 선별</span>
         </div>
         <div class="t-desc">
-          • <b>국화 31평 (5.6~6.3억) / 둥지 31평 (6.5~7.2억)</b><br>
-          • 용적률 220~244%, 대지지분 <b>13.5~14.2평</b>으로 산호(19.04평)보다 대지지분이 약 5평 작습니다.<br>
-          • 재건축 시 추가 분담금만 4억 원 이상 예상되므로 투자·재건축 관점에서는 산호·개나리가 훨씬 유리합니다.
+          • 국화우성·한신 30평은 <b>7.2~7.3억</b>으로 예산 초과입니다.<br>
+          • 문정초·지역난방을 원한다면 <b>국화라이프 30평(5.7~5.9억 급매)</b>, <b>국화동성·신동아 28평(5.6~5.9억)</b>, 또는 바로 옆 <b>둔산 청솔 27~31평(4.85억 / 5.5억~)</b>만 선별 타진하세요.
         </div>
       </div>
 
-      <div class="target-box planb">
+      <div class="target-box primary">
         <div class="t-head">
-          <span class="t-name">대안 3. 산호·개나리 24~27평 시드 보존</span>
-          <span class="tag tag-blue">현금 2.4억 보존</span>
+          <span class="t-name">4. 6억 예산 돌파 시: 인근 준신축 84㎡ 직행</span>
+          <span class="tag tag-blue">실거주 만족도 1위</span>
         </div>
         <div class="t-desc">
-          • <b>산호 24평 (3.3~3.5억) / 개나리 27평 (3.95~4.15억)</b><br>
-          • 초기 투입 현금을 9,000만 원 이하로 줄이고 <b>잔여 시드 2.4억 원을 미국 주식·채권 포트폴리오로 운용</b>하면서 동일하게 탄방동 재건축 조합원 지위를 확보하는 실속형 플랜B입니다.
+          • <b>목동 더샵리슈빌 (2022년):</b> 84㎡ 급매 <b>5.8~6.2억</b><br>
+          • <b>용문 둔산더샵엘리프 (2025년):</b> 84㎡ 급매 <b>6.0~6.3억</b><br>
+          • 6억 이상을 주고 용적률 220%대 구축(한우리·국화·한가람)을 사서 미래 분담금 3~4억을 또 내는 것보다, 처음부터 지하주차장 완비된 준신축·신축 84㎡로 가는 것이 유리합니다.
         </div>
       </div>
     </div>
@@ -644,7 +767,7 @@
   </button>
   <button type="button" class="tab-btn" onclick="switchTab('tab-planb', this)">
     <span class="ico">🔄</span>
-    <span>플랜B/대안</span>
+    <span>주변시세/대안</span>
   </button>
   <button type="button" class="tab-btn" onclick="switchTab('tab-call', this)">
     <span class="ico">📞</span>
@@ -703,8 +826,16 @@ function mCalc() {
   var pmt = maxLoan * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
   var dsrPct = Math.round((pmt / 710) * 100);
 
-  var reconMap = { 'sanho': 25000, 'gaenari': 27500, 'hanwoori': 33500, 'new84': 0 };
-  var reconName = { 'sanho': '산호 추정 분담금 2.50억 반영', 'gaenari': '개나리 추정 분담금 2.75억 반영', 'hanwoori': '한우리 추정 분담금 3.35억 반영 (대지지분 열위)', 'new84': '신축/준신축 추가 분담금 없음' };
+  var reconMap = { 'sanho': 25000, 'gaenari': 27500, 'hanwoori': 33500, 'nokwon': 26500, 'keunmaul': 36000, 'gukhwa': 35000, 'new84': 0 };
+  var reconName = {
+    'sanho': '산호(용적률 168%) 추정 분담금 2.50억 반영',
+    'gaenari': '개나리(용적률 175%) 추정 분담금 2.75억 반영',
+    'hanwoori': '한우리(용적률 195%) 추정 분담금 3.35억 반영',
+    'nokwon': '둔산 녹원(용적률 181%) 추정 분담금 2.65억 반영',
+    'keunmaul': '갈마 경성큰마을(용적률 229%·15구역) 추정 분담금 3.60억 반영',
+    'gukhwa': '둔산 국화라이프(중고밀도) 추정 분담금 3.50억 반영',
+    'new84': '신축/준신축 추가 분담금 없음'
+  };
   var reconAdd = reconMap[complex] || 0;
   var totalRecon = price + repair + reconAdd;
 
