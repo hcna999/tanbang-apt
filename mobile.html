@@ -431,93 +431,7 @@
 
   </div>
 
-  <!-- TAB 2: 대출/현금 계산기 -->
-  <div id="tab-calc" class="tab-panel">
-    <div class="card">
-      <div class="card-title">
-        <span>🧮 실시간 대출·현금·재건축 시뮬레이터</span>
-      </div>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">
-        매물 버튼을 누르거나 슬라이더를 움직이면 부부 총시드(3.3억) 기준 필요현금과 보존 시드가 즉시 계산됩니다.
-      </p>
-
-      <div class="preset-grid">
-        <button type="button" class="preset-btn active" onclick="mPreset(54200, 1500, 80, 'sanho', this)">🥇 산호 8층 (5.42억)</button>
-        <button type="button" class="preset-btn" onclick="mPreset(52000, 3000, 80, 'sanho', this)">🥈 산호 7층+올수리</button>
-        <button type="button" class="preset-btn" onclick="mPreset(51000, 1000, 80, 'gaenari', this)">🆕 개나리 2층 (5.10억)</button>
-        <button type="button" class="preset-btn" onclick="mPreset(52000, 2500, 80, 'nokwon', this)">⭐ 둔산녹원 31평 (5.20억)</button>
-        <button type="button" class="preset-btn" onclick="mPreset(40000, 2500, 80, 'keunmaul', this)">💰 경성큰마을 32평 (4.00억)</button>
-        <button type="button" class="preset-btn" onclick="mPreset(58000, 2000, 80, 'gukhwa', this)">🏫 국화라이프 30평 (5.80억)</button>
-      </div>
-
-      <div class="slider-group">
-        <div class="slider-hdr">
-          <span>매수 체결가</span>
-          <span class="val" id="m-price-lbl">5.42억 (54,200만)</span>
-        </div>
-        <input type="range" id="m-price" min="36000" max="75000" step="100" value="54200" oninput="mCalc()">
-      </div>
-
-      <div class="slider-group">
-        <div class="slider-hdr">
-          <span>인테리어 수리비</span>
-          <span class="val" id="m-repair-lbl">1,500만 원</span>
-        </div>
-        <input type="range" id="m-repair" min="0" max="5000" step="500" value="1500" oninput="mCalc()">
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
-        <div>
-          <label style="font-size:11px;font-weight:700;color:var(--muted);">대출 트랙 (LTV)</label>
-          <select id="m-ltv" onchange="mCalc()" style="width:100%;padding:7px;border-radius:8px;border:1px solid #cbd5e1;font-size:12px;font-weight:700;margin-top:2px;">
-            <option value="80" selected>생애최초 80%</option>
-            <option value="70">일반 주담대 70%</option>
-          </select>
-        </div>
-        <div>
-          <label style="font-size:11px;font-weight:700;color:var(--muted);">금리 (30년 원리금)</label>
-          <select id="m-rate" onchange="mCalc()" style="width:100%;padding:7px;border-radius:8px;border:1px solid #cbd5e1;font-size:12px;font-weight:700;margin-top:2px;">
-            <option value="3.8">3.8% (특례/우대)</option>
-            <option value="4.0" selected>4.0% (시중 기준)</option>
-            <option value="4.3">4.3% (보수적)</option>
-          </select>
-        </div>
-      </div>
-
-      <input type="hidden" id="m-complex" value="sanho">
-
-      <div class="calc-res-grid">
-        <div class="res-box highlight">
-          <div class="lbl">최대 주담대 대출액</div>
-          <div class="num" id="m-out-loan">4.34억</div>
-          <div class="sub" id="m-out-loan-sub">5.42억 × 80%</div>
-        </div>
-        <div class="res-box highlight">
-          <div class="lbl">실제 필요 현금</div>
-          <div class="num" id="m-out-cash">1.30억</div>
-          <div class="sub" id="m-out-cash-sub">계약+부대+수리 합산</div>
-        </div>
-        <div class="res-box">
-          <div class="lbl">매수 후 잔여 보존 시드</div>
-          <div class="num" id="m-out-seed" style="color:var(--green);">2.00억</div>
-          <div class="sub">부부 총시드 3.30억 기준</div>
-        </div>
-        <div class="res-box">
-          <div class="lbl">월 원리금 (소득대비)</div>
-          <div class="num" id="m-out-pmt">207만/월</div>
-          <div class="sub" id="m-out-dsr">월 세후소득 대비 29%</div>
-        </div>
-      </div>
-
-      <div class="res-box" style="margin-top:8px;background:#fffbeb;border-color:#fde68a;">
-        <div class="lbl" style="color:#b45309;">재건축 34평 입주 시 총 원가 추정 (매수가+수리+추정분담금)</div>
-        <div class="num" id="m-out-recon" style="color:#b45309;">8.07억</div>
-        <div class="sub" id="m-out-recon-sub" style="color:#92400e;">산호 추정 분담금 2.50억 반영 (인근 신축 11.5억 대비 안전마진 확보)</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 3: 주변시세 / 대안비교 -->
+<!-- TAB 3: 주변시세 / 대안비교 -->
   <div id="tab-planb" class="tab-panel">
     <div class="card">
       <div class="card-title">
@@ -837,10 +751,6 @@
     <span class="ico">📋</span>
     <span>핵심현황</span>
   </button>
-  <button type="button" class="tab-btn" onclick="switchTab('tab-calc', this)">
-    <span class="ico">🧮</span>
-    <span>대출계산기</span>
-  </button>
   <button type="button" class="tab-btn" onclick="switchTab('tab-planb', this)">
     <span class="ico">🔄</span>
     <span>주변시세/대안</span>
@@ -859,80 +769,6 @@ function switchTab(tabId, btnEl) {
   btnEl.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-function mPreset(price, repair, ltv, complex, btnEl) {
-  document.getElementById('m-price').value = price;
-  document.getElementById('m-repair').value = repair;
-  document.getElementById('m-ltv').value = String(ltv);
-  document.getElementById('m-complex').value = complex;
-  document.querySelectorAll('.preset-btn').forEach(function(b) { b.classList.remove('active'); });
-  if (btnEl) btnEl.classList.add('active');
-  mCalc();
-}
-
-function fmtEok(man) {
-  var eok = Math.floor(man / 10000);
-  var rem = Math.round(man % 10000);
-  if (eok > 0 && rem > 0) return eok + '억 ' + rem.toLocaleString() + '만';
-  if (eok > 0) return eok + '.00억';
-  return rem.toLocaleString() + '만';
-}
-
-function mCalc() {
-  var price = parseInt(document.getElementById('m-price').value, 10);
-  var repair = parseInt(document.getElementById('m-repair').value, 10);
-  var ltv = parseInt(document.getElementById('m-ltv').value, 10);
-  var rate = parseFloat(document.getElementById('m-rate').value);
-  var complex = document.getElementById('m-complex').value;
-
-  document.getElementById('m-price-lbl').textContent = (price / 10000).toFixed(2) + '억 (' + price.toLocaleString() + '만)';
-  document.getElementById('m-repair-lbl').textContent = repair.toLocaleString() + '만 원';
-
-  var rawLoan = Math.round(price * (ltv / 100));
-  var cap = (ltv === 80) ? 60000 : 50000;
-  var maxLoan = Math.min(rawLoan, cap);
-
-  var taxRate = (ltv === 80) ? 0.008 : 0.011;
-  var extraCost = Math.max(250, Math.round(price * taxRate));
-  var reqCash = (price - maxLoan) + extraCost + repair;
-  var remainSeed = 33000 - reqCash;
-
-  var r = (rate / 100) / 12;
-  var n = 360;
-  var pmt = maxLoan * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-  var dsrPct = Math.round((pmt / 710) * 100);
-
-  var reconMap = { 'sanho': 25000, 'gaenari': 27500, 'hanwoori': 33500, 'nokwon': 26500, 'keunmaul': 36000, 'gukhwa': 35000, 'new84': 0 };
-  var reconName = {
-    'sanho': '산호(용적률 168%) 추정 분담금 2.50억 반영',
-    'gaenari': '개나리(용적률 175%) 추정 분담금 2.75억 반영',
-    'hanwoori': '한우리(용적률 195%) 추정 분담금 3.35억 반영',
-    'nokwon': '둔산 녹원(용적률 181%) 추정 분담금 2.65억 반영',
-    'keunmaul': '갈마 경성큰마을(용적률 229%·15구역) 추정 분담금 3.60억 반영',
-    'gukhwa': '둔산 국화라이프(중고밀도) 추정 분담금 3.50억 반영',
-    'new84': '신축/준신축 추가 분담금 없음'
-  };
-  var reconAdd = reconMap[complex] || 0;
-  var totalRecon = price + repair + reconAdd;
-
-  document.getElementById('m-out-loan').textContent = (maxLoan / 10000).toFixed(2) + '억';
-  document.getElementById('m-out-loan-sub').textContent = fmtEok(maxLoan) + ' (LTV ' + ltv + '%)';
-
-  document.getElementById('m-out-cash').textContent = (reqCash / 10000).toFixed(2) + '억';
-  document.getElementById('m-out-cash-sub').textContent = fmtEok(reqCash) + ' (수리·부대비용 포함)';
-
-  var seedEl = document.getElementById('m-out-seed');
-  seedEl.textContent = (remainSeed / 10000).toFixed(2) + '억';
-  seedEl.style.color = remainSeed >= 15000 ? '#059669' : (remainSeed >= 8000 ? '#d97706' : '#dc2626');
-
-  document.getElementById('m-out-pmt').textContent = '월 ' + Math.round(pmt).toLocaleString() + '만';
-  document.getElementById('m-out-dsr').textContent = '세후 월소득 대비 ' + dsrPct + '%';
-
-  document.getElementById('m-out-recon').textContent = (totalRecon / 10000).toFixed(2) + '억';
-  document.getElementById('m-out-recon-sub').textContent = reconName[complex] + ' (신축 11.5억 대비 마진 ' + ((115000 - totalRecon)/10000).toFixed(2) + '억)';
-}
-
-document.addEventListener('DOMContentLoaded', mCalc);
 </script>
 </body>
 </html>
