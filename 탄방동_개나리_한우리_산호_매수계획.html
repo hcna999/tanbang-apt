@@ -704,6 +704,9 @@
           <button type="button" class="preset-btn" onclick="setSimPreset('nokwon31', this)">⭐ 둔산녹원 31평 (5.20억·181%)</button>
           <button type="button" class="preset-btn" onclick="setSimPreset('keunmaul32', this)">💰 경성큰마을 32평 (4.00억)</button>
           <button type="button" class="preset-btn" onclick="setSimPreset('gukhwa30', this)">🏫 국화라이프 30평 (5.80억)</button>
+          <button type="button" class="preset-btn" onclick="setSimPreset('sujung31', this)">🏗️ 수정타운 31평 (5.10억·9구역)</button>
+          <button type="button" class="preset-btn" onclick="setSimPreset('saemmeori31', this)">🏗️ 샘머리 31평 (5.80억·8구역)</button>
+          <button type="button" class="preset-btn" onclick="setSimPreset('eunhasu32', this)">💎 은하수 32평 (4.40억·12구역)</button>
           <button type="button" class="preset-btn" onclick="setSimPreset('hangaram25', this)">⚠️ 한가람 25평 (6.40억·선도)</button>
           <button type="button" class="preset-btn" onclick="setSimPreset('haetnim28', this)">⚠️ 둔산햇님 28평 (7.40억)</button>
           <button type="button" class="preset-btn" onclick="setSimPreset('new84', this)">🏢 목동/용문 준신축 (6.00억)</button>
@@ -719,7 +722,10 @@
             <option value="hanwoori" data-kb="56500" data-bundam="28500" data-jibun="용적률 204%·지분 15.98평">한우리 31평 (KB 5.65억 · 지분 15.98평)</option>
             <option value="nokwon" data-kb="52000" data-bundam="23000" data-jibun="용적률 181%·12층 저밀도">둔산 녹원 31평 (실거래 5.1~5.5억 · 용적률 181% 알짜)</option>
             <option value="keunmaul" data-kb="40000" data-bundam="34000" data-jibun="용적률 229%·15구역 단독">갈마 경성큰마을 32평 (실거래 4.0억 · 2,910세대 가성비)</option>
-            <option value="gukhwa" data-kb="58000" data-bundam="33000" data-jibun="14~15층 중고밀·문정초">둔산 국화라이프 30평 / 동성·신동아 28평 (5.7~5.9억)</option>
+            <option value="gukhwa" data-kb="58000" data-bundam="33000" data-jibun="14~15층 중고밀·통합11구역">둔산 국화라이프 30평 / 동성·신동아 28평 (5.7~5.9억)</option>
+            <option value="sujung" data-kb="51000" data-bundam="31000" data-jibun="2,010세대·9구역 단독">둔산 수정타운 31평 (급매 5.0~5.2억 · 9구역)</option>
+            <option value="saemmeori" data-kb="58000" data-bundam="32000" data-jibun="5,440세대·둔산8구역">둔산 샘머리1·2단지 31평 (5.8억~ · 둔산8구역)</option>
+            <option value="eunhasu" data-kb="44000" data-bundam="30000" data-jibun="용적률 211%·통합12구역">둔산 은하수 32평 (저층 4.3~4.8억 · 녹원과 12구역)</option>
             <option value="hangaram" data-kb="63000" data-bundam="36000" data-jibun="용적률 223%·14구역 선도">탄방 한가람 25평/30평 (6.4~7.1억 · 용적률 223% 과밀)</option>
             <option value="haetnim" data-kb="74000" data-bundam="35000" data-jibun="용적률 222%·한밭초">둔산 햇님 28평 (7.3~7.8억 · 용적률 222% · 선도탈락)</option>
             <option value="new84" data-kb="60000" data-bundam="0" data-jibun="준신축/신축(분담금 없음)">목동더샵/둔산엘리프 84㎡ (KB=매수가)</option>
@@ -875,6 +881,12 @@
           sel.value = 'keunmaul'; pIn.value = 40000; rIn.value = 2500;
         } else if (type === 'gukhwa30') {
           sel.value = 'gukhwa'; pIn.value = 58000; rIn.value = 2000;
+        } else if (type === 'sujung31') {
+          sel.value = 'sujung'; pIn.value = 51000; rIn.value = 2500;
+        } else if (type === 'saemmeori31') {
+          sel.value = 'saemmeori'; pIn.value = 58000; rIn.value = 2500;
+        } else if (type === 'eunhasu32') {
+          sel.value = 'eunhasu'; pIn.value = 44000; rIn.value = 2500;
         } else if (type === 'hangaram25') {
           sel.value = 'hangaram'; pIn.value = 64000; rIn.value = 2500;
         } else if (type === 'haetnim28') {
@@ -1643,6 +1655,116 @@
         &nbsp;&nbsp;• <strong>[5억 초반 저밀도 1위] 둔산 녹원 31평 (5.10~5.50억)</strong>: 탄방역 도보 6분, 1,200세대 대단지이면서 <strong>12층 저밀도(용적률 181%)</strong>로 둔산동에서 재건축 대지지분 가치가 가장 뛰어난 숨은 보석입니다.<br>
         &nbsp;&nbsp;• <strong>[4억 초반 가성비 1위] 갈마 경성큰마을 32평 (4.00~4.05억)</strong>: 산호 대비 <strong>1.4억 원 저렴한 4.0억</strong>에 매수하여 주담대 원리금을 대폭 낮출 수 있으며, 2,910세대 단일 단지로 <strong>노후계획도시 15구역(단독 재건축 안전진단 완화 특례)</strong>을 추진 중입니다.<br>
         &nbsp;&nbsp;• <strong>[5억 후반 지역난방·문정초] 국화라이프 30평 (5.70~6.00억) / 청솔 27~31평 (4.85억 / 5.50억)</strong>: 우성·한신(7.2억+) 대신 국화라이프 30평이나 동성·신동아 28평(5.6~5.9억) 급매를 노리면 합리적인 비용으로 문정초·지역난방 대단지에 진입할 수 있습니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4-C: 대전 둔산·탄방·인근 재건축 가능성 및 분담금 시뮬레이션 ============ -->
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04-C</span>
+      <h2>대전 둔산·탄방·인근 재건축 가능성 전체 지도 &amp; 추정 분담금 계산 (2026.11 최신)</h2>
+    </div>
+
+    <div class="callout acc" style="margin-bottom: 16px;">
+      <span class="callout-label">2035 대전 노후계획도시정비 기본계획 핵심 요약</span>
+      <p>
+        • <strong>용적률 대폭 상향:</strong> 둔산지구 기준용적률이 기존 <strong>226% → 360%</strong>로 상향 확정(총 17개 특별정비예정구역: 주택정비형 15곳 + 시설정비형 2곳).<br>
+        • <strong>1차 선도지구(확정):</strong> <strong>13구역(크로바·목련)</strong>, <strong>14구역(한가람·공작한양)</strong> 총 2곳(약 5,252가구) 선정 → 특별정비계획 수립 중.<br>
+        • <strong>2차 정비물량(2027~2028년 일괄 공모):</strong> 둔산지구 연 4,000호씩 <strong>2개년 총 8,000호</strong> 배정. 단순 동의율 경쟁에서 <strong>특별정비계획 완성도·실현가능성(정성평가)</strong> 중심으로 개편되어 <strong>통합17구역(개나리·산호·한우리), 둔산8구역(샘머리·둥지·꿈나무), 9구역(수정타운), 통합11구역(국화·가람·청솔), 통합12구역(녹원·은하수)</strong> 등이 경쟁 중입니다.
+      </p>
+    </div>
+
+    <div class="tscroll">
+      <table>
+        <caption>
+          ※ <strong>[2026.11 조사] 둔산지구 특별정비예정구역 &amp; 둔산 외 인근(월평·송촌·유성) 재건축 추진 현황 및 추정 분담금(신축 84㎡ 기준)</strong>
+        </caption>
+        <thead>
+          <tr>
+            <th>구역 / 권역</th>
+            <th>포함 단지 &amp; 규모</th>
+            <th>추진 현황 (2026.11 기준)</th>
+            <th class="num">기존 용적률<br><span class="sub-txt">(기준 360% 대비)</span></th>
+            <th class="num">신축 84㎡<br>추정 분담금<br><span class="sub-txt">(평당 공사비 800~850만)</span></th>
+            <th>사업성 &amp; 매수 판정</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <th>🥇 통합 17구역<br><span class="sub-txt">(시설정비형)</span></th>
+            <td><strong>산호 · 개나리 · 한우리</strong><br><span class="sub-txt">약 1,618세대 이상</span></td>
+            <td>• <strong>추진준비위원회 발족</strong><br>• 2차 공모(2027~2028) 정조준</td>
+            <td class="num t-go"><strong>168%~204%</strong><br><span class="sub-txt">산호 168% · 개나리 175%</span></td>
+            <td class="num t-go"><strong>산호 1.9~2.1억</strong><br>개나리 2.3~2.5억<br><span class="sub-txt">한우리 2.85억</span></td>
+            <td><span class="pill p-go">★ 사업성 둔산권 최상위</span><br><span class="sub-txt">낮은 초기 매수가(5.1~5.45억) + 최고 대지지분(산호 19.04평)으로 분담금 최저.</span></td>
+          </tr>
+          <tr class="hl">
+            <th>⭐ 통합 12구역<br><span class="sub-txt">(주택정비형)</span></th>
+            <td><strong>녹원 · 은하수</strong><br><span class="sub-txt">총 2,016세대</span></td>
+            <td>• 특별정비예정구역 지정<br>• 주민대표 모임·추진 준비</td>
+            <td class="num t-go"><strong>181%~211%</strong><br><span class="sub-txt">녹원 181% 저밀도</span></td>
+            <td class="num t-go"><strong>녹원 2.2~2.4억</strong><br>은하수 2.9~3.1억</td>
+            <td><span class="pill p-go">★ 녹원 5억 초반 알짜</span><br><span class="sub-txt">녹원 31평(5.1~5.5억)은 저밀도·탄방역 6분으로 2차 공모 유력 후보.</span></td>
+          </tr>
+          <tr>
+            <th>둔산 8구역<br><span class="sub-txt">(대규모 통합)</span></th>
+            <td><strong>샘머리 1·2 · 꿈나무 · 둥지</strong><br><span class="sub-txt">총 5,440세대 (둔산 최대)</span></td>
+            <td>• <strong>대규모 통합 추진</strong><br>• 2차 물량 핵심 경합지</td>
+            <td class="num">200%~227%<br><span class="sub-txt">15~20층 중고밀</span></td>
+            <td class="num"><strong>3.1~3.4억</strong><br><span class="sub-txt">(샘머리·둥지 31평 기준)</span></td>
+            <td><span class="pill p-acc">대단지 프리미엄 · 5.8억~</span><br><span class="sub-txt">샘머리 31평(5.8억~)이 5.6억 이하 급매 시 8구역 대어 진입 유효.</span></td>
+          </tr>
+          <tr>
+            <th>9구역<br><span class="sub-txt">(단독 대단지)</span></th>
+            <td><strong>롯데 수정타운</strong><br><span class="sub-txt">단독 2,010세대</span></td>
+            <td>• <strong>추진준비위 결성 · 대통합 선언</strong><br>• 단독/연계 속도전</td>
+            <td class="num">약 205%~215%<br><span class="sub-txt">15층 중밀</span></td>
+            <td class="num"><strong>3.0~3.2억</strong><br><span class="sub-txt">(31평 급매 5.0~5.2억)</span></td>
+            <td><span class="pill p-acc">단독 추진 의사결정 빠름</span><br><span class="sub-txt">5.0~5.2억 급매 시 입지·속도 모두 양호.</span></td>
+          </tr>
+          <tr>
+            <th>통합 11구역<br><span class="sub-txt">(문정초 블록)</span></th>
+            <td><strong>국화 5단지 · 가람 · 청솔</strong><br><span class="sub-txt">약 5,150세대</span></td>
+            <td>• <strong>주민대표단 구성·추진 중</strong><br>• 2차 물량 경합</td>
+            <td class="num">208%~225%<br><span class="sub-txt">14~15층</span></td>
+            <td class="num"><strong>3.2~3.5억</strong><br><span class="sub-txt">(국화 30평 기준)</span></td>
+            <td><span class="pill p-acc">학군·상권 우수 / 5.7~5.9억</span><br><span class="sub-txt">국화라이프·동성 5.7억 이하 급매만 선별.</span></td>
+          </tr>
+          <tr>
+            <th>14구역 (선도)<br><span class="sub-txt">(1차 확정)</span></th>
+            <td><strong>한가람 · 공작한양</strong><br><span class="sub-txt">2,454세대</span></td>
+            <td>• <strong>1차 선도지구 확정</strong><br>• 특별정비계획 수립 중</td>
+            <td class="num t-warn"><strong>223%</strong><br><span class="sub-txt">소형비중·과밀</span></td>
+            <td class="num t-warn"><strong>3.5~3.7억+</strong><br><span class="sub-txt">(고밀도 부담)</span></td>
+            <td><span class="pill p-stop">프리미엄 과다 선반영</span><br><span class="sub-txt">25평 6.4억·30평 7.2억으로 매수가+분담금 이중 부담.</span></td>
+          </tr>
+          <tr>
+            <th>통합 7 · 15구역<br><span class="sub-txt">(가성비/2순위)</span></th>
+            <td><strong>향촌·파랑새(7) / 경성큰마을(15)</strong><br><span class="sub-txt">큰마을 2,910세대</span></td>
+            <td>• 특별정비예정구역 지정<br>• 2차 이후 중장기 추진</td>
+            <td class="num t-warn">220%~229%<br><span class="sub-txt">고밀도</span></td>
+            <td class="num t-warn"><strong>3.4~3.6억</strong><br><span class="sub-txt">(큰마을 32평 기준)</span></td>
+            <td><span class="pill p-acc">실거주 가성비 1위(3.9~4.5억)</span><br><span class="sub-txt">재건축 분담금은 크나 초기 매수가가 4억대라 총원가 방어.</span></td>
+          </tr>
+          <tr>
+            <th>둔산 외 인근<br><span class="sub-txt">(월평·송촌·유성)</span></th>
+            <td>• <strong>월평동:</strong> 누리·한아름·무궁화<br>• <strong>송촌지구:</strong> 6구역(보람·삼익소월)<br>• <strong>유성구:</strong> 장대B구역 재개발</td>
+            <td>• 월평: 장기 정비·리모델링<br>• <strong>송촌 6구역:</strong> 2026.07 선도 선정<br>• <strong>장대B:</strong> 철거 중(2027 착공 목표)</td>
+            <td class="num">200%~240%</td>
+            <td class="num">3.2억~4.0억+<br><span class="sub-txt">(장대B 일반분양 예정)</span></td>
+            <td><span class="pill p-warn">생활권·학군 차이</span><br><span class="sub-txt">송촌(대덕구)·장대(유성)는 둔산 학원가·직주근접과 생활권이 다름.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout go" style="margin-top: 14px;">
+      <span class="callout-label">재건축 분담금 계산 공식 &amp; 2026년 공사비 민감도 체크</span>
+      <p>
+        • <strong>기본 공식:</strong> <code>추가분담금 = 조합원 분양가 - 권리가액</code> (<code>권리가액 = 종전자산 감정평가액 × 비례율</code>)<br>
+        • <strong>2026년 현실 가정:</strong> 둔산 선도지구 사업안 기준 <strong>평당 공사비 800만~850만 원</strong>, 신축 84㎡ 일반분양가 <strong>7.8억~8.8억(보수)</strong> 적용 시, <strong>기준용적률 360%</strong>를 받더라도 기존 용적률이 낮은 단지(산호 168%·개나리 175%·녹원 181%)와 과밀 단지(223~229%) 간 <strong>분담금 격차가 1.2억~1.6억 원</strong>까지 벌어집니다.<br>
+        • <strong>공사비 민감도:</strong> 착공 시점 평당 공사비가 800만 → 900만 원(+100만/평)으로 오르면 34평 기준 조합원 분담금이 <strong>약 +3,400만~4,500만 원 추가 상승</strong>하므로, <strong>초기 대지지분이 큰 저용적률 단지(산호·개나리·녹원)</strong>가 가장 안전합니다.
       </p>
     </div>
   </section>
