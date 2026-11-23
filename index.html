@@ -403,7 +403,25 @@
   .dong-legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.78rem; color: #475569; margin: 6px 0 10px; align-items: center; }
   .leg-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
 
+
+  .rmap-wrap { background: #fff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 14px; margin: 16px 0 22px; box-shadow: 0 3px 10px rgba(15,23,42,.05); }
+  .rmap-btns { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+  .rmap-btn { border: 1px solid #cbd5e1; background: #f8fafc; color: #1e293b; border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all .15s; }
+  .rmap-btn:hover { background: #e2e8f0; }
+  .rmap-btn.active { background: #0f172a; color: #fff; border-color: #0f172a; }
+  .rmap-canvas { width: 100%; height: 420px; border-radius: 10px; border: 1px solid #cbd5e1; z-index: 1; }
+  .rmap-info { margin-top: 10px; padding: 12px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 0.84rem; line-height: 1.55; color: #1e293b; }
+  .rmap-info-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .rmap-links a { display: inline-block; font-size: 0.76rem; font-weight: 700; color: #0369a1; text-decoration: none; background: #e0f2fe; padding: 3px 8px; border-radius: 6px; margin-left: 4px; }
+  .rmap-links a:hover { background: #bae6fd; }
+  .rmap-status { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+  .dong-lbl { background: rgba(15,23,42,.82); color: #fff; border: none; border-radius: 4px; padding: 1px 4px; font-size: 10px; font-weight: 700; box-shadow: none; }
+  .dong-lbl.royal { background: #047857; border: 1px solid #fbbf24; }
+  .dong-lbl.avoid { background: #dc2626; }
+
 </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
@@ -1369,143 +1387,258 @@
     </div>
 
     
-    <div style="margin-top: 22px;">
-      <h3 style="font-size:1.05rem; margin: 0 0 6px; color:#0f172a;">🗺️ 단지별 동 배치 도식화 &amp; 로열동 · 동호수 라인 한눈에 보기 (개념 배치도)</h3>
-      <div class="dong-legend">
-        <span><i class="leg-dot" style="background:#059669;"></i><strong>로열동 (정남향·최선호)</strong></span>
-        <span><i class="leg-dot" style="background:#3b82f6;"></i>일반 주력동 (남향/혼합)</span>
-        <span><i class="leg-dot" style="background:#94a3b8;"></i>소형평형 / 동·서향</span>
-        <span><i class="leg-dot" style="background:#ef4444;"></i>기피 동 (소음·서향·비선호)</span>
-        <span style="margin-left:auto; font-weight:700; color:#1e293b;">↑ 북(N) / 아래쪽 남향(S)</span>
+    
+    <div class="rmap-wrap" id="real-dong-map-section">
+      <h3 style="font-size:1.05rem; margin: 0 0 4px; color:#0f172a;">🗺️ 실제 지도 기반 단지별 동 배치 &amp; 로열동 · 동호수 뷰어</h3>
+      <div style="font-size:0.8rem; color:#475569; margin-bottom:6px;">
+        단지 버튼을 누르면 <strong>실제 지도(OpenStreetMap 줌 17~18)</strong>로 이동해 실제 건물 배치·동 번호·도로·역세권을 그대로 보여주고, <strong>★로열동(초록) · 일반동(파랑) · 기피동(빨강)</strong> 외곽선을 자동 색칠합니다.
       </div>
-
-      <div class="dong-grid">
-        <!-- 1. 산호 -->
-        <div class="dong-card">
-          <div class="dong-card-hdr"><span>1. 탄방 산호 (7개동 · 12층)</span><span class="dong-badge">로열: 101·103·105동</span></div>
-          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
-            <text x="8" y="14" font-size="10" fill="#64748b" font-weight="700">↑ 북측 (탄방초·문정중 방면)</text>
-            <text x="278" y="14" font-size="10" fill="#0369a1" font-weight="700">탄방역 5분 →</text>
-            <!-- 정남향 31평 (가로 배치) -->
-            <rect x="20" y="28" width="95" height="24" rx="4" fill="#059669"/><text x="67" y="44" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">★ 105동 (31평)</text>
-            <rect x="135" y="28" width="95" height="24" rx="4" fill="#3b82f6"/><text x="182" y="44" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">107동 (31평)</text>
-            <rect x="20" y="68" width="105" height="24" rx="4" fill="#059669"/><text x="72" y="84" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">★ 103동 (중앙·31)</text>
-            <rect x="20" y="108" width="120" height="26" rx="4" fill="#047857" stroke="#fbbf24" stroke-width="2"/><text x="80" y="125" text-anchor="middle" font-size="11" fill="#fff" font-weight="800">★ 101동 (최남단·역최단)</text>
-            <!-- 동서향 17평 (세로 배치) -->
-            <rect x="255" y="28" width="24" height="50" rx="4" fill="#94a3b8"/><text x="267" y="57" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">106</text>
-            <rect x="290" y="28" width="24" height="50" rx="4" fill="#94a3b8"/><text x="302" y="57" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">104</text>
-            <rect x="325" y="28" width="24" height="50" rx="4" fill="#94a3b8"/><text x="337" y="57" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">102</text>
-            <text x="302" y="92" text-anchor="middle" font-size="9" fill="#64748b">17평 복도식(동·서향)</text>
-            <text x="180" y="148" text-anchor="middle" font-size="10" fill="#047857" font-weight="700">↓ 남향 개방감 최상 (101동 앞 가림 없음)</text>
-          </svg>
-          <div class="dong-meta">
-            • <b>추천 호수 라인:</b> 계단식 <b>중간라인(2·3호)</b> 단열·난방 우위 (끝라인은 샤시 교체 필수)<br>
-            • <b>추천 층수:</b> <b>5~11층</b> (1층·12층 탑층 제외)
-          </div>
-        </div>
-
-        <!-- 2. 개나리 -->
-        <div class="dong-card">
-          <div class="dong-card-hdr"><span>2. 탄방 개나리 (6개동 · 6~12층)</span><span class="dong-badge">로열: 101·102·104동</span></div>
-          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
-            <text x="8" y="14" font-size="10" fill="#0369a1" font-weight="700">← 탄방역 1분 초역세권</text>
-            <text x="255" y="14" font-size="10" fill="#64748b" font-weight="700">정남향 판상형</text>
-            <rect x="18" y="30" width="105" height="26" rx="4" fill="#047857" stroke="#fbbf24" stroke-width="2"/><text x="70" y="47" text-anchor="middle" font-size="11" fill="#fff" font-weight="800">★ 101동 (역 1분·31)</text>
-            <rect x="138" y="30" width="95" height="26" rx="4" fill="#059669"/><text x="185" y="47" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">★ 102동 (정숙·31)</text>
-            <rect x="248" y="30" width="92" height="26" rx="4" fill="#3b82f6"/><text x="294" y="47" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">103동 (31평)</text>
-            <rect x="18" y="76" width="115" height="26" rx="4" fill="#059669"/><text x="75" y="93" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">★ 104동 (안쪽·31)</text>
-            <rect x="155" y="76" width="85" height="24" rx="4" fill="#94a3b8"/><text x="197" y="92" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">105동 (24평·6층)</text>
-            <rect x="252" y="76" width="88" height="24" rx="4" fill="#94a3b8"/><text x="296" y="92" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">106동 (24평·12층)</text>
-            <text x="180" y="138" text-anchor="middle" font-size="10" fill="#047857" font-weight="700">현재 실매물: ★ 102동 2층 5.20억 (5.05~5.10억 네고 타깃)</text>
-          </svg>
-          <div class="dong-meta">
-            • <b>추천 호수 라인:</b> 개별난방 효율 좋은 <b>중간 호수 라인</b> 최선호 (끝라인 외벽 단열 체크)<br>
-            • <b>추천 층수:</b> <b>5~10층</b> (102동 2층은 저층 감안 네고 필수)
-          </div>
-        </div>
-
-        <!-- 3. 한우리 -->
-        <div class="dong-card">
-          <div class="dong-card-hdr"><span>3. 탄방 한우리 (10개동 · 6~15층)</span><span class="dong-badge">로열: 106·107·108동</span></div>
-          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
-            <text x="8" y="14" font-size="10" fill="#0369a1" font-weight="700">↑ 탄방초 · 문정중 도보 5분</text>
-            <rect x="16" y="28" width="95" height="24" rx="4" fill="#059669"/><text x="63" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 107동 (학군·31)</text>
-            <rect x="122" y="28" width="95" height="24" rx="4" fill="#059669"/><text x="169" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 106동 (정숙·31)</text>
-            <rect x="228" y="28" width="112" height="24" rx="4" fill="#059669"/><text x="284" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 108·103동 (남향)</text>
-            <rect x="16" y="68" width="105" height="24" rx="4" fill="#3b82f6"/><text x="68" y="84" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">109·110동 (6층형)</text>
-            <rect x="135" y="68" width="105" height="24" rx="4" fill="#94a3b8"/><text x="187" y="84" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">101·104동 (26평)</text>
-            <rect x="252" y="68" width="88" height="24" rx="4" fill="#94a3b8"/><text x="296" y="84" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">102·105동</text>
-            <text x="180" y="138" text-anchor="middle" font-size="10" fill="#b45309" font-weight="700">※ 대지지분(15.98평) 열위 -> 5.5억 이하 급매만 진입</text>
-          </svg>
-          <div class="dong-meta">
-            • <b>추천 호수 라인:</b> 판상형 <b>중간 라인</b> 선호 (도로변 소음 라인·6층 탑층 주의)<br>
-            • <b>추천 층수:</b> <b>5~10층</b> (1~2층 KB하위가 대출 제한 주의)
-          </div>
-        </div>
-
-        <!-- 4. 둔산 녹원 -->
-        <div class="dong-card">
-          <div class="dong-card-hdr"><span>4. 둔산 녹원 (12개동 · 12층 · 181%)</span><span class="dong-badge">로열: 105·101·103동</span></div>
-          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
-            <text x="8" y="14" font-size="10" fill="#0369a1" font-weight="700">← 탄방역 6분 · 둔산초 인접</text>
-            <text x="250" y="14" font-size="10" fill="#047857" font-weight="700">전 동 정남향 일자</text>
-            <!-- 3열 x 4행 정남향 일자 배치 -->
-            <rect x="16" y="26" width="76" height="22" rx="4" fill="#059669"/><text x="54" y="41" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 101동</text>
-            <rect x="100" y="26" width="76" height="22" rx="4" fill="#3b82f6"/><text x="138" y="41" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">102동</text>
-            <rect x="184" y="26" width="76" height="22" rx="4" fill="#059669"/><text x="222" y="41" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 103동</text>
-            <rect x="268" y="26" width="76" height="22" rx="4" fill="#3b82f6"/><text x="306" y="41" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">104동(매물)</text>
-
-            <rect x="16" y="60" width="76" height="24" rx="4" fill="#047857" stroke="#fbbf24" stroke-width="2"/><text x="54" y="76" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">★ 105동</text>
-            <rect x="100" y="60" width="76" height="22" rx="4" fill="#059669"/><text x="138" y="75" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 106동</text>
-            <rect x="184" y="60" width="76" height="22" rx="4" fill="#3b82f6"/><text x="222" y="75" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">107동</text>
-            <rect x="268" y="60" width="76" height="22" rx="4" fill="#3b82f6"/><text x="306" y="75" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">108동</text>
-
-            <rect x="16" y="96" width="76" height="22" rx="4" fill="#3b82f6"/><text x="54" y="111" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">109동</text>
-            <rect x="100" y="96" width="76" height="22" rx="4" fill="#3b82f6"/><text x="138" y="111" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">110동</text>
-            <rect x="184" y="96" width="76" height="22" rx="4" fill="#ef4444"/><text x="222" y="111" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">111동(도로)</text>
-            <rect x="268" y="96" width="76" height="22" rx="4" fill="#ef4444"/><text x="306" y="111" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">112동(도로)</text>
-            <text x="180" y="142" text-anchor="middle" font-size="10" fill="#64748b">↓ 남측 대덕대로·둔산남로 외곽 저층 소음 체크</text>
-          </svg>
-          <div class="dong-meta">
-            • <b>추천 호수 라인:</b> 중앙난방 특성상 외풍 적은 <b>중간 호수 라인</b> 최선호<br>
-            • <b>추천 층수:</b> <b>6~11층</b> (현재 최저 104동 저/12 5.20억 -> 1층 여부 확인 필수)
-          </div>
-        </div>
-
-        <!-- 5. 갈마 경성큰마을 -->
-        <div class="dong-card">
-          <div class="dong-card-hdr"><span>5. 갈마 경성큰마을 (25개동 · 15층)</span><span class="dong-badge">정남향: 110~123동</span></div>
-          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
-            <text x="8" y="14" font-size="10" fill="#dc2626" font-weight="700">주의: 동/서향 7개동 반드시 구분!</text>
-            <rect x="16" y="26" width="160" height="32" rx="5" fill="#059669" stroke="#fbbf24" stroke-width="2"/><text x="96" y="46" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">★ 정남향 12개동 (110~113·115·116·118~123)</text>
-            <rect x="188" y="26" width="156" height="32" rx="5" fill="#3b82f6"/><text x="266" y="46" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">혼합 6개동 (108·109·117·126~128)</text>
-            <rect x="16" y="72" width="328" height="28" rx="5" fill="#ef4444"/><text x="180" y="90" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">기피 동/서향 7개동: 101·102·103·105·106·107·125동 (일조·환금성 열위)</text>
-            <text x="180" y="128" text-anchor="middle" font-size="10" fill="#047857" font-weight="700">현재 최저 매물: 108동 7/15 3.90억 (혼합동 중층 · 남향라인 여부 확인)</text>
-          </svg>
-          <div class="dong-meta">
-            • <b>추천 호수 라인:</b> 32평 <b>정남향 동 중간라인</b> 최선호 (사이드 끝라인 결로·외풍 주의)<br>
-            • <b>추천 층수:</b> <b>6~13층</b> (대덕대로변 인접 저층 제외)
-          </div>
-        </div>
-
-        <!-- 6. 월평 황실타운 & 국화 5단지 -->
-        <div class="dong-card">
-          <div class="dong-card-hdr"><span>6. 월평 황실타운 · 둔산 국화 5단지</span><span class="dong-badge">1호선·문정초권</span></div>
-          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
-            <text x="8" y="14" font-size="10" fill="#0369a1" font-weight="700">[월평역 3분] 황실타운 (18개동 · 1,950세대)</text>
-            <rect x="16" y="22" width="155" height="28" rx="4" fill="#059669"/><text x="93" y="40" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 중앙 남향 105~112동</text>
-            <rect x="182" y="22" width="162" height="28" rx="4" fill="#3b82f6"/><text x="263" y="40" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">외곽·역인접 101~104·113~118동</text>
-            <text x="8" y="72" font-size="10" fill="#0369a1" font-weight="700">[시청역·문정초] 둔산 국화 5단지 (전 동 정남향 일자)</text>
-            <rect x="16" y="80" width="165" height="28" rx="4" fill="#059669"/><text x="98" y="98" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 우성501·한신603·라이프201·신동아302</text>
-            <rect x="192" y="80" width="152" height="28" rx="4" fill="#ef4444"/><text x="268" y="98" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">로데오·큰길 외곽 저층 기피</text>
-            <text x="180" y="135" text-anchor="middle" font-size="10" fill="#047857" font-weight="700">현재 급매: 황실 25평 118동 8층 3.7억 / 31평 105동 6층 4.7억</text>
-          </svg>
-          <div class="dong-meta">
-            • <b>호수 라인 팁:</b> 전 단지 <b>중간 라인 · 6~13층</b> 선호 (※ 국화우성은 504동·4호 라인 없음)<br>
-            • <b>신규 경매:</b> 월평 한아름 102동 14층 1405호 (12/7 매각 · 최저 3.675억)
-          </div>
-        </div>
+      <div class="rmap-btns" id="rmap-btns">
+        <button type="button" class="rmap-btn active" onclick="focusRealMap('sanho', this)">🥇 산호</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('gaenari', this)">🆕 개나리</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('hanwoori', this)">한우리</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('nokwon', this)">⭐ 녹원</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('keunmaul', this)">경성큰마을</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('hwangsil', this)">🚇 황실타운</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('gukhwa', this)">국화5단지</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('sujung', this)">수정타운</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('eunhasu', this)">은하수</button>
+        <button type="button" class="rmap-btn" onclick="focusRealMap('tani', this)">신축 탄이</button>
       </div>
+      <div id="real-apt-map" class="rmap-canvas"></div>
+      <div class="rmap-status" id="rmap-status">지도를 불러오는 중입니다... (마우스 휠/손가락으로 확대·이동 가능)</div>
+      <div class="rmap-info" id="rmap-info"></div>
+    </div>
+
+    <script>
+    (function() {
+      var COMPLEX_MAP_DATA = {
+        sanho: {
+          name: "탄방 산호아파트 (7개동 · 최고 12층 · 용적률 168%)",
+          lat: 36.3445384, lon: 127.3867146, zoom: 17,
+          royal: ["101동", "103동", "105동"],
+          avoid: ["102동", "104동", "106동"],
+          royalTxt: "101동(최남단 앞동·역 최단) · 103동(중앙) · 105동(공원 인접) [정남향 31평]",
+          lineTxt: "계단식 중간라인(2·3호) 최선호 · 로열층 5~11층 (끝라인 샤시 확인)",
+          avoidTxt: "102·104·106동(17평 동·서향 복도식) 및 1층·12층 탑층",
+          priceTxt: "현재 31평 포털 최저 103동 저/12 5.60억 (비공개 5.40~5.42억 / 7층 전환 타진)",
+          naverQ: "대전 서구 탄방동 산호아파트"
+        },
+        gaenari: {
+          name: "탄방 개나리아파트 (6개동 · 6~12층 · 용적률 175%)",
+          lat: 36.3433734, lon: 127.3830737, zoom: 17,
+          royal: ["101동", "102동", "104동"],
+          avoid: ["105동", "106동"],
+          royalTxt: "101동(탄방역 1분) · 102동·104동(안쪽 조용한 남향 31평)",
+          lineTxt: "개별난방 효율 높은 중간 호수 라인 최선호 · 로열층 5~10층",
+          avoidTxt: "105·106동(24평 소형) 및 1~2층 저층·12층 탑층",
+          priceTxt: "현재 31평 유일 실매물: ★102동 2/11 5.20억 (5.05~5.10억 네고 타깃)",
+          naverQ: "대전 서구 탄방동 개나리아파트"
+        },
+        hanwoori: {
+          name: "탄방 한우리아파트 (10개동 · 6~15층 · 용적률 204%)",
+          lat: 36.3468411, lon: 127.3886843, zoom: 17,
+          royal: ["106동", "107동", "108동", "103동"],
+          avoid: ["109동", "110동"],
+          royalTxt: "106·107동(탄방초·문정중 5분 안쪽 정숙) · 108·103동(정남향)",
+          lineTxt: "판상형 중간 라인 선호 · 로열층 5~10층",
+          avoidTxt: "109·110동(6층 저층형), 1~2층 저층 및 도로변 소음 라인",
+          priceTxt: "현재 31평 최저 107동 2/12 5.70억 (대지지분 15.98평 열위 -> 5.5억↓ 급매만)",
+          naverQ: "대전 서구 탄방동 한우리아파트"
+        },
+        nokwon: {
+          name: "둔산 녹원아파트 (12개동 · 12층 · 용적률 181%)",
+          lat: 36.3460726, lon: 127.3818314, zoom: 17,
+          royal: ["105동", "101동", "103동", "106동"],
+          avoid: ["111동", "112동"],
+          royalTxt: "전 동 정남향 일자 배치 · ★105동(중앙 대표) · 101·103동(탄방역·둔산초 동선)",
+          lineTxt: "중앙난방 특성상 외풍 적은 중간 호수 라인 최선호 · 로열층 6~11층",
+          avoidTxt: "111·112동(남측 대덕대로·둔산남로 외곽 저층 소음) 및 1층·12층",
+          priceTxt: "현재 31평 최저 104동 저/12 5.20억 (1층 여부 확인 필수 · 저밀도 1위 대안)",
+          naverQ: "대전 서구 둔산동 녹원아파트"
+        },
+        keunmaul: {
+          name: "갈마 경성큰마을 (25개동 · 15층 · 2,910세대)",
+          lat: 36.3476741, lon: 127.3772707, zoom: 16,
+          royal: ["110동","111동","112동","113동","115동","116동","118동","119동","120동","121동","122동","123동"],
+          avoid: ["101동","102동","103동","105동","106동","107동","125동"],
+          royalTxt: "정남향 12개동 (110~113·115·116·118~123동) 최선호",
+          lineTxt: "32평 정남향 동 중간 라인 · 로열층 6~13층",
+          avoidTxt: "동/서향 7개동 (101~103·105~107·125동) 및 대덕대로변 저층",
+          priceTxt: "현재 32평 최저 108동 7/15 3.90억 (4억 이하 대단지 가성비 1위)",
+          naverQ: "대전 서구 갈마동 큰마을아파트"
+        },
+        hwangsil: {
+          name: "월평 황실타운 (18개동 · 15층 · 1,950세대 · 월평역 3분)",
+          lat: 36.3613223, lon: 127.3713665, zoom: 17,
+          royal: ["105동","106동","107동","108동","109동","110동","111동","112동"],
+          avoid: [],
+          royalTxt: "단지 중앙 남향 판상형 105~112동 (역세권 + 정숙성 균형)",
+          lineTxt: "중간 호수 라인 · 로열층 6~13층",
+          avoidTxt: "큰길 외곽 저층 및 1층·15층 탑층",
+          priceTxt: "현재 급매: 25평 118동 8/15 3.70억 · 31평 ★105동 6/15 4.70억",
+          naverQ: "대전 서구 월평동 황실타운아파트"
+        },
+        gukhwa: {
+          name: "둔산 국화 5개 단지 (26개동 · 14~15층 · 통합 11구역)",
+          lat: 36.3549626, lon: 127.3982473, zoom: 16,
+          royal: ["201동","302동","501동","603동","101동"],
+          avoid: [],
+          royalTxt: "전 동 정남향 · 문정초/문정중 인접 안쪽 동 (라이프201·신동아302·우성501·한신603)",
+          lineTxt: "중간 호수 라인 · 로열층 7~13층 (※ 국화우성은 504동·4호 라인 없음)",
+          avoidTxt: "로데오 상가·큰길 외곽 저층 및 1층",
+          priceTxt: "현재 최저: 국화동성 28평 101동 8/15 5.90억 (라이프·신동아 6.5억~)",
+          naverQ: "대전 서구 둔산동 국화라이프아파트"
+        },
+        sujung: {
+          name: "둔산 롯데수정타운 (단독 2,010세대 · 9구역)",
+          lat: 36.3595762, lon: 127.3971355, zoom: 17,
+          royal: ["5동","6동","7동","8동","9동","10동"],
+          avoid: [],
+          royalTxt: "단지 중앙 남향 판상형 동 (단독 2,010세대 재건축 속도 빠름)",
+          lineTxt: "중간 호수 라인 · 로열층 6~13층",
+          avoidTxt: "외곽 도로변 저층 및 1층·15층 탑층",
+          priceTxt: "현재 31평 최저 13동 2/15 5.00억 · 3동 3/15 5.20억",
+          naverQ: "대전 서구 둔산동 수정타운아파트"
+        },
+        eunhasu: {
+          name: "둔산 은하수아파트 (816세대 · 12층 · 통합 12구역)",
+          lat: 36.3504234, lon: 127.3806153, zoom: 17,
+          royal: ["101동","102동","103동","105동"],
+          avoid: [],
+          royalTxt: "단지 내부 정남향 동 (갤러리아 타임월드·둔산초 도보권)",
+          lineTxt: "중간 호수 라인 · 로열층 5~11층",
+          avoidTxt: "1층·12층 탑층 및 상가 인접 저층",
+          priceTxt: "현재 32평 급매 109동 저/12 4.30억 · 105동 저/12 4.40억 / 경매 101동 6층(11/23)",
+          naverQ: "대전 서구 둔산동 은하수아파트"
+        },
+        tani: {
+          name: "탄방 e편한세상둔산 (776세대 · 2020년 신축 · 탄방역권)",
+          lat: 36.3419567, lon: 127.3945675, zoom: 17,
+          royal: ["101동","102동","105동","106동"],
+          avoid: [],
+          royalTxt: "단지 중앙·남향 판상형 위주 (지하주차장·신축 커뮤니티 완비)",
+          lineTxt: "중·고층 (7~18층) 개방감 우수 라인",
+          avoidTxt: "저층(1~3층) 및 외곽 도로변 저층",
+          priceTxt: "28평 6.8억 급매 소진 -> 현재 최저 107동 저/22 7.20억",
+          naverQ: "대전 서구 탄방동 e편한세상둔산"
+        }
+      };
+
+      var rMap = null;
+      var polyLayer = null;
+      var pinMarker = null;
+      var polyCache = {};
+
+      function initRealMap() {
+        if (typeof L === "undefined" || !document.getElementById("real-apt-map")) return;
+        if (rMap) return;
+        rMap = L.map("real-apt-map", { scrollWheelZoom: false }).setView([36.3445384, 127.3867146], 17);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap"
+        }).addTo(rMap);
+        polyLayer = L.layerGroup().addTo(rMap);
+        focusRealMap("sanho", document.querySelector("#rmap-btns .rmap-btn"));
+      }
+
+      function renderPolygons(key, elements) {
+        if (!polyLayer) return;
+        polyLayer.clearLayers();
+        var cfg = COMPLEX_MAP_DATA[key];
+        var nodes = {};
+        elements.forEach(function(e) { if (e.type === "node") nodes[e.id] = [e.lat, e.lon]; });
+        var drawn = 0;
+        elements.forEach(function(e) {
+          if (e.type !== "way" || !e.nodes) return;
+          var pts = [];
+          e.nodes.forEach(function(nid) { if (nodes[nid]) pts.push(nodes[nid]); });
+          if (pts.length < 3) return;
+          var tags = e.tags || {};
+          var rawName = tags.name || tags["addr:housenumber"] || "";
+          var m = rawName.match(/(\d{1,3}동)/);
+          var dong = m ? m[1] : "";
+          var isRoyal = dong && cfg.royal.indexOf(dong) !== -1;
+          var isAvoid = dong && cfg.avoid.indexOf(dong) !== -1;
+          var color = isRoyal ? "#047857" : (isAvoid ? "#dc2626" : (dong ? "#2563eb" : "#64748b"));
+          var fillOp = isRoyal ? 0.55 : (isAvoid ? 0.45 : (dong ? 0.35 : 0.15));
+          var poly = L.polygon(pts, { color: color, weight: isRoyal ? 2.5 : 1.5, fillColor: color, fillOpacity: fillOp }).addTo(polyLayer);
+          if (dong) {
+            drawn++;
+            var cls = "dong-lbl" + (isRoyal ? " royal" : (isAvoid ? " avoid" : ""));
+            var labelTxt = (isRoyal ? "★" : "") + dong;
+            poly.bindTooltip(labelTxt, { permanent: true, direction: "center", className: cls });
+            poly.bindPopup("<b>" + cfg.name.split(" (")[0] + " " + dong + "</b><br>" + (isRoyal ? "★ 추천 로열동" : (isAvoid ? "⚠️ 기피/비선호 동" : "일반 동")) + "<br>" + cfg.lineTxt);
+          }
+        });
+        var st = document.getElementById("rmap-status");
+        if (st) st.textContent = drawn > 0
+          ? "실제 지도 위 " + drawn + "개 동 외곽선 및 동 번호 자동 표시 완료 (초록=★로열동 / 파랑=일반동 / 빨강=기피동)"
+          : "실제 지도 타일 로드 완료 (지도 위 건물 외곽선과 동 번호를 확대해 확인하세요)";
+      }
+
+      function fetchOsmFootprints(key) {
+        var cfg = COMPLEX_MAP_DATA[key];
+        var st = document.getElementById("rmap-status");
+        if (polyCache[key]) {
+          renderPolygons(key, polyCache[key]);
+          return;
+        }
+        if (st) st.textContent = "실제 건물 외곽선(동 배치) 데이터를 불러오는 중...";
+        var dLat = 0.0022, dLon = 0.0028;
+        var bbox = (cfg.lat - dLat) + "," + (cfg.lon - dLon) + "," + (cfg.lat + dLat) + "," + (cfg.lon + dLon);
+        var q = '[out:json][timeout:10];way["building"](' + bbox + ');out body;>;out skel qt;';
+        fetch("https://overpass-api.de/api/interpreter", {
+          method: "POST",
+          body: "data=" + encodeURIComponent(q)
+        }).then(function(r) { return r.json(); }).then(function(data) {
+          var els = (data && data.elements) ? data.elements : [];
+          polyCache[key] = els;
+          renderPolygons(key, els);
+        }).catch(function() {
+          if (st) st.textContent = "실제 지도 타일 표시 중 (동 외곽선 서버 일시 혼잡 — 지도 타일의 실제 동 번호를 확인하세요)";
+        });
+      }
+
+      window.focusRealMap = function(key, btnEl) {
+        var cfg = COMPLEX_MAP_DATA[key];
+        if (!cfg) return;
+        document.querySelectorAll("#rmap-btns .rmap-btn").forEach(function(b) { b.classList.remove("active"); });
+        if (btnEl) btnEl.classList.add("active");
+        if (rMap) {
+          rMap.invalidateSize();
+          rMap.flyTo([cfg.lat, cfg.lon], cfg.zoom, { duration: 0.6 });
+          if (pinMarker) rMap.removeLayer(pinMarker);
+          pinMarker = L.circleMarker([cfg.lat, cfg.lon], { radius: 6, color: "#0f172a", fillColor: "#fbbf24", fillOpacity: 0.9 }).addTo(rMap);
+          fetchOsmFootprints(key);
+        }
+        var naverUrl = "https://map.naver.com/p/search/" + encodeURIComponent(cfg.naverQ);
+        var kakaoUrl = "https://map.kakao.com/?q=" + encodeURIComponent(cfg.naverQ);
+        var infoEl = document.getElementById("rmap-info");
+        if (infoEl) {
+          infoEl.innerHTML =
+            '<div class="rmap-info-head"><strong>' + cfg.name + '</strong>' +
+            '<span class="rmap-links"><a href="' + naverUrl + '" target="_blank">네이버지도 열기 ↗</a><a href="' + kakaoUrl + '" target="_blank">카카오맵 열기 ↗</a></span></div>' +
+            '• <b style="color:#047857;">★ 로열동:</b> ' + cfg.royalTxt + '<br>' +
+            '• <b>추천 호수 라인/층:</b> ' + cfg.lineTxt + '<br>' +
+            '• <b style="color:#dc2626;">기피 동/라인:</b> ' + cfg.avoidTxt + '<br>' +
+            '• <b>현재 시세/매물:</b> ' + cfg.priceTxt;
+        }
+      };
+
+      window.addEventListener("DOMContentLoaded", initRealMap);
+      window.addEventListener("load", function() { if (rMap) rMap.invalidateSize(); });
+      // For mobile tab switching: resize Leaflet map when tab becomes visible
+      var origSwitch = window.switchTab;
+      if (typeof origSwitch === "function") {
+        window.switchTab = function(tabId, btnEl) {
+          origSwitch(tabId, btnEl);
+          setTimeout(function() { if (rMap) rMap.invalidateSize(); else initRealMap(); }, 120);
+        };
+      }
+    })();
+    </script>
+
     </div>
 
     <div class="tscroll" style="margin-top: 22px;">
