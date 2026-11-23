@@ -293,6 +293,17 @@
     margin-top: 8px;
     border-radius: 0 6px 6px 0;
   }
+
+  .dong-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 14px; margin: 16px 0 20px; }
+  .dong-card { background: #fff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 12px 14px; box-shadow: 0 2px 6px rgba(15,23,42,.04); }
+  .dong-card-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-weight: 800; font-size: 0.95rem; color: #0f172a; }
+  .dong-badge { font-size: 0.72rem; font-weight: 700; padding: 2px 7px; border-radius: 99px; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+  .dong-svg { width: 100%; height: auto; display: block; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; }
+  .dong-meta { margin-top: 8px; font-size: 0.8rem; line-height: 1.5; color: #334155; }
+  .dong-meta b { color: #0f172a; }
+  .dong-legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.78rem; color: #475569; margin: 6px 0 10px; align-items: center; }
+  .leg-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+
 </style>
 </head>
 <body>
@@ -436,7 +447,7 @@
     <div class="card">
       <div class="card-title">
         <span>📊 지하철 1호선 둔산권 주요 단지 비교 (30단지 감시 중)</span>
-        <span class="tag tag-blue">11/19 기준</span>
+        <span class="tag tag-blue">11/23 기준</span>
       </div>
       <p style="font-size:12px;color:var(--ink-sub);margin-bottom:8px;">
         10억+ 초고가(크로바·목련·한마루)는 제외하고, <b>실제 4억~7억 초반 비교군 16개 단지</b>의 2026.08~11월 실거래가와 용적률을 전수 대조했습니다.
@@ -620,16 +631,162 @@
       </div>
       <div class="target-box primary">
         <div class="t-head"><span class="t-name">법원경매: 은하수 101동 6층 604호</span><span class="tag tag-blue">11/23 D-4</span></div>
-        <div class="t-desc"><b>2025타경504064</b> | 유찰 1회 | 감정 5.0억 → <b>최저 3.5억(70%)</b>. 4.0억 낙찰 시 총원가 6.9~7.1억으로 최강 안전마진(권리분석 필수).</div>
+        <div class="t-desc">• <b>[신규 12/7] 2026타경152</b> 월평 한아름 102동 14층 (유찰1회, 감정 5.25억 → <b>최저 3.675억</b>)<br>• <b>[11/23] 2025타경504064</b> 둔산 은하수 101동 6층 (최저 3.5억, 결과 확인)</div>
       </div>
       <div class="target-box planb">
         <div class="t-head"><span class="t-name">11/19 핵심 매물 6선 &amp; 1호선 추가 전략</span><span class="tag tag-green">30단지 확장</span></div>
         <div class="t-desc">
           • <b>1순위 저밀:</b> 개나리 31평 102동 2층(5.2억→5.05~5.1 네고) / 녹원 31평 104동 저층(5.2억, 1층 확인)<br>
-          • <b>신축 역전:</b> 용문 더샵엘리프 25평(7.4억) 대비 <b>탄이 28평 102동 저층(6.8억)</b>이 6천만 저렴+넓음<br>
+          • <b>신축 역전:</b> 용문 더샵엘리프 25평(7.4억) 대비 탄이 6.8억 급매 소진 → 최저 <b>7.2억</b> (용문 더샵엘리프 29평 8.5억)<br>
           • <b>월평역 4억대:</b> 황실타운(4.2~5.15억) · 진달래(4.1~4.8억) · 다모아(3.8~4.4억) 1호선 초역세권 가성비
         </div>
       </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>🗺️ 단지별 동 배치 도식화 (로열동·호수라인)</span>
+      </div>
+
+    <div style="margin-top: 22px;">
+      <h3 style="font-size:1.05rem; margin: 0 0 6px; color:#0f172a;">🗺️ 단지별 동 배치 도식화 &amp; 로열동 · 동호수 라인 한눈에 보기 (개념 배치도)</h3>
+      <div class="dong-legend">
+        <span><i class="leg-dot" style="background:#059669;"></i><strong>로열동 (정남향·최선호)</strong></span>
+        <span><i class="leg-dot" style="background:#3b82f6;"></i>일반 주력동 (남향/혼합)</span>
+        <span><i class="leg-dot" style="background:#94a3b8;"></i>소형평형 / 동·서향</span>
+        <span><i class="leg-dot" style="background:#ef4444;"></i>기피 동 (소음·서향·비선호)</span>
+        <span style="margin-left:auto; font-weight:700; color:#1e293b;">↑ 북(N) / 아래쪽 남향(S)</span>
+      </div>
+
+      <div class="dong-grid">
+        <!-- 1. 산호 -->
+        <div class="dong-card">
+          <div class="dong-card-hdr"><span>1. 탄방 산호 (7개동 · 12층)</span><span class="dong-badge">로열: 101·103·105동</span></div>
+          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="14" font-size="10" fill="#64748b" font-weight="700">↑ 북측 (탄방초·문정중 방면)</text>
+            <text x="278" y="14" font-size="10" fill="#0369a1" font-weight="700">탄방역 5분 →</text>
+            <!-- 정남향 31평 (가로 배치) -->
+            <rect x="20" y="28" width="95" height="24" rx="4" fill="#059669"/><text x="67" y="44" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">★ 105동 (31평)</text>
+            <rect x="135" y="28" width="95" height="24" rx="4" fill="#3b82f6"/><text x="182" y="44" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">107동 (31평)</text>
+            <rect x="20" y="68" width="105" height="24" rx="4" fill="#059669"/><text x="72" y="84" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">★ 103동 (중앙·31)</text>
+            <rect x="20" y="108" width="120" height="26" rx="4" fill="#047857" stroke="#fbbf24" stroke-width="2"/><text x="80" y="125" text-anchor="middle" font-size="11" fill="#fff" font-weight="800">★ 101동 (최남단·역최단)</text>
+            <!-- 동서향 17평 (세로 배치) -->
+            <rect x="255" y="28" width="24" height="50" rx="4" fill="#94a3b8"/><text x="267" y="57" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">106</text>
+            <rect x="290" y="28" width="24" height="50" rx="4" fill="#94a3b8"/><text x="302" y="57" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">104</text>
+            <rect x="325" y="28" width="24" height="50" rx="4" fill="#94a3b8"/><text x="337" y="57" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">102</text>
+            <text x="302" y="92" text-anchor="middle" font-size="9" fill="#64748b">17평 복도식(동·서향)</text>
+            <text x="180" y="148" text-anchor="middle" font-size="10" fill="#047857" font-weight="700">↓ 남향 개방감 최상 (101동 앞 가림 없음)</text>
+          </svg>
+          <div class="dong-meta">
+            • <b>추천 호수 라인:</b> 계단식 <b>중간라인(2·3호)</b> 단열·난방 우위 (끝라인은 샤시 교체 필수)<br>
+            • <b>추천 층수:</b> <b>5~11층</b> (1층·12층 탑층 제외)
+          </div>
+        </div>
+
+        <!-- 2. 개나리 -->
+        <div class="dong-card">
+          <div class="dong-card-hdr"><span>2. 탄방 개나리 (6개동 · 6~12층)</span><span class="dong-badge">로열: 101·102·104동</span></div>
+          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="14" font-size="10" fill="#0369a1" font-weight="700">← 탄방역 1분 초역세권</text>
+            <text x="255" y="14" font-size="10" fill="#64748b" font-weight="700">정남향 판상형</text>
+            <rect x="18" y="30" width="105" height="26" rx="4" fill="#047857" stroke="#fbbf24" stroke-width="2"/><text x="70" y="47" text-anchor="middle" font-size="11" fill="#fff" font-weight="800">★ 101동 (역 1분·31)</text>
+            <rect x="138" y="30" width="95" height="26" rx="4" fill="#059669"/><text x="185" y="47" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">★ 102동 (정숙·31)</text>
+            <rect x="248" y="30" width="92" height="26" rx="4" fill="#3b82f6"/><text x="294" y="47" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">103동 (31평)</text>
+            <rect x="18" y="76" width="115" height="26" rx="4" fill="#059669"/><text x="75" y="93" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">★ 104동 (안쪽·31)</text>
+            <rect x="155" y="76" width="85" height="24" rx="4" fill="#94a3b8"/><text x="197" y="92" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">105동 (24평·6층)</text>
+            <rect x="252" y="76" width="88" height="24" rx="4" fill="#94a3b8"/><text x="296" y="92" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">106동 (24평·12층)</text>
+            <text x="180" y="138" text-anchor="middle" font-size="10" fill="#047857" font-weight="700">현재 실매물: ★ 102동 2층 5.20억 (5.05~5.10억 네고 타깃)</text>
+          </svg>
+          <div class="dong-meta">
+            • <b>추천 호수 라인:</b> 개별난방 효율 좋은 <b>중간 호수 라인</b> 최선호 (끝라인 외벽 단열 체크)<br>
+            • <b>추천 층수:</b> <b>5~10층</b> (102동 2층은 저층 감안 네고 필수)
+          </div>
+        </div>
+
+        <!-- 3. 한우리 -->
+        <div class="dong-card">
+          <div class="dong-card-hdr"><span>3. 탄방 한우리 (10개동 · 6~15층)</span><span class="dong-badge">로열: 106·107·108동</span></div>
+          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="14" font-size="10" fill="#0369a1" font-weight="700">↑ 탄방초 · 문정중 도보 5분</text>
+            <rect x="16" y="28" width="95" height="24" rx="4" fill="#059669"/><text x="63" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 107동 (학군·31)</text>
+            <rect x="122" y="28" width="95" height="24" rx="4" fill="#059669"/><text x="169" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 106동 (정숙·31)</text>
+            <rect x="228" y="28" width="112" height="24" rx="4" fill="#059669"/><text x="284" y="44" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 108·103동 (남향)</text>
+            <rect x="16" y="68" width="105" height="24" rx="4" fill="#3b82f6"/><text x="68" y="84" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">109·110동 (6층형)</text>
+            <rect x="135" y="68" width="105" height="24" rx="4" fill="#94a3b8"/><text x="187" y="84" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">101·104동 (26평)</text>
+            <rect x="252" y="68" width="88" height="24" rx="4" fill="#94a3b8"/><text x="296" y="84" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">102·105동</text>
+            <text x="180" y="138" text-anchor="middle" font-size="10" fill="#b45309" font-weight="700">※ 대지지분(15.98평) 열위 -> 5.5억 이하 급매만 진입</text>
+          </svg>
+          <div class="dong-meta">
+            • <b>추천 호수 라인:</b> 판상형 <b>중간 라인</b> 선호 (도로변 소음 라인·6층 탑층 주의)<br>
+            • <b>추천 층수:</b> <b>5~10층</b> (1~2층 KB하위가 대출 제한 주의)
+          </div>
+        </div>
+
+        <!-- 4. 둔산 녹원 -->
+        <div class="dong-card">
+          <div class="dong-card-hdr"><span>4. 둔산 녹원 (12개동 · 12층 · 181%)</span><span class="dong-badge">로열: 105·101·103동</span></div>
+          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="14" font-size="10" fill="#0369a1" font-weight="700">← 탄방역 6분 · 둔산초 인접</text>
+            <text x="250" y="14" font-size="10" fill="#047857" font-weight="700">전 동 정남향 일자</text>
+            <!-- 3열 x 4행 정남향 일자 배치 -->
+            <rect x="16" y="26" width="76" height="22" rx="4" fill="#059669"/><text x="54" y="41" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 101동</text>
+            <rect x="100" y="26" width="76" height="22" rx="4" fill="#3b82f6"/><text x="138" y="41" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">102동</text>
+            <rect x="184" y="26" width="76" height="22" rx="4" fill="#059669"/><text x="222" y="41" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 103동</text>
+            <rect x="268" y="26" width="76" height="22" rx="4" fill="#3b82f6"/><text x="306" y="41" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">104동(매물)</text>
+
+            <rect x="16" y="60" width="76" height="24" rx="4" fill="#047857" stroke="#fbbf24" stroke-width="2"/><text x="54" y="76" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">★ 105동</text>
+            <rect x="100" y="60" width="76" height="22" rx="4" fill="#059669"/><text x="138" y="75" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 106동</text>
+            <rect x="184" y="60" width="76" height="22" rx="4" fill="#3b82f6"/><text x="222" y="75" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">107동</text>
+            <rect x="268" y="60" width="76" height="22" rx="4" fill="#3b82f6"/><text x="306" y="75" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">108동</text>
+
+            <rect x="16" y="96" width="76" height="22" rx="4" fill="#3b82f6"/><text x="54" y="111" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">109동</text>
+            <rect x="100" y="96" width="76" height="22" rx="4" fill="#3b82f6"/><text x="138" y="111" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">110동</text>
+            <rect x="184" y="96" width="76" height="22" rx="4" fill="#ef4444"/><text x="222" y="111" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">111동(도로)</text>
+            <rect x="268" y="96" width="76" height="22" rx="4" fill="#ef4444"/><text x="306" y="111" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">112동(도로)</text>
+            <text x="180" y="142" text-anchor="middle" font-size="10" fill="#64748b">↓ 남측 대덕대로·둔산남로 외곽 저층 소음 체크</text>
+          </svg>
+          <div class="dong-meta">
+            • <b>추천 호수 라인:</b> 중앙난방 특성상 외풍 적은 <b>중간 호수 라인</b> 최선호<br>
+            • <b>추천 층수:</b> <b>6~11층</b> (현재 최저 104동 저/12 5.20억 -> 1층 여부 확인 필수)
+          </div>
+        </div>
+
+        <!-- 5. 갈마 경성큰마을 -->
+        <div class="dong-card">
+          <div class="dong-card-hdr"><span>5. 갈마 경성큰마을 (25개동 · 15층)</span><span class="dong-badge">정남향: 110~123동</span></div>
+          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="14" font-size="10" fill="#dc2626" font-weight="700">주의: 동/서향 7개동 반드시 구분!</text>
+            <rect x="16" y="26" width="160" height="32" rx="5" fill="#059669" stroke="#fbbf24" stroke-width="2"/><text x="96" y="46" text-anchor="middle" font-size="10" fill="#fff" font-weight="800">★ 정남향 12개동 (110~113·115·116·118~123)</text>
+            <rect x="188" y="26" width="156" height="32" rx="5" fill="#3b82f6"/><text x="266" y="46" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">혼합 6개동 (108·109·117·126~128)</text>
+            <rect x="16" y="72" width="328" height="28" rx="5" fill="#ef4444"/><text x="180" y="90" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">기피 동/서향 7개동: 101·102·103·105·106·107·125동 (일조·환금성 열위)</text>
+            <text x="180" y="128" text-anchor="middle" font-size="10" fill="#047857" font-weight="700">현재 최저 매물: 108동 7/15 3.90억 (혼합동 중층 · 남향라인 여부 확인)</text>
+          </svg>
+          <div class="dong-meta">
+            • <b>추천 호수 라인:</b> 32평 <b>정남향 동 중간라인</b> 최선호 (사이드 끝라인 결로·외풍 주의)<br>
+            • <b>추천 층수:</b> <b>6~13층</b> (대덕대로변 인접 저층 제외)
+          </div>
+        </div>
+
+        <!-- 6. 월평 황실타운 & 국화 5단지 -->
+        <div class="dong-card">
+          <div class="dong-card-hdr"><span>6. 월평 황실타운 · 둔산 국화 5단지</span><span class="dong-badge">1호선·문정초권</span></div>
+          <svg class="dong-svg" viewBox="0 0 360 155" xmlns="http://www.w3.org/2000/svg">
+            <text x="8" y="14" font-size="10" fill="#0369a1" font-weight="700">[월평역 3분] 황실타운 (18개동 · 1,950세대)</text>
+            <rect x="16" y="22" width="155" height="28" rx="4" fill="#059669"/><text x="93" y="40" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 중앙 남향 105~112동</text>
+            <rect x="182" y="22" width="162" height="28" rx="4" fill="#3b82f6"/><text x="263" y="40" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">외곽·역인접 101~104·113~118동</text>
+            <text x="8" y="72" font-size="10" fill="#0369a1" font-weight="700">[시청역·문정초] 둔산 국화 5단지 (전 동 정남향 일자)</text>
+            <rect x="16" y="80" width="165" height="28" rx="4" fill="#059669"/><text x="98" y="98" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">★ 우성501·한신603·라이프201·신동아302</text>
+            <rect x="192" y="80" width="152" height="28" rx="4" fill="#ef4444"/><text x="268" y="98" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">로데오·큰길 외곽 저층 기피</text>
+            <text x="180" y="135" text-anchor="middle" font-size="10" fill="#047857" font-weight="700">현재 급매: 황실 25평 118동 8층 3.7억 / 31평 105동 6층 4.7억</text>
+          </svg>
+          <div class="dong-meta">
+            • <b>호수 라인 팁:</b> 전 단지 <b>중간 라인 · 6~13층</b> 선호 (※ 국화우성은 504동·4호 라인 없음)<br>
+            • <b>신규 경매:</b> 월평 한아름 102동 14층 1405호 (12/7 매각 · 최저 3.675억)
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
 
     <div class="card">
